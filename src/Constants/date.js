@@ -1,6 +1,15 @@
-export const getDateStringFromTimestamp = (timestamp, simplified = false) => {
-  const date = new Date(timestamp.seconds * 1000);
-  
+export const getDateStringFormatted = (date, simplified = false) => {
+  //const date = new Date(timestamp.seconds * 1000);
+  const daysInIndonesia = [
+    'Minggu',
+    'Senin',
+    'Selasa',
+    'Rabu',
+    'Kamis',
+    'Jumat',
+    'Sabtu',
+  ]
+
   const monthsInIndonesia = [
     'Januari',
     'Februari',
@@ -30,7 +39,7 @@ export const getDateStringFromTimestamp = (timestamp, simplified = false) => {
     'Des'
   ];
 
-  return `${date.getDate()} ${simplified ?monthsInIndonesiaSimplified[date.getMonth()] : monthsInIndonesia[date.getMonth()]} ${date.getFullYear()}`;
+  return `${daysInIndonesia[date.getDay()]}, ${date.getDate()} ${simplified ?monthsInIndonesiaSimplified[date.getMonth()] : monthsInIndonesia[date.getMonth()]} ${date.getFullYear()}`;
 }
 
 export const getYearFromTimestamp = (timestamp) => {

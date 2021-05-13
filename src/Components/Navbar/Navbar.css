@@ -5,7 +5,8 @@
   width: 100%;
   padding: 10px 40px;
   z-index: 10;
-  background-color: white;
+  background-color: #1D914A;
+  color: #ffffff;
   align-content: right;
   box-shadow: 0px 2px 9px 4px rgba(216,216,216,0.5);
   -webkit-box-shadow: 0px 2px 9px 4px rgba(216,216,216,0.5);

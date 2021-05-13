@@ -2,6 +2,7 @@ import React from 'react';
 import { Route, Redirect, Switch } from 'react-router-dom';
 import PrivateRoute from './PrivateRoute';
 import Login from '../../Containers/Login/Login';
+import HomePage from '../../Containers/HomePage/HomePage';
 
 const DummyPage = () => (
   <div>
@@ -31,14 +32,15 @@ const SkpkNavigation = ({match}) => {
   )
 }
 
+
 const HomeNavigation = () => {
   return (
     <Switch>
       <Route exact path='/'><Redirect to='/login'/></Route>
       <Route path='/login' component={Login}/>
-      <Route path='/home' component={DummyPage}/>
       <Route path='/skpk' component={SkpkNavigation}/>
       <Route path='/skmk' component={SkmkNavigatior}/>
+      <PrivateRoute path='/home' component={HomePage}/>
     </Switch>
   );
 };
