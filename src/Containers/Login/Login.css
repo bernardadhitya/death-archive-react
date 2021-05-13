@@ -5,12 +5,14 @@
   align-items: center;
   height: 100vh;
 }
+
 .login-btn{
-  background-color: #3183CD;
+  background-color: #1D914A;
   padding: 16px 4px;
   cursor: pointer;
   border-radius: 4px;
-  color: #ffffff
+  color: #ffffff;
+  margin-top: 30px;
 }
 
 .login-card{
@@ -27,4 +29,16 @@
   margin-top: 10px;
   margin-bottom: 10px;
   width: 100%;
+}
+
+.hospital-img{
+  width: 100%;
+  height: 720px;
+  object-fit: cover;
+}
+
+.form-container{
+  justify-content: center;
+  text-align: center;
+  padding: 100px 60px 100px 30px;
 }

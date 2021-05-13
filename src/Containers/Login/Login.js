@@ -2,6 +2,10 @@ import React, { useState } from 'react';
 import './Login.css';
 import { Grid, TextField } from '@material-ui/core';
 import { useHistory } from "react-router-dom"
+import hospital from '../../Assets/images/hospital.png';
+import logo from '../../Assets/images/logo.png';
+import PersonIcon from '@material-ui/icons/Person';
+import LockIcon from '@material-ui/icons/Lock';
 
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -17,36 +21,95 @@ const Login = () => {
     }
   }
 
-  return (
-    <div className='login-page'>
-      <div className='login-card'>
-        <h3>Masuk ke PasarKerja</h3>
-        <div className="form-item">
-          <TextField
-            id="username"
-            label="text"
-            variant="outlined"
-            fullWidth="true"
-            value={username}
-            onChange={(e) => {setUsername(e.target.value)}}
-          />
-        </div>
-        <div className="form-item">
-          <TextField
-            id="password"
-            label="Password"
-            variant="outlined"
-            type="password"
-            fullWidth="true"
-            value={password}
-            onChange={(e) => {setPassword(e.target.value)}}
-          />
-        </div>
+  const renderLoginForm = () => {
+    return (
+      <div className='login-page'>
+        <div className='login-card'>
+          <h3>Masuk ke PasarKerja</h3>
+          <div className="form-item">
+            
+            <TextField
+              id="username"
+              label="text"
+              variant="outlined"
+              fullWidth="true"
+              value={username}
+              onChange={(e) => {setUsername(e.target.value)}}
+            />
+          </div>
+          <div className="form-item">
+            <TextField
+              id="password"
+              label="Password"
+              variant="outlined"
+              type="password"
+              fullWidth="true"
+              value={password}
+              onChange={(e) => {setPassword(e.target.value)}}
+            />
+          </div>
           <div className="login-btn" onClick={() => handleLogin()}>
             Masuk
           </div>
         </div>
       </div>
+    )
+  }
+
+  return (
+    <Grid container>
+      <Grid item xs={7}>
+        <div style={{width: '100%'}}>
+          <img src={hospital} alt='' className='hospital-img'/>
+        </div>
+      </Grid>
+      <Grid item xs={5}>
+        <div className='form-container'>
+          <img src={logo} alt='' style={{width: '150px', height: '150px'}}/>
+          <div style={{height: '60px'}}></div>
+          <Grid container alignItems="flex-end">
+            <Grid item xs={2}>
+              <PersonIcon fontSize='large' style={{color: '#818181'}}/>
+            </Grid>
+            <Grid item xs={10}>
+              <TextField
+                id="username"
+                label="Username"
+                variant="standard"
+                fullWidth="true"
+                value={username}
+                onChange={(e) => {setUsername(e.target.value)}}
+              />
+            </Grid>
+          </Grid>
+          <div style={{height: '30px'}}></div>
+          <Grid container alignItems="flex-end">
+            <Grid item xs={2}>
+              <LockIcon fontSize='large' style={{color: '#818181'}}/>
+            </Grid>
+            <Grid item xs={10}>
+              <TextField
+                id="password"
+                label="Password"
+                variant="standard"
+                fullWidth="true"
+                value={password}
+                onChange={(e) => {setPassword(e.target.value)}}
+              />
+            </Grid>
+          </Grid>
+          <Grid container>
+            <Grid item xs={4}></Grid>
+            <Grid item xs={4} alignItems='center'>
+              <div className="login-btn" onClick={() => handleLogin()}>
+                Login
+              </div>
+            </Grid>
+            <Grid item xs={4}></Grid>
+          </Grid>
+        </div>
+      </Grid>
+    </Grid>
   )
 };
 
