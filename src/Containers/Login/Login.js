@@ -21,41 +21,6 @@ const Login = () => {
     }
   }
 
-  const renderLoginForm = () => {
-    return (
-      <div className='login-page'>
-        <div className='login-card'>
-          <h3>Masuk ke PasarKerja</h3>
-          <div className="form-item">
-            
-            <TextField
-              id="username"
-              label="text"
-              variant="outlined"
-              fullWidth="true"
-              value={username}
-              onChange={(e) => {setUsername(e.target.value)}}
-            />
-          </div>
-          <div className="form-item">
-            <TextField
-              id="password"
-              label="Password"
-              variant="outlined"
-              type="password"
-              fullWidth="true"
-              value={password}
-              onChange={(e) => {setPassword(e.target.value)}}
-            />
-          </div>
-          <div className="login-btn" onClick={() => handleLogin()}>
-            Masuk
-          </div>
-        </div>
-      </div>
-    )
-  }
-
   return (
     <Grid container>
       <Grid item xs={7}>
@@ -91,6 +56,7 @@ const Login = () => {
               <TextField
                 id="password"
                 label="Password"
+                type="password"
                 variant="standard"
                 fullWidth="true"
                 value={password}
