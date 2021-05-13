@@ -92,7 +92,7 @@ const Navbar = () => {
           <img src={logo} style={{width: '150px', height: '150px'}} alt=''/>
         </div>
         <List>
-          <ListItem button>
+          <ListItem button onClick={() => history.push('/home')}>
             <ListItemIcon><HomeIcon /></ListItemIcon>
             <ListItemText>Dashboard</ListItemText>
           </ListItem>
@@ -103,11 +103,11 @@ const Navbar = () => {
             <ListItemIcon><MailIcon /></ListItemIcon>
             <ListItemText>SKPK</ListItemText>
           </ListItem>
-          <ListItem button>
+          <ListItem button onClick={() => history.push('/skpk/form')}>
             <ListItemIcon/>
             <ListItemText>Input SKPK</ListItemText>
           </ListItem>
-          <ListItem button>
+          <ListItem button onClick={() => history.push('/skpk/rekap')}>
             <ListItemIcon/>
             <ListItemText>Database SKPK</ListItemText>
           </ListItem>
@@ -118,18 +118,18 @@ const Navbar = () => {
             <ListItemIcon><MailIcon /></ListItemIcon>
             <ListItemText>SKMK</ListItemText>
           </ListItem>
-          <ListItem button>
+          <ListItem button onClick={() => history.push('/skmk/form')}>
             <ListItemIcon/>
             <ListItemText>Input SKMK</ListItemText>
           </ListItem>
-          <ListItem button>
+          <ListItem button onClick={() => history.push('/skmk/rekap')}>
             <ListItemIcon/>
             <ListItemText>Database SKMK</ListItemText>
           </ListItem>
         </List>
         <Divider />
         <List>
-          <ListItem button>
+          <ListItem button onClick={() => history.push('/bulanan')}>
             <ListItemIcon><DateRangeIcon /></ListItemIcon>
             <ListItemText>Rekap Data Bulanan</ListItemText>
           </ListItem>

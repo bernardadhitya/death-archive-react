@@ -13,7 +13,9 @@ const DummyPage = () => (
 const SkmkNavigatior = ({match}) => {
   return (
     <Switch>
-      <PrivateRoute exact path={match.url} component={DummyPage}/>
+      <PrivateRoute exact path={match.url}>
+        <Redirect to={`/${match.url}/rekap`}/>
+      </PrivateRoute>
       <PrivateRoute path={`${match.url}/rekap`} component={DummyPage}/>
       <PrivateRoute path={`${match.url}/form`} component={DummyPage}/>
       <PrivateRoute path={`${match.url}/:id`} component={DummyPage}/>
@@ -24,7 +26,9 @@ const SkmkNavigatior = ({match}) => {
 const SkpkNavigation = ({match}) => {
   return (
     <Switch>
-      <PrivateRoute exact path={match.url} component={DummyPage}/>
+      <PrivateRoute exact path={match.url}>
+        <Redirect to={`/${match.url}/rekap`}/>
+      </PrivateRoute>
       <PrivateRoute path={`${match.url}/rekap`} component={DummyPage}/>
       <PrivateRoute path={`${match.url}/form`} component={DummyPage}/>
       <PrivateRoute path={`${match.url}/:id`} component={DummyPage}/>
@@ -41,6 +45,7 @@ const HomeNavigation = () => {
       <Route path='/skpk' component={SkpkNavigation}/>
       <Route path='/skmk' component={SkmkNavigatior}/>
       <PrivateRoute path='/home' component={HomePage}/>
+      <PrivateRoute path='/bulanan' component={DummyPage}/>
     </Switch>
   );
 };
