@@ -127,13 +127,13 @@ const Navbar = () => {
             <ListItemText>Database SKMK</ListItemText>
           </ListItem>
         </List>
+        <Divider />
         <List>
           <ListItem button>
             <ListItemIcon><DateRangeIcon /></ListItemIcon>
             <ListItemText>Rekap Data Bulanan</ListItemText>
           </ListItem>
         </List>
-        <Divider />
       </div>
     )
   };
