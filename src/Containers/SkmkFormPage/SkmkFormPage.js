@@ -28,9 +28,9 @@ const SkmkFormPage = () => {
 
   const [namaJenazah,             setNamaJenazah             ] = useState('');
   const [tempatLahirJenazah,      setTempatLahirJenazah      ] = useState('');
-  const [umurTahunJenazah,        setUmurTahunJenazah        ] = useState(0);
-  const [umurBulanJenazah,        setUmurBulanJenazah        ] = useState(0);
-  const [umurHariJenazah,         setUmurHariJenazah         ] = useState(0);
+  const [umurTahunJenazah,        setUmurTahunJenazah        ] = useState(null);
+  const [umurBulanJenazah,        setUmurBulanJenazah        ] = useState(null);
+  const [umurHariJenazah,         setUmurHariJenazah         ] = useState(null);
   const [tanggalLahirJenazah,     setTanggalLahirJenazah     ] = useState(null);
   const [pekerjaanJenazah,        setPekerjaanJenazah        ] = useState('');
   const [alamatJalanJenazah,      setAlamatJalanJenazah      ] = useState('');
@@ -45,7 +45,8 @@ const SkmkFormPage = () => {
   const [tanggalMeninggalJenazah, setTanggalMeninggalJenazah ] = useState(null);
   const [waktuMeninggalJenazah,   setWaktuMeninggalJenazah   ] = useState(null);
   const [tempatMeninggalJenazah,  setTempatMeninggalJenazah  ] = useState('');
-  const [lamaDirawatJenazah,      setLamaDirawatJenazah      ] = useState('');
+  const [nilaiLamaDirawatJenazah, setNilaiLamaDirawatJenazah ] = useState('');
+  const [satuanLamaDirawatJenazah,setSatuanLamaDirawatJenazah] = useState('');
 
   const [diagnosaUmum,            setDiagnosaUmum            ] = useState([]);
   const [diagnosaIbuAnak,         setDiagnosaIbuAnak         ] = useState([]);
@@ -123,7 +124,8 @@ const SkmkFormPage = () => {
         tanggalMeninggalJenazah={tanggalMeninggalJenazah}    
         waktuMeninggalJenazah={waktuMeninggalJenazah}        
         tempatMeninggalJenazah={tempatMeninggalJenazah}       
-        lamaDirawatJenazah={lamaDirawatJenazah}
+        nilaiLamaDirawatJenazah={nilaiLamaDirawatJenazah}
+        satuanLamaDirawatJenazah={satuanLamaDirawatJenazah}
         setNamaJenazah={setNamaJenazah}              
         setTempatLahirJenazah={setTempatLahirJenazah}         
         setUmurTahunJenazah={setUmurTahunJenazah}           
@@ -143,7 +145,8 @@ const SkmkFormPage = () => {
         setTanggalMeninggalJenazah={setTanggalMeninggalJenazah}    
         setWaktuMeninggalJenazah={setWaktuMeninggalJenazah}        
         setTempatMeninggalJenazah={setTempatMeninggalJenazah}       
-        setLamaDirawatJenazah={setLamaDirawatJenazah}
+        setNilaiLamaDirawatJenazah={setNilaiLamaDirawatJenazah}
+        setSatuanLamaDirawatJenazah={setSatuanLamaDirawatJenazah}
       />
     )
   }
