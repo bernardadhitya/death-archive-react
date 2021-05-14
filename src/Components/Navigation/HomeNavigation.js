@@ -3,6 +3,7 @@ import { Route, Redirect, Switch } from 'react-router-dom';
 import PrivateRoute from './PrivateRoute';
 import Login from '../../Containers/Login/Login';
 import HomePage from '../../Containers/HomePage/HomePage';
+import SkmkFormPage from '../../Containers/SkmkFormPage/SkmkFormPage';
 
 const DummyPage = () => (
   <div>
@@ -17,7 +18,7 @@ const SkmkNavigatior = ({match}) => {
         <Redirect to={`/${match.url}/rekap`}/>
       </PrivateRoute>
       <PrivateRoute path={`${match.url}/rekap`} component={DummyPage}/>
-      <PrivateRoute path={`${match.url}/form`} component={DummyPage}/>
+      <PrivateRoute path={`${match.url}/form`} component={SkmkFormPage}/>
       <PrivateRoute path={`${match.url}/:id`} component={DummyPage}/>
     </Switch>
   )
