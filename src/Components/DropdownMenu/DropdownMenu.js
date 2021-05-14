@@ -3,7 +3,7 @@ import { DownOutlined } from '@ant-design/icons';
 import React from 'react';
 
 const DropdownMenu = (props) => {
-  const { list = [], onSelect = () => {} } = props;
+  const { list = [], onSelect = () => {}, byIndex = false } = props;
 
   const { Option } = Select;
 
@@ -19,7 +19,7 @@ const DropdownMenu = (props) => {
       filterSort={(optionA, optionB) =>
         optionA.children.toLowerCase().localeCompare(optionB.children.toLowerCase())
       }
-      onChange={(value) => onSelect(list[value])}
+      onChange={(value) => onSelect(byIndex ? value : list[value])}
     >
       { list.map((item, idx) => 
         <Option value={idx}>
