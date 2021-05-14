@@ -1,5 +1,6 @@
 import { Card, Col, DatePicker, Input, Row, TimePicker } from 'antd';
 import React from 'react';
+import DropdownMenu from '../DropdownMenu/DropdownMenu';
 
 const SkmkDataJenazah = () => {
   
@@ -136,7 +137,7 @@ const SkmkDataJenazah = () => {
           <p>Tempat Meninggal</p>
         </Col>
         <Col span={18}>
-          
+          <DropdownMenu list={['Rumah Sakit', 'Rumah', 'DoA', 'Lainnya']}/>
         </Col>
       </Row>
       <Row gutter={16}>
@@ -149,7 +150,7 @@ const SkmkDataJenazah = () => {
           />
         </Col>
         <Col span={6}>
-          
+          <DropdownMenu list={['Jam', 'Hari']}/>
         </Col>
       </Row>
     </Card>

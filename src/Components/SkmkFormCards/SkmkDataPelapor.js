@@ -1,8 +1,9 @@
 import React from 'react';
 import { Card, Col, DatePicker, Input, Row } from 'antd';
+import DropdownMenu from '../DropdownMenu/DropdownMenu';
 
 const SkmkDataPelapor = () => {
-  
+
   return (
     <Card
       title='Data Pelapor'
@@ -120,7 +121,7 @@ const SkmkDataPelapor = () => {
           <p>Hubungan dengan Mendiang</p>
         </Col>
         <Col span={8}>
-          
+          <DropdownMenu list={['Suami', 'Istri', 'Anak', 'Orang Tua', 'Lainnya']}/>
         </Col>
       </Row>
     </Card>
