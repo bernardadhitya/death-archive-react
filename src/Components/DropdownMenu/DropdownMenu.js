@@ -3,11 +3,15 @@ import { DownOutlined } from '@ant-design/icons';
 import React from 'react';
 
 const DropdownMenu = (props) => {
-  const { list = [] } = props;
+  const { list = [], onSelect } = props;
 
   const menu = () => (
     <Menu>
-      { list.map(item => <Menu.Item>{item}</Menu.Item>)}
+      { list.map((item, idx) => 
+        <Menu.Item onClick={() => onSelect(idx)}>
+          {item}
+        </Menu.Item>
+      )}
     </Menu>
   )
 
