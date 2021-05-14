@@ -142,14 +142,14 @@ const Navbar = () => {
     return (
       <div className='navbar-menu'>
         <div className='item'>
-          <h5>{getDateStringFormatted(new Date())}</h5>
+          <h3 style={{color: '#ffffff'}}>{getDateStringFormatted(new Date())}</h3>
         </div>
         <div>
           <div
             className='item'
             onClick={handleProfileClick}
           >
-            <h5>Hi, Admin</h5>
+            <h3 style={{color: '#ffffff'}}>Hi, Admin</h3>
           </div>
           <StyledMenu
             id="customized-menu"
@@ -166,7 +166,7 @@ const Navbar = () => {
                   </div>
                 </Grid>
                 <Grid item xs={8}>
-                  <div className='text-no-margin'>
+                  <div className='text-no-margin' style={{marginTop: '20px'}}>
                     <h5>Admin</h5>
                     <h6>Admin</h6>
                   </div>
