@@ -1,7 +1,17 @@
 import { Card, Col, DatePicker, Input, Row } from 'antd';
 import React from 'react';
 
-const SkmkDataSurat = () => {
+const SkmkDataSurat = (props) => {
+  const {
+    namaPembuatSurat,
+    nomorSurat,
+    tanggalSurat,
+    namaPenandatangan,
+    setNamaPembuatSurat,
+    setNomorSurat,
+    setTanggalSurat,
+    setNamaPenandatangan
+  } = props;
   
   return (
     <Card

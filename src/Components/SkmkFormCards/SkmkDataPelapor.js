@@ -2,7 +2,37 @@ import React from 'react';
 import { Card, Col, DatePicker, Input, Row } from 'antd';
 import DropdownMenu from '../DropdownMenu/DropdownMenu';
 
-const SkmkDataPelapor = () => {
+const SkmkDataPelapor = (props) => {
+  const {
+    namaPelapor,              
+    tempatLahirPelapor,              
+    tanggalLahirPelapor,          
+    pekerjaanPelapor,           
+    alamatJalanPelapor,           
+    alamatNomorPelapor,           
+    alamatRtRwPelapor,            
+    alamatKelurahanPelapor,     
+    alamatKecamatanPelapor,     
+    alamatKotaPelapor,        
+    alamatKodePosPelapor,       
+    nomorTeleponPelapor,        
+    nomorKtpPelapor,
+    hubunganPelapor,            
+    setNamaPelapor,
+    setTempatLahirPelapor,
+    setTanggalLahirPelapor,
+    setPekerjaanPelapor,
+    setAlamatJalanPelapor,
+    setAlamatNomorPelapor,
+    setAlamatRtRwPelapor,
+    setAlamatKelurahanPelapor,
+    setAlamatKecamatanPelapor,
+    setAlamatKotaPelapor,
+    setAlamatKodePosPelapor,
+    setNomorTeleponPelapor,
+    setNomorKtpPelapor,
+    setHubunganPelapor,
+  } = props;
 
   return (
     <Card

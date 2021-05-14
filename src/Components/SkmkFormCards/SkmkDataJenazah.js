@@ -2,8 +2,49 @@ import { Card, Col, DatePicker, Input, Row, TimePicker } from 'antd';
 import React from 'react';
 import DropdownMenu from '../DropdownMenu/DropdownMenu';
 
-const SkmkDataJenazah = () => {
-  
+const SkmkDataJenazah = (props) => {
+  const {
+    namaJenazah,              
+    tempatLahirJenazah,         
+    umurTahunJenazah,           
+    umurBulanJenazah,           
+    umurHariJenazah,          
+    tanggalLahirJenazah,          
+    pekerjaanJenazah,           
+    alamatJalanJenazah,           
+    alamatNomorJenazah,           
+    alamatRtRwJenazah,            
+    alamatKelurahanJenazah,     
+    alamatKecamatanJenazah,     
+    alamatKotaJenazah,        
+    alamatKodePosJenazah,       
+    nomorTeleponJenazah,        
+    nomorKtpJenazah,            
+    tanggalMeninggalJenazah,    
+    waktuMeninggalJenazah,        
+    tempatMeninggalJenazah,       
+    lamaDirawatJenazah,
+    setNamaJenazah,              
+    setTempatLahirJenazah,         
+    setUmurTahunJenazah,           
+    setUmurBulanJenazah,           
+    setUmurHariJenazah,          
+    setTanggalLahirJenazah,          
+    setPekerjaanJenazah,           
+    setAlamatJalanJenazah,           
+    setAlamatNomorJenazah,           
+    setAlamatRtRwJenazah,            
+    setAlamatKelurahanJenazah,     
+    setAlamatKecamatanJenazah,     
+    setAlamatKotaJenazah,        
+    setAlamatKodePosJenazah,       
+    setNomorTeleponJenazah,        
+    setNomorKtpJenazah,            
+    setTanggalMeninggalJenazah,    
+    setWaktuMeninggalJenazah,        
+    setTempatMeninggalJenazah,       
+    setLamaDirawatJenazah
+  } = props;
   return (
     <Card
       title='Data Jenazah'

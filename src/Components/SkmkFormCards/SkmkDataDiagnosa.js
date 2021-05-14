@@ -3,7 +3,13 @@ import React, { useState } from 'react';
 import { icdxList } from '../../Constants/icdx';
 import DropdownMenu from '../DropdownMenu/DropdownMenu';
 
-const SkmkDataDiagnosa = () => {
+const SkmkDataDiagnosa = (props) => {
+  const {
+    diagnosaUmum,
+    setDiagnosaUmum,
+    diagnosaIbuAnak,
+    setDiagnosaIbuAnak
+  } = props;
 
   const [lamaKematian, setLamaKematian] = useState(null);
 
