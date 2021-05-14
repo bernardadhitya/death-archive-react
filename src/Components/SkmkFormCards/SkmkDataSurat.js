@@ -1,5 +1,5 @@
 import { Card, Col, DatePicker, Input, Row } from 'antd';
-import React from 'react';
+import React, { useState } from 'react';
 
 const SkmkDataSurat = (props) => {
   const {
@@ -12,6 +12,52 @@ const SkmkDataSurat = (props) => {
     setTanggalSurat,
     setNamaPenandatangan
   } = props;
+
+  const [nomorUrut, setNomorUrut] = useState(null);
+  const [bulanSurat, setBulanSurat] = useState(null);
+  const [tahunSurat, setTahunSurat] = useState(null);
+
+  const renderNomorSuratForm = () => {
+    
+    const handleNomorSurat = () => {
+      setNomorSurat(`${nomorUrut}/SKMK-KD/${bulanSurat}/${tahunSurat}`)
+    };
+
+    return (
+      <Row gutter={16}>
+        <Col span={6}>
+          <p>Nomor Surat</p>
+        </Col>
+        <Col span={4}>
+          <Input
+            value={nomorUrut}
+            onChange={(e) => {setNomorUrut(e.target.value); handleNomorSurat()}}
+            placeholder='No. Urut'
+          />
+        </Col>
+        <Col span={3}>
+          <p> / SKMK-KD / </p>
+        </Col>
+        <Col span={4}>
+          <Input
+            value={bulanSurat}
+            onChange={(e) => {setBulanSurat(e.target.value); handleNomorSurat();}}
+            placeholder='Bulan'
+          />
+        </Col>
+        <Col span={1}>
+          <p>/</p>
+        </Col>
+        <Col span={4}>
+          <Input
+            value={tahunSurat}
+            onChange={(e) => {setTahunSurat(e.target.value); handleNomorSurat();}}
+            placeholder='Tahun Surat'
+          />
+        </Col>
+      </Row>
+    )
+  }
   
   return (
     <Card
@@ -24,42 +70,22 @@ const SkmkDataSurat = (props) => {
         </Col>
         <Col span={18}>
           <Input
+            value={namaPembuatSurat}
+            onChange={(e) => setNamaPembuatSurat(e.target.value)}
             placeholder='Nama'
           />
         </Col>
       </Row>
-      <Row gutter={16}>
-        <Col span={6}>
-          <p>Nomor Surat</p>
-        </Col>
-        <Col span={4}>
-          <Input
-            placeholder='No. Urut'
-          />
-        </Col>
-        <Col span={3}>
-          <p> / SKMK-KD / </p>
-        </Col>
-        <Col span={4}>
-          <Input
-            placeholder='Bulan'
-          />
-        </Col>
-        <Col span={1}>
-          <p>/</p>
-        </Col>
-        <Col span={4}>
-          <Input
-            placeholder='Tahun Surat'
-          />
-        </Col>
-      </Row>
+      {renderNomorSuratForm()}
       <Row gutter={16}>
         <Col span={6}>
           <p>Tanggal Surat</p>
         </Col>
         <Col span={6}>
-          <DatePicker/>
+          <DatePicker
+            value={tanggalSurat}
+            onChange={(value) => setTanggalSurat(value)}
+          />
         </Col>
       </Row>
       <Row gutter={16}>
@@ -69,6 +95,8 @@ const SkmkDataSurat = (props) => {
         <Col span={18}>
           <Input
             placeholder='Nama'
+            value={namaPenandatangan}
+            onChange={(e) => setNamaPenandatangan(e.target.value)}
           />
         </Col>
       </Row>
