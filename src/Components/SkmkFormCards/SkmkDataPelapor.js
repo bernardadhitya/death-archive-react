@@ -45,6 +45,8 @@ const SkmkDataPelapor = (props) => {
         </Col>
         <Col span={18}>
           <Input
+            value={namaPelapor}
+            onChange={(e) => setNamaPelapor(e.target.value)}
             placeholder='Name'
           />
         </Col>
@@ -55,11 +57,16 @@ const SkmkDataPelapor = (props) => {
         </Col>
         <Col span={6}>
           <Input
+            value={tempatLahirPelapor}
+            onChange={(e) => setTempatLahirPelapor(e.target.value)}
             placeholder='Kota'
           />
         </Col>
         <Col span={6}>
-          <DatePicker/>
+          <DatePicker
+            value={tanggalLahirPelapor}
+            onChange={(value) => setTanggalLahirPelapor(value)}
+          />
         </Col>
       </Row>
       <Row gutter={16}>
@@ -67,8 +74,19 @@ const SkmkDataPelapor = (props) => {
           <p>Pekerjaan</p>
         </Col>
         <Col span={18}>
-          <Input
-            placeholder='Pekerjaan'
+          <DropdownMenu
+            list={[
+              'Belum/Tidak Bekerja',
+              'Sekolah',
+              'TNI/POLRI',
+              'PNS',
+              'Petani',
+              'Wiraswasta/jasa',
+              'Nelayan',
+              'Buruh',
+              'Lainnya'
+            ]}
+            onSelect={(value) => setPekerjaanPelapor(value)}
           />
         </Col>
       </Row>
@@ -80,6 +98,8 @@ const SkmkDataPelapor = (props) => {
           <Row gutter={16}>
             <Col span={13}>
               <Input
+                value={alamatJalanPelapor}
+                onChange={(e) => setAlamatJalanPelapor(e.target.value)}
                 placeholder='Nama Jalan'
               />
             </Col>
@@ -88,6 +108,8 @@ const SkmkDataPelapor = (props) => {
             </Col>
             <Col span={4}>
               <Input
+                value={alamatNomorPelapor}
+                onChange={(e) => setAlamatNomorPelapor(e.target.value)}
                 placeholder='000'
               />
             </Col>
@@ -96,6 +118,8 @@ const SkmkDataPelapor = (props) => {
             </Col>
             <Col span={4}>
               <Input
+                value={alamatRtRwPelapor}
+                onChange={(e) => setAlamatRtRwPelapor(e.target.value)}
                 placeholder='000/000'
               />
             </Col>
@@ -103,11 +127,15 @@ const SkmkDataPelapor = (props) => {
           <Row gutter={16}>
             <Col span={12}>
               <Input
+                value={alamatKelurahanPelapor}
+                onChange={(e) => setAlamatKelurahanPelapor(e.target.value)}
                 placeholder='Kelurahan/Desa'
               />
             </Col>
             <Col span={12}>
               <Input
+                value={alamatKecamatanPelapor}
+                onChange={(e) => setAlamatKecamatanPelapor(e.target.value)}
                 placeholder='Kecamatan'
               />
             </Col>
@@ -116,11 +144,15 @@ const SkmkDataPelapor = (props) => {
           <Row gutter={16}>
             <Col span={12}>
               <Input
+                value={alamatKotaPelapor}
+                onChange={(e) => setAlamatKotaPelapor(e.target.value)}
                 placeholder='Kota/Kabupaten'
               />
             </Col>
             <Col span={12}>
               <Input
+                value={alamatKodePosPelapor}
+                onChange={(e) => setAlamatKodePosPelapor(e.target.value)}
                 placeholder='Kode Pos'
               />
             </Col>
@@ -129,6 +161,8 @@ const SkmkDataPelapor = (props) => {
           <Row gutter={16}>
             <Col span={24}>
               <Input
+                value={nomorTeleponPelapor}
+                onChange={(e) => setNomorTeleponPelapor(e.target.value)}
                 placeholder='Telp'
               />
             </Col>
@@ -142,6 +176,8 @@ const SkmkDataPelapor = (props) => {
         </Col>
         <Col span={18}>
           <Input
+            value={nomorKtpPelapor}
+            onChange={(e) => setNomorKtpPelapor(e.target.value)}
             placeholder='Nomor KTP'
           />
         </Col>
@@ -151,7 +187,10 @@ const SkmkDataPelapor = (props) => {
           <p>Hubungan dengan Mendiang</p>
         </Col>
         <Col span={8}>
-          <DropdownMenu list={['Suami', 'Istri', 'Anak', 'Orang Tua', 'Lainnya']}/>
+          <DropdownMenu
+            list={['Suami', 'Istri', 'Anak', 'Orang Tua', 'Lainnya']}
+            onSelect={(value) => setHubunganPelapor(value)}
+          />
         </Col>
       </Row>
     </Card>
