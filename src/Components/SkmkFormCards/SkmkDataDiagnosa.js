@@ -1,5 +1,6 @@
 import { Card, Col, Input, Row } from 'antd';
 import React, { useState } from 'react';
+import { icdxList } from '../../Constants/icdx';
 import DropdownMenu from '../DropdownMenu/DropdownMenu';
 
 const SkmkDataDiagnosa = () => {
@@ -16,7 +17,7 @@ const SkmkDataDiagnosa = () => {
           <p>Nama Penyebab</p>
         </Col>
         <Col span={18}>
-          <DropdownMenu/>
+          <DropdownMenu list={icdxList.map(icdxItem => icdxItem.penyakit)}/>
         </Col>
         <Col span={6}>
           <p>Selang waktu terjadinya penyakit sampai meninggal</p>
@@ -50,7 +51,7 @@ const SkmkDataDiagnosa = () => {
           <p>Kode ICD-10</p>
         </Col>
         <Col span={18}>
-          <DropdownMenu/>
+        <DropdownMenu list={icdxList.map(icdxItem => icdxItem.icdx)}/>
         </Col>
       </Row>
     ))
