@@ -19,7 +19,7 @@ const DropdownMenu = (props) => {
       filterSort={(optionA, optionB) =>
         optionA.children.toLowerCase().localeCompare(optionB.children.toLowerCase())
       }
-      onChange={(value) => onSelect(value)}
+      onChange={(value) => onSelect(list[value])}
     >
       { list.map((item, idx) => 
         <Option value={idx}>
