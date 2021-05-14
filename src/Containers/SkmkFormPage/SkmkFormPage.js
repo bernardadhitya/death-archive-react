@@ -1,5 +1,6 @@
 import { Button } from '@material-ui/core';
 import React, { useState } from 'react';
+import { useHistory } from 'react-router';
 import SkmkDataDiagnosa from '../../Components/SkmkFormCards/SkmkDataDiagnosa';
 import SkmkDataJenazah from '../../Components/SkmkFormCards/SkmkDataJenazah';
 import SkmkDataPelapor from '../../Components/SkmkFormCards/SkmkDataPelapor';
@@ -324,6 +325,108 @@ const SkmkFormPage = () => {
     )
   }
 
+  const history = useHistory();
+
+  const handleSubmit = () => {
+    sessionStorage.setItem('namaPembuatSurat',          namaPembuatSurat);          
+    sessionStorage.setItem('nomorSurat',                nomorSurat);                
+    sessionStorage.setItem('tanggalSurat',              tanggalSurat);              
+    sessionStorage.setItem('namaPenandatangan',         namaPenandatangan);         
+    sessionStorage.setItem('namaPelapor',               namaPelapor);               
+    sessionStorage.setItem('tempatLahirPelapor',        tempatLahirPelapor);        
+    sessionStorage.setItem('tanggalLahirPelapor',       tanggalLahirPelapor);       
+    sessionStorage.setItem('pekerjaanPelapor',          pekerjaanPelapor);          
+    sessionStorage.setItem('alamatJalanPelapor',        alamatJalanPelapor);        
+    sessionStorage.setItem('alamatNomorPelapor',        alamatNomorPelapor);        
+    sessionStorage.setItem('alamatRtRwPelapor',         alamatRtRwPelapor);         
+    sessionStorage.setItem('alamatKelurahanPelapor',    alamatKelurahanPelapor);    
+    sessionStorage.setItem('alamatKecamatanPelapor',    alamatKecamatanPelapor);    
+    sessionStorage.setItem('alamatKotaPelapor',         alamatKotaPelapor);         
+    sessionStorage.setItem('alamatKodePosPelapor',      alamatKodePosPelapor);      
+    sessionStorage.setItem('nomorTeleponPelapor',       nomorTeleponPelapor);       
+    sessionStorage.setItem('nomorKtpPelapor',           nomorKtpPelapor);           
+    sessionStorage.setItem('hubunganPelapor',           hubunganPelapor);           
+    sessionStorage.setItem('namaJenazah',               namaJenazah);               
+    sessionStorage.setItem('tempatLahirJenazah',        tempatLahirJenazah);        
+    sessionStorage.setItem('umurTahunJenazah',          umurTahunJenazah);          
+    sessionStorage.setItem('umurBulanJenazah',          umurBulanJenazah);          
+    sessionStorage.setItem('umurHariJenazah',           umurHariJenazah);           
+    sessionStorage.setItem('tanggalLahirJenazah',       tanggalLahirJenazah);       
+    sessionStorage.setItem('pekerjaanJenazah',          pekerjaanJenazah);          
+    sessionStorage.setItem('alamatJalanJenazah',        alamatJalanJenazah);        
+    sessionStorage.setItem('alamatNomorJenazah',        alamatNomorJenazah);        
+    sessionStorage.setItem('alamatRtRwJenazah',         alamatRtRwJenazah);         
+    sessionStorage.setItem('alamatKelurahanJenazah',    alamatKelurahanJenazah);    
+    sessionStorage.setItem('alamatKecamatanJenazah',    alamatKecamatanJenazah);    
+    sessionStorage.setItem('alamatKotaJenazah',         alamatKotaJenazah);         
+    sessionStorage.setItem('alamatKodePosJenazah',      alamatKodePosJenazah);      
+    sessionStorage.setItem('nomorTeleponJenazah',       nomorTeleponJenazah);       
+    sessionStorage.setItem('nomorKtpJenazah',           nomorKtpJenazah);           
+    sessionStorage.setItem('tanggalMeninggalJenazah',   tanggalMeninggalJenazah);   
+    sessionStorage.setItem('waktuMeninggalJenazah',     waktuMeninggalJenazah);     
+    sessionStorage.setItem('tempatMeninggalJenazah',    tempatMeninggalJenazah);    
+    sessionStorage.setItem('nilaiLamaDirawatJenazah',   nilaiLamaDirawatJenazah);   
+    sessionStorage.setItem('satuanLamaDirawatJenazah',  satuanLamaDirawatJenazah);  
+    sessionStorage.setItem('namaPenyebabUtamaBayi',     namaPenyebabUtamaBayi);     
+    sessionStorage.setItem('hariPenyebabUtamaBayi',     hariPenyebabUtamaBayi);     
+    sessionStorage.setItem('bulanPenyebabUtamaBayi',    bulanPenyebabUtamaBayi);    
+    sessionStorage.setItem('tahunPenyebabUtamaBayi',    tahunPenyebabUtamaBayi);    
+    sessionStorage.setItem('jamPenyebabUtamaBayi',      jamPenyebabUtamaBayi);      
+    sessionStorage.setItem('menitPenyebabUtamaBayi',    menitPenyebabUtamaBayi);    
+    sessionStorage.setItem('icdxPenyebabUtamaBayi',     icdxPenyebabUtamaBayi);     
+    sessionStorage.setItem('namaPenyebabLainnyaBayi',   namaPenyebabLainnyaBayi);   
+    sessionStorage.setItem('hariPenyebabLainnyaBayi',   hariPenyebabLainnyaBayi);   
+    sessionStorage.setItem('bulanPenyebabLainnyaBayi',  bulanPenyebabLainnyaBayi);  
+    sessionStorage.setItem('tahunPenyebabLainnyaBayi',  tahunPenyebabLainnyaBayi);  
+    sessionStorage.setItem('jamPenyebabLainnyaBayi',    jamPenyebabLainnyaBayi);    
+    sessionStorage.setItem('menitPenyebabLainnyaBayi',  menitPenyebabLainnyaBayi);  
+    sessionStorage.setItem('icdxPenyebabLainnyaBayi',   icdxPenyebabLainnyaBayi);   
+    sessionStorage.setItem('namaPenyebabUtamaIbu',      namaPenyebabUtamaIbu);      
+    sessionStorage.setItem('hariPenyebabUtamaIbu',      hariPenyebabUtamaIbu);      
+    sessionStorage.setItem('bulanPenyebabUtamaIbu',     bulanPenyebabUtamaIbu);     
+    sessionStorage.setItem('tahunPenyebabUtamaIbu',     tahunPenyebabUtamaIbu);     
+    sessionStorage.setItem('jamPenyebabUtamaIbu',       jamPenyebabUtamaIbu);       
+    sessionStorage.setItem('menitPenyebabUtamaIbu',     menitPenyebabUtamaIbu);     
+    sessionStorage.setItem('icdxPenyebabUtamaIbu',      icdxPenyebabUtamaIbu);      
+    sessionStorage.setItem('namaPenyebabLainnyaIbu',    namaPenyebabLainnyaIbu);    
+    sessionStorage.setItem('hariPenyebabLainnyaIbu',    hariPenyebabLainnyaIbu);    
+    sessionStorage.setItem('bulanPenyebabLainnyaIbu',   bulanPenyebabLainnyaIbu);   
+    sessionStorage.setItem('tahunPenyebabLainnyaIbu',   tahunPenyebabLainnyaIbu);   
+    sessionStorage.setItem('jamPenyebabLainnyaIbu',     jamPenyebabLainnyaIbu);     
+    sessionStorage.setItem('menitPenyebabLainnyaIbu',   menitPenyebabLainnyaIbu);   
+    sessionStorage.setItem('icdxPenyebabLainnyaIbu',    icdxPenyebabLainnyaIbu);    
+    sessionStorage.setItem('namaPenyebabLangsung',      namaPenyebabLangsung);      
+    sessionStorage.setItem('hariPenyebabLangsung',      hariPenyebabLangsung);      
+    sessionStorage.setItem('bulanPenyebabLangsung',     bulanPenyebabLangsung);     
+    sessionStorage.setItem('tahunPenyebabLangsung',     tahunPenyebabLangsung);     
+    sessionStorage.setItem('jamPenyebabLangsung',       jamPenyebabLangsung);       
+    sessionStorage.setItem('menitPenyebabLangsung',     menitPenyebabLangsung);     
+    sessionStorage.setItem('icdxPenyebabLangsung',      icdxPenyebabLangsung);      
+    sessionStorage.setItem('namaPenyebabAntara1',       namaPenyebabAntara1);       
+    sessionStorage.setItem('hariPenyebabAntara1',       hariPenyebabAntara1);       
+    sessionStorage.setItem('bulanPenyebabAntara1',      bulanPenyebabAntara1);      
+    sessionStorage.setItem('tahunPenyebabAntara1',      tahunPenyebabAntara1);      
+    sessionStorage.setItem('jamPenyebabAntara1',        jamPenyebabAntara1);        
+    sessionStorage.setItem('menitPenyebabAntara1',      menitPenyebabAntara1);      
+    sessionStorage.setItem('icdxPenyebabAntara1',       icdxPenyebabAntara1);       
+    sessionStorage.setItem('namaPenyebabAntara2',       namaPenyebabAntara2);       
+    sessionStorage.setItem('hariPenyebabAntara2',       hariPenyebabAntara2);       
+    sessionStorage.setItem('bulanPenyebabAntara2',      bulanPenyebabAntara2);      
+    sessionStorage.setItem('tahunPenyebabAntara2',      tahunPenyebabAntara2);      
+    sessionStorage.setItem('jamPenyebabAntara2',        jamPenyebabAntara2);        
+    sessionStorage.setItem('menitPenyebabAntara2',      menitPenyebabAntara2);      
+    sessionStorage.setItem('icdxPenyebabAntara2',       icdxPenyebabAntara2);       
+    sessionStorage.setItem('namaPenyebabDasar',         namaPenyebabDasar);         
+    sessionStorage.setItem('hariPenyebabDasar',         hariPenyebabDasar);         
+    sessionStorage.setItem('bulanPenyebabDasar',        bulanPenyebabDasar);        
+    sessionStorage.setItem('tahunPenyebabDasar',        tahunPenyebabDasar);        
+    sessionStorage.setItem('jamPenyebabDasar',          jamPenyebabDasar);          
+    sessionStorage.setItem('menitPenyebabDasar',        menitPenyebabDasar);        
+    sessionStorage.setItem('icdxPenyebabDasar',         icdxPenyebabDasar);
+
+    history.push('/skmk/form/display');
+  }
+
   return (
     <div style={{margin: '120px 160px'}}>
       <h1>Input Surat Keterangan Melapor Kematian (SKMK)</h1>
@@ -339,15 +442,7 @@ const SkmkFormPage = () => {
       <Button
         size='large'
         style={{backgroundColor: '#F6B931', float: 'right'}}
-        onClick={() => console.log({
-          namaPenyebabAntara2, 
-          hariPenyebabAntara2, 
-          bulanPenyebabAntara2,
-          tahunPenyebabAntara2,
-          jamPenyebabAntara2,  
-          menitPenyebabAntara2,
-          icdxPenyebabAntara2
-        })}
+        onClick={() => handleSubmit()}
       >
         Berikutnya
       </Button>
