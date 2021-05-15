@@ -56,7 +56,7 @@ const SkmkDataJenazah = (props) => {
     >
       <Row gutter={16}>
         <Col span={6}>
-          <p>Nama Jenazah</p>
+          <p>Nama Jenazah*</p>
         </Col>
         <Col span={18}>
           <Input
@@ -68,7 +68,7 @@ const SkmkDataJenazah = (props) => {
       </Row>
       <Row gutter={16}>
         <Col span={6}>
-          <p>Tempat / Tanggal Lahir</p>
+          <p>Tempat / Tanggal Lahir*</p>
         </Col>
         <Col span={6}>
           <Input
@@ -86,7 +86,7 @@ const SkmkDataJenazah = (props) => {
       </Row>
       <Row gutter={16}>
         <Col span={6}>
-          <p>Umur</p>
+          <p>Umur*</p>
         </Col>
         <Col span={4}>
           <Input
@@ -112,7 +112,7 @@ const SkmkDataJenazah = (props) => {
       </Row>
       <Row gutter={16}>
         <Col span={6}>
-          <p>Pekerjaan</p>
+          <p>Pekerjaan*</p>
         </Col>
         <Col span={18}>
           <DropdownMenu
@@ -133,7 +133,7 @@ const SkmkDataJenazah = (props) => {
       </Row>
       <Row gutter={16}>
         <Col span={6}>
-          <p>Alamat</p>
+          <p>Alamat*</p>
         </Col>
         <Col span={18}>
           <Row gutter={16}>
@@ -213,7 +213,7 @@ const SkmkDataJenazah = (props) => {
       <div style={{height: '4px'}}></div>
       <Row gutter={16}>
         <Col span={6}>
-          <p>Nomor KTP</p>
+          <p>Nomor KTP*</p>
         </Col>
         <Col span={18}>
           <Input
@@ -225,7 +225,7 @@ const SkmkDataJenazah = (props) => {
       </Row>
       <Row gutter={16}>
         <Col span={6}>
-          <p>Tanggal Meninggal Dunia</p>
+          <p>Tanggal Meninggal Dunia*</p>
         </Col>
         <Col span={18}>
           <DatePicker
@@ -236,7 +236,7 @@ const SkmkDataJenazah = (props) => {
       </Row>
       <Row gutter={16}>
         <Col span={6}>
-          <p>Waktu Meninggal</p>
+          <p>Waktu Meninggal*</p>
         </Col>
         <Col span={18}>
           <TimePicker
@@ -247,7 +247,7 @@ const SkmkDataJenazah = (props) => {
       </Row>
       <Row gutter={16}>
         <Col span={6}>
-          <p>Tempat Meninggal</p>
+          <p>Tempat Meninggal*</p>
         </Col>
         <Col span={18}>
           <DropdownMenu

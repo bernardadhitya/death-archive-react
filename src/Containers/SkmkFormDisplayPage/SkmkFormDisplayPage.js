@@ -5,6 +5,7 @@ import SkmkDataDiagnosaDisplay from '../../Components/SkmkFormDisplayCards/SkmkD
 import SkmkDataJenazahDisplay from '../../Components/SkmkFormDisplayCards/SkmkDataJenazahDisplay';
 import SkmkDataPelaporDisplay from '../../Components/SkmkFormDisplayCards/SkmkDataPelaporDisplay';
 import SkmkDataSuratDisplay from '../../Components/SkmkFormDisplayCards/SkmkDataSuratDisplay';
+import { handleSubmitData } from './SkmkFormSubmit';
 
 const SkmkFormDisplayPage = () => {
   const namaPembuatSurat =         sessionStorage.getItem('namaPembuatSurat');          
@@ -243,15 +244,7 @@ const SkmkFormDisplayPage = () => {
       <Button
         size='large'
         style={{backgroundColor: '#F6B931', float: 'right'}}
-        onClick={() => console.log({
-          namaPenyebabAntara2, 
-          hariPenyebabAntara2, 
-          bulanPenyebabAntara2,
-          tahunPenyebabAntara2,
-          jamPenyebabAntara2,  
-          menitPenyebabAntara2,
-          icdxPenyebabAntara2
-        })}
+        onClick={() => handleSubmitData()}
       >
         Berikutnya
       </Button>

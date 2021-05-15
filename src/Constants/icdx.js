@@ -40,5 +40,5 @@ export const icdxList = [
   {icdx: 'O04', penyakit: 'Medical Aborsi'},
   {icdx: 'O05', penyakit: 'Aborsi Lain Lain'},
   {icdx: 'I64', penyakit: 'Stroke'},
-  {icdx: '-', penyakit: 'Lainnya'}
+  {icdx: '-', penyakit: 'Lain-lain'}
 ];

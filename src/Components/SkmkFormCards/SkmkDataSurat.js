@@ -26,7 +26,7 @@ const SkmkDataSurat = (props) => {
     return (
       <Row gutter={16}>
         <Col span={6}>
-          <p>Nomor Surat</p>
+          <p>Nomor Surat*</p>
         </Col>
         <Col span={4}>
           <Input
@@ -66,7 +66,7 @@ const SkmkDataSurat = (props) => {
     >
       <Row gutter={16}>
         <Col span={6}>
-          <p>Nama Pembuat Surat</p>
+          <p>Nama Pembuat Surat*</p>
         </Col>
         <Col span={18}>
           <Input
@@ -79,7 +79,7 @@ const SkmkDataSurat = (props) => {
       {renderNomorSuratForm()}
       <Row gutter={16}>
         <Col span={6}>
-          <p>Tanggal Surat</p>
+          <p>Tanggal Surat*</p>
         </Col>
         <Col span={6}>
           <DatePicker
@@ -90,7 +90,7 @@ const SkmkDataSurat = (props) => {
       </Row>
       <Row gutter={16}>
         <Col span={6}>
-          <p>Petugas yang Menandatangani Surat</p>
+          <p>Petugas yang Menandatangani Surat*</p>
         </Col>
         <Col span={18}>
           <Input

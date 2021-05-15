@@ -41,7 +41,7 @@ const SkmkDataPelapor = (props) => {
     >
       <Row gutter={16}>
         <Col span={6}>
-          <p>Nama Pelapor</p>
+          <p>Nama Pelapor*</p>
         </Col>
         <Col span={18}>
           <Input
@@ -53,7 +53,7 @@ const SkmkDataPelapor = (props) => {
       </Row>
       <Row gutter={16}>
         <Col span={6}>
-          <p>Tempat / Tanggal Lahir</p>
+          <p>Tempat / Tanggal Lahir*</p>
         </Col>
         <Col span={6}>
           <Input
@@ -71,7 +71,7 @@ const SkmkDataPelapor = (props) => {
       </Row>
       <Row gutter={16}>
         <Col span={6}>
-          <p>Pekerjaan</p>
+          <p>Pekerjaan*</p>
         </Col>
         <Col span={18}>
           <DropdownMenu
@@ -92,7 +92,7 @@ const SkmkDataPelapor = (props) => {
       </Row>
       <Row gutter={16}>
         <Col span={6}>
-          <p>Alamat</p>
+          <p>Alamat*</p>
         </Col>
         <Col span={18}>
           <Row gutter={16}>
@@ -172,7 +172,7 @@ const SkmkDataPelapor = (props) => {
       <div style={{height: '4px'}}></div>
       <Row gutter={16}>
         <Col span={6}>
-          <p>Nomor KTP</p>
+          <p>Nomor KTP*</p>
         </Col>
         <Col span={18}>
           <Input
@@ -184,7 +184,7 @@ const SkmkDataPelapor = (props) => {
       </Row>
       <Row gutter={16}>
         <Col span={6}>
-          <p>Hubungan dengan Mendiang</p>
+          <p>Hubungan dengan Mendiang*</p>
         </Col>
         <Col span={8}>
           <DropdownMenu

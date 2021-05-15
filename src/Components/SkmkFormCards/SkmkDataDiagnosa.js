@@ -83,7 +83,7 @@ const SkmkDataDiagnosa = (props) => {
   const renderDiagnosaIbuAnak = () => {
     const diagnosaIbuAnakList = [
       {
-        judul:      'Penyebab Utama Bayi',
+        judul:      'Penyebab Utama Bayi*',
         nama:       props.namaPenyebabUtamaBayi,    
         hari:       props.hariPenyebabUtamaBayi,  
         bulan:      props.bulanPenyebabUtamaBayi, 
@@ -119,7 +119,7 @@ const SkmkDataDiagnosa = (props) => {
 
       },
       {
-        judul:      'Penyebab Utama Ibu',
+        judul:      'Penyebab Utama Ibu*',
         nama:       props.namaPenyebabUtamaIbu,    
         hari:       props.hariPenyebabUtamaIbu,  
         bulan:      props.bulanPenyebabUtamaIbu, 
@@ -161,7 +161,7 @@ const SkmkDataDiagnosa = (props) => {
   const renderDiagnosaUmum = () => {
     const diagnosaUmumList = [
       {
-        judul:      'Penyebab Langsung',
+        judul:      'Penyebab Langsung*',
         nama:       props.namaPenyebabLangsung,    
         hari:       props.hariPenyebabLangsung,  
         bulan:      props.bulanPenyebabLangsung, 
@@ -215,7 +215,7 @@ const SkmkDataDiagnosa = (props) => {
 
       },
       {
-        judul:      'Penyebab Dasar',
+        judul:      'Penyebab Dasar*',
         nama:       props.namaPenyebabDasar,    
         hari:       props.hariPenyebabDasar,  
         bulan:      props.bulanPenyebabDasar, 
