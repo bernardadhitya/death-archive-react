@@ -1,6 +1,6 @@
 import { Button } from '@material-ui/core';
 import React, { useState } from 'react';
-import { useLocation } from 'react-router';
+import { useHistory, useLocation } from 'react-router';
 import SkmkDataDiagnosaDisplay from '../../Components/SkmkFormDisplayCards/SkmkDataDiagnosaDisplay';
 import SkmkDataJenazahDisplay from '../../Components/SkmkFormDisplayCards/SkmkDataJenazahDisplay';
 import SkmkDataPelaporDisplay from '../../Components/SkmkFormDisplayCards/SkmkDataPelaporDisplay';
@@ -229,6 +229,8 @@ const SkmkFormDisplayPage = () => {
     )
   }
 
+  const history = useHistory();
+
   return (
     <div style={{margin: '120px 160px'}}>
       <h1>Input Surat Keterangan Melapor Kematian (SKMK)</h1>
@@ -243,10 +245,14 @@ const SkmkFormDisplayPage = () => {
       <br/><br/>
       <Button
         size='large'
-        style={{backgroundColor: '#F6B931', float: 'right'}}
-        onClick={() => handleSubmitData()}
+        style={{backgroundColor: '#3990B2', float: 'right', color: '#FFFFFF'}}
+        onClick={() => {
+          handleSubmitData();
+          window.alert('Data berhasil disimpan!');
+          history.push('/home');
+        }}
       >
-        Berikutnya
+        Simpan
       </Button>
       <br/><br/><br/><br/>
     </div>
