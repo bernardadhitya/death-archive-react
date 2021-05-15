@@ -101,7 +101,8 @@ const SkmkFormDisplayPage = () => {
   const tahunPenyebabDasar =       sessionStorage.getItem('tahunPenyebabDasar');        
   const jamPenyebabDasar =         sessionStorage.getItem('jamPenyebabDasar');          
   const menitPenyebabDasar =       sessionStorage.getItem('menitPenyebabDasar');        
-  const icdxPenyebabDasar =        sessionStorage.getItem('icdxPenyebabDasar');       
+  const icdxPenyebabDasar =        sessionStorage.getItem('icdxPenyebabDasar');
+  const lamaKematian =             sessionStorage.getItem('lamaKematian');       
 
   const renderDataSurat = () => {
     return (
@@ -221,7 +222,8 @@ const SkmkFormDisplayPage = () => {
         tahunPenyebabDasar={tahunPenyebabDasar}      
         jamPenyebabDasar={jamPenyebabDasar}        
         menitPenyebabDasar={menitPenyebabDasar}      
-        icdxPenyebabDasar={icdxPenyebabDasar}       
+        icdxPenyebabDasar={icdxPenyebabDasar}
+        lamaKematian={lamaKematian}       
       />
     )
   }

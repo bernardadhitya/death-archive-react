@@ -1,5 +1,6 @@
 import { Card, Col, DatePicker, Input, Row } from 'antd';
 import React, { useState } from 'react';
+import moment from 'moment';
 
 const SkmkDataSurat = (props) => {
   const {
@@ -35,7 +36,7 @@ const SkmkDataSurat = (props) => {
           <p>Tanggal Surat</p>
         </Col>
         <Col span={6}>
-          <p>{tanggalSurat}</p>
+          <p>{moment(tanggalSurat).format('LL')}</p>
         </Col>
       </Row>
       <Row gutter={16}>

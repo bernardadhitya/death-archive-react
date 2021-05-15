@@ -5,8 +5,7 @@ import { icdxList } from '../../Constants/icdx';
 import DropdownMenu from '../DropdownMenu/DropdownMenu';
 
 const SkmkDataDiagnosa = (props) => {
-  const [lamaKematian, setLamaKematian] = useState(null);
-
+  const {lamaKematian} = props;
   const renderDiagnosaForm = (diagnosaList = []) => {
     return diagnosaList.map((item, idx) => {
       const {
@@ -33,20 +32,8 @@ const SkmkDataDiagnosa = (props) => {
           <Col span={6}>
             <p>Selang waktu terjadinya penyakit sampai meninggal</p>
           </Col>
-          <Col span={3}>
-            <p>{`${hari} Hari`}</p>
-          </Col>
-          <Col span={3}>
-            <p>{`${bulan} Bulan`}</p>
-          </Col>
-          <Col span={3}>
-          <p>{`${tahun} Tahun`}</p>
-          </Col>
-          <Col span={3}>
-          <p>{`${jam} Jam`}</p>
-          </Col>
-          <Col span={3}>
-          <p>{`${menit} Menit`}</p>
+          <Col span={18}>
+            <p>{`${hari} Hari ${bulan} Bulan ${tahun} Tahun ${jam} Jam ${menit} Menit`}</p>
           </Col>
         </Row>
       )
@@ -173,14 +160,13 @@ const SkmkDataDiagnosa = (props) => {
           <p>Jenjang Umur Jenazah</p>
         </Col>
         <Col span={18}>
-          <DropdownMenu
-            byIndex 
-            list={[
-              'Kematian Umur 0-6 Hari Termasuk Lahir Mati',
-              'Kematian Umur 7 Hari ke Atas'
-            ]}
-            onSelect={(item) => setLamaKematian(item)}
-          />
+          <p>
+            {
+              lamaKematian === 0 ? 
+                'Kematian Umur 0-6 Hari Termasuk Lahir Mati' :
+                'Kematian Umur 7 Hari ke Atas'
+            }
+          </p>
         </Col>
       </Row>
       {renderDataDiagnosaForm()}

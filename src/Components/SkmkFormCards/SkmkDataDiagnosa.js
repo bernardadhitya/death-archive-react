@@ -5,7 +5,7 @@ import { icdxList } from '../../Constants/icdx';
 import DropdownMenu from '../DropdownMenu/DropdownMenu';
 
 const SkmkDataDiagnosa = (props) => {
-  const [lamaKematian, setLamaKematian] = useState(null);
+  const {lamaKematian, setLamaKematian} = props;
 
   const renderDiagnosaForm = (diagnosaList = []) => {
     return diagnosaList.map((item, idx) => {
@@ -230,7 +230,6 @@ const SkmkDataDiagnosa = (props) => {
         setJam:     props.setJamPenyebabDasar,  
         setMenit:   props.setMenitPenyebabDasar,
         setIcdx:    props.setIcdxPenyebabDasar, 
-
       }
     ];
     return renderDiagnosaForm(diagnosaUmumList);

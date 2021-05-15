@@ -46,25 +46,16 @@ const SkmkDataJenazah = (props) => {
         <Col span={6}>
           <p>Tempat / Tanggal Lahir</p>
         </Col>
-        <Col span={6}>
-          <p>{tempatLahirJenazah}</p>
-        </Col>
-        <Col span={6}>
-          <p>{tanggalLahirJenazah}</p>
+        <Col span={16}>
+          <p>{`${tempatLahirJenazah}, ${moment(tanggalLahirJenazah).format('LL')}`}</p>
         </Col>
       </Row>
       <Row gutter={16}>
         <Col span={6}>
           <p>Umur</p>
         </Col>
-        <Col span={4}>
-          <p>{`${umurTahunJenazah} Tahun`}</p>
-        </Col>
-        <Col span={4}>
-          <p>{`${umurBulanJenazah} Bulan`}</p>
-        </Col>
-        <Col span={4}>
-          <p>{`${umurHariJenazah} Hari`}</p>{}
+        <Col span={18}>
+          <p>{`${umurTahunJenazah} Tahun ${umurBulanJenazah} Bulan ${umurHariJenazah} Hari`}</p>
         </Col>
       </Row>
       <Row gutter={16}>
@@ -101,7 +92,7 @@ const SkmkDataJenazah = (props) => {
           <p>Tanggal Meninggal Dunia</p>
         </Col>
         <Col span={18}>
-          <p>{tanggalMeninggalJenazah}</p>
+          <p>{moment(tanggalMeninggalJenazah).format('LL')}</p>
         </Col>
       </Row>
       <Row gutter={16}>
@@ -109,7 +100,7 @@ const SkmkDataJenazah = (props) => {
           <p>Waktu Meninggal</p>
         </Col>
         <Col span={18}>
-          <p>{waktuMeninggalJenazah}</p>
+          <p>{moment(waktuMeninggalJenazah).format('HH:mm')}</p>
         </Col>
       </Row>
       <Row gutter={16}>

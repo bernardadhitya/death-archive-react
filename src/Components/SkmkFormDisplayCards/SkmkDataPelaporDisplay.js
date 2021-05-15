@@ -1,6 +1,7 @@
 import React from 'react';
 import { Card, Col, DatePicker, Input, Row } from 'antd';
 import DropdownMenu from '../DropdownMenu/DropdownMenu';
+import moment from 'moment';
 
 const SkmkDataPelapor = (props) => {
   const {
@@ -37,11 +38,8 @@ const SkmkDataPelapor = (props) => {
         <Col span={6}>
           <p>Tempat / Tanggal Lahir</p>
         </Col>
-        <Col span={6}>
-          <p>{tempatLahirPelapor}</p>
-        </Col>
-        <Col span={6}>
-          <p>{tanggalLahirPelapor}</p>
+        <Col span={18}>
+          <p>{`${tempatLahirPelapor}, ${moment(tanggalLahirPelapor).format('LL')}`}</p>
         </Col>
       </Row>
       <Row gutter={16}>

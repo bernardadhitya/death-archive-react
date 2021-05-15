@@ -105,6 +105,7 @@ const SkmkFormPage = () => {
   const [jamPenyebabDasar,          setJamPenyebabDasar          ] = useState('');
   const [menitPenyebabDasar,        setMenitPenyebabDasar        ] = useState('');
   const [icdxPenyebabDasar,         setIcdxPenyebabDasar         ] = useState('');
+  const [lamaKematian,              setLamaKematian              ] = useState(null);
 
 
   const renderDataSurat = () => {
@@ -265,6 +266,7 @@ const SkmkFormPage = () => {
         jamPenyebabDasar={jamPenyebabDasar}        
         menitPenyebabDasar={menitPenyebabDasar}      
         icdxPenyebabDasar={icdxPenyebabDasar}       
+        lamaKematian={lamaKematian}
         setNamaPenyebabUtamaBayi     ={setNamaPenyebabUtamaBayi   }
         setHariPenyebabUtamaBayi     ={setHariPenyebabUtamaBayi   }
         setBulanPenyebabUtamaBayi    ={setBulanPenyebabUtamaBayi  }
@@ -321,6 +323,7 @@ const SkmkFormPage = () => {
         setJamPenyebabDasar          ={setJamPenyebabDasar        }
         setMenitPenyebabDasar        ={setMenitPenyebabDasar      }
         setIcdxPenyebabDasar         ={setIcdxPenyebabDasar       }
+        setLamaKematian              ={setLamaKematian            }
       />
     )
   }
@@ -423,6 +426,7 @@ const SkmkFormPage = () => {
     sessionStorage.setItem('jamPenyebabDasar',          jamPenyebabDasar);          
     sessionStorage.setItem('menitPenyebabDasar',        menitPenyebabDasar);        
     sessionStorage.setItem('icdxPenyebabDasar',         icdxPenyebabDasar);
+    sessionStorage.setItem('lamaKematian',              lamaKematian);
 
     history.push('/skmk/form/display');
   }
