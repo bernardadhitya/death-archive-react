@@ -127,7 +127,7 @@ const SkmkDataDiagnosa = (props) => {
         jam:        props.jamPenyebabDasar,   
         menit:      props.menitPenyebabDasar, 
         icdx:       props.icdxPenyebabDasar,  
-      }
+      },
       {
         judul:      'Final UCoD',
         nama:       props.namaFinalUcod, 
