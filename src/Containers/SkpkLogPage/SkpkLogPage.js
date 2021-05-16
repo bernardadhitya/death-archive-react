@@ -1,4 +1,4 @@
-import { Button, Col, Input, Row, Space, Table } from 'antd';
+import { Button, Col, Input, Row, Space, Table, DatePicker } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { getSkpkLogs } from '../../supabase';
 import moment from 'moment';
@@ -10,6 +10,9 @@ const SkpkLogPage = () => {
 
   const [searchText, setSearchText] = useState('');
   const [searchedColumn, setSearchedColumn] = useState('');
+
+  const [searchDate, setSearchDate] = useState(new Date());
+  const [searchedTanggalMeninggal, setSearchedTanggalMeninggal] = useState('');
 
   const stringDiff = (a, b) => a.localeCompare(b, 'en', { numeric: true });
 
@@ -99,13 +102,54 @@ const SkpkLogPage = () => {
     setSearchText('');
   };
 
+  const getColumnSearchTanggalMeninggalProps = dataIndex => ({
+    filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
+      <div style={{ padding: 8 }}>
+        <DatePicker
+          onChange={value => setSelectedKeys(value ? [value] : [])}
+          picker="month"
+          style={{ marginBottom: 8, display: 'block' }}
+        />
+        <Space>
+          <Button
+            type="primary"
+            onClick={() => handleSearchTanggalMeninggal(selectedKeys, confirm, dataIndex)}
+            icon={<SearchOutlined />}
+            size="small"
+            style={{ width: 90 }}
+          >
+            Search
+          </Button>
+          <Button onClick={() => handleResetSearchTanggalMeninggal(clearFilters)} size="small" style={{ width: 90 }}>
+            Reset
+          </Button>
+        </Space>
+      </div>
+    ),
+    filterIcon: filtered => <SearchOutlined style={{ color: filtered ? '#1890ff' : undefined }} />,
+    onFilter: (value, record) =>
+      record[dataIndex]
+        ? moment(record[dataIndex]).isSame(moment(value), 'month')
+        : '',
+  });
+
+  const handleSearchTanggalMeninggal = (selectedKeys, confirm, dataIndex) => {
+    confirm();
+    setSearchDate(selectedKeys[0]);
+    setSearchedTanggalMeninggal(dataIndex);
+  };
+
+  const handleResetSearchTanggalMeninggal = clearFilters => {
+    clearFilters();
+    setSearchDate(new Date());
+  };
+
   const columns = [
     {
       title: 'Nama Jenazah',
       dataIndex: 'nama_jenazah',
       key: 'nama_jenazah',
       width: 100,
-      //sorter: (a, b) => stringDiff(a.nama_jenazah, b.nama_jenazah),
       ...getColumnSearchProps('nama_jenazah')
     },
     {
@@ -152,12 +196,8 @@ const SkpkLogPage = () => {
       title: 'Tgl. Meninggal',
       dataIndex: 'tanggal_meninggal',
       key: 'tanggal_meninggal',
-      sorter: (a, b) => {
-        const start = moment(a.tanggal_meninggal);
-        const end = moment(b.tanggal_meninggal);
-        return start.diff(end, 'days');
-      },
       width: 100,
+      ...getColumnSearchTanggalMeninggalProps('tanggal_meninggal')
     },
     {
       title: 'Diagnosa',

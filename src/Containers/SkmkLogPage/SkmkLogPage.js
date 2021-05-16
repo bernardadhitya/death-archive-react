@@ -151,7 +151,6 @@ const SkmkLogPage = () => {
       key: 'nama_jenazah',
       width: 100,
       ...getColumnSearchNamaJenazahProps('nama_jenazah')
-      //sorter: (a, b) => stringDiff(a.nama_jenazah, b.nama_jenazah),
     },
     {
       title: 'Jenis Kelamin',
@@ -197,11 +196,6 @@ const SkmkLogPage = () => {
       title: 'Tgl. Meninggal',
       dataIndex: 'tanggal_meninggal',
       key: 'tanggal_meninggal',
-      // sorter: (a, b) => {
-      //   const start = moment(a.tanggal_meninggal);
-      //   const end = moment(b.tanggal_meninggal);
-      //   return start.diff(end, 'days');
-      // },
       width: 100,
       ...getColumnSearchTanggalMeninggalProps('tanggal_meninggal')
     },
