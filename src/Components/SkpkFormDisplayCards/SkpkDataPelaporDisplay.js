@@ -3,7 +3,7 @@ import { Card, Col, DatePicker, Input, Row } from 'antd';
 import DropdownMenu from '../DropdownMenu/DropdownMenu';
 import moment from 'moment';
 
-const SkpkDataPelapor = (props) => {
+const SkmkDataPelapor = (props) => {
   const {
     namaPelapor,              
     tempatLahirPelapor,              
@@ -83,4 +83,4 @@ const SkpkDataPelapor = (props) => {
   )
 }
 
-export default SkpkDataPelapor;
+export default SkmkDataPelapor;

@@ -2,7 +2,7 @@ import { Card, Col, DatePicker, Input, Row } from 'antd';
 import React, { useState } from 'react';
 import moment from 'moment';
 
-const SkpkDataSurat = (props) => {
+const SkmkDataSurat = (props) => {
   const {
     namaPembuatSurat,
     nomorSurat,
@@ -51,4 +51,4 @@ const SkpkDataSurat = (props) => {
   )
 }
 
-export default SkpkDataSurat;
+export default SkmkDataSurat;

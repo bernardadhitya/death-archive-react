@@ -3,7 +3,7 @@ import moment from 'moment';
 import React, { useState } from 'react';
 import DropdownMenu from '../DropdownMenu/DropdownMenu';
 
-const SkpkDataJenazah = (props) => {
+const SkmkDataJenazah = (props) => {
   const {
     namaJenazah,              
     tempatLahirJenazah,         
@@ -123,4 +123,4 @@ const SkpkDataJenazah = (props) => {
   )
 }
 
-export default SkpkDataJenazah;
+export default SkmkDataJenazah;

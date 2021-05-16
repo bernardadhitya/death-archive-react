@@ -155,3 +155,5 @@ export const createSkmkEntry = async (
 
   return suratSkmkEntry;
 }
+
+export const createSkpkEntry = async () => {}

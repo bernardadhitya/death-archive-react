@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { icdxList } from '../../Constants/icdx';
 import DropdownMenu from '../DropdownMenu/DropdownMenu';
 
-const SkpkDataDiagnosa = (props) => {
+const SkmkDataDiagnosa = (props) => {
   const {lamaKematian} = props;
   const renderDiagnosaForm = (diagnosaList = []) => {
     return diagnosaList.map((item, idx) => {
@@ -174,4 +174,4 @@ const SkpkDataDiagnosa = (props) => {
   )
 }
 
-export default SkpkDataDiagnosa;
+export default SkmkDataDiagnosa;
