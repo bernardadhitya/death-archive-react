@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router';
 import SkpkDataDiagnosa from '../../Components/SkpkFormCards/SkpkDataDiagnosa';
 import SkpkDataJenazah from '../../Components/SkpkFormCards/SkpkDataJenazah';
-import SkpkDataPelapor from '../../Components/SkpkFormCards/SkpkDataPelapor';
 import SkpkDataSurat from '../../Components/SkpkFormCards/SkpkDataSurat';
 
 const SkpkFormPage = () => {
@@ -39,6 +38,7 @@ const SkpkFormPage = () => {
   const [tempatMeninggalJenazah,    setTempatMeninggalJenazah   ] = useState('');
   const [nilaiLamaDirawatJenazah,   setNilaiLamaDirawatJenazah  ] = useState('');
   const [satuanLamaDirawatJenazah,  setSatuanLamaDirawatJenazah ] = useState('');
+  const [jenisKelaminJenazah,       setJenisKelaminJenazah      ] = useState('Laki-laki');
   const [statusKependudukanJenazah, setStatusKependudukanJenazah] = useState('');
   const [statusWanitaJenazah,       setStatusWanitaJenazah      ] = useState('');
   const [dasarDiagnosaJenazah,      setDasarDiagnosaJenazah     ] = useState('');
@@ -164,6 +164,7 @@ const SkpkFormPage = () => {
         tempatMeninggalJenazah={tempatMeninggalJenazah}       
         nilaiLamaDirawatJenazah={nilaiLamaDirawatJenazah}
         satuanLamaDirawatJenazah={satuanLamaDirawatJenazah}
+        jenisKelaminJenazah           ={jenisKelaminJenazah         }
         statusKependudukanJenazah     ={statusKependudukanJenazah   }
         statusWanitaJenazah           ={statusWanitaJenazah         }
         dasarDiagnosaJenazah          ={dasarDiagnosaJenazah        }
@@ -192,6 +193,7 @@ const SkpkFormPage = () => {
         setTempatMeninggalJenazah={setTempatMeninggalJenazah}       
         setNilaiLamaDirawatJenazah={setNilaiLamaDirawatJenazah}
         setSatuanLamaDirawatJenazah={setSatuanLamaDirawatJenazah} 
+        setJenisKelaminJenazah        ={setJenisKelaminJenazah      }
         setStatusKependudukanJenazah  ={setStatusKependudukanJenazah}
         setStatusWanitaJenazah        ={setStatusWanitaJenazah      }
         setDasarDiagnosaJenazah       ={setDasarDiagnosaJenazah     }
@@ -429,6 +431,7 @@ const SkpkFormPage = () => {
     sessionStorage.setItem('nomorRekamMedis',           nomorRekamMedis);          
     sessionStorage.setItem('namaPenerima',              namaPenerima);             
     sessionStorage.setItem('hubunganPenerima',          hubunganPenerima);         
+    sessionStorage.setItem('jenisKelaminJenazah',       jenisKelaminJenazah);
     sessionStorage.setItem('statusKependudukanJenazah', statusKependudukanJenazah);   
     sessionStorage.setItem('statusWanitaJenazah',       statusWanitaJenazah);         
     sessionStorage.setItem('dasarDiagnosaJenazah',      dasarDiagnosaJenazah);        

@@ -46,7 +46,22 @@ const SkpkDataJenazah = (props) => {
     setWaktuMeninggalJenazah,        
     setTempatMeninggalJenazah,       
     setNilaiLamaDirawatJenazah,
-    setSatuanLamaDirawatJenazah
+    setSatuanLamaDirawatJenazah,
+    statusKependudukanJenazah,
+    statusWanitaJenazah,      
+    dasarDiagnosaJenazah,     
+    waktuPemulasaranJenazah,  
+    rencanaPemulasaranJenazah,
+    pendidikanJenazah,        
+    lahirMatiJenazah,         
+    setStatusKependudukanJenazah,
+    setStatusWanitaJenazah,
+    setDasarDiagnosaJenazah,
+    setWaktuPemulasaranJenazah,
+    setRencanaPemulasaranJenazah,
+    setPendidikanJenazah,
+    setLahirMatiJenazah,
+    setJenisKelaminJenazah
   } = props;
 
   return (
@@ -63,6 +78,29 @@ const SkpkDataJenazah = (props) => {
             value={namaJenazah}
             onChange={(e) => setNamaJenazah(e.target.value)}
             placeholder='Nama'
+          />
+        </Col>
+      </Row>
+      <Row gutter={16}>
+        <Col span={6}>
+          <p>Nomor KTP*</p>
+        </Col>
+        <Col span={18}>
+          <Input
+            value={nomorKtpJenazah}
+            onChange={(e) => setNomorKtpJenazah(e.target.value)}
+            placeholder='Nomor KTP'
+          />
+        </Col>
+      </Row>
+      <Row gutter={16}>
+        <Col span={6}>
+          <p>Jenis Kelamin</p>
+        </Col>
+        <Col span={18}>
+          <DropdownMenu
+            list={['Laki-laki', 'Perempuan']}
+            onSelect={(value) => setJenisKelaminJenazah(value)}
           />
         </Col>
       </Row>
@@ -86,27 +124,19 @@ const SkpkDataJenazah = (props) => {
       </Row>
       <Row gutter={16}>
         <Col span={6}>
-          <p>Umur*</p>
+          <p>Pendidikan</p>
         </Col>
-        <Col span={4}>
-          <Input
-            value={umurTahunJenazah}
-            onChange={(e) => setUmurTahunJenazah(e.target.value)}
-            placeholder='Tahun'
-          />
-        </Col>
-        <Col span={4}>
-          <Input
-            value={umurBulanJenazah}
-            onChange={(e) => setUmurBulanJenazah(e.target.value)}
-            placeholder='Bulan'
-          />
-        </Col>
-        <Col span={4}>
-          <Input
-            value={umurHariJenazah}
-            onChange={(e) => setUmurHariJenazah(e.target.value)}
-            placeholder='Hari'
+        <Col span={18}>
+          <DropdownMenu
+            list={[
+              'Tidak Sekolah/Tdk Tamat SD',
+              'SD',
+              'SLTP',
+              'SLTA',
+              'Akademi/Diploma',
+              'Sarjana'
+            ]}
+            onSelect={(value) => setPendidikanJenazah(value)}
           />
         </Col>
       </Row>
@@ -210,19 +240,21 @@ const SkpkDataJenazah = (props) => {
           </Row>
         </Col>
       </Row>
-      <div style={{height: '4px'}}></div>
       <Row gutter={16}>
         <Col span={6}>
-          <p>Nomor KTP*</p>
+          <p>Status Kependudukan*</p>
         </Col>
         <Col span={18}>
-          <Input
-            value={nomorKtpJenazah}
-            onChange={(e) => setNomorKtpJenazah(e.target.value)}
-            placeholder='Nomor KTP'
+          <DropdownMenu
+            list={[
+              'Penduduk Tetap',
+              'Bukan Penduduk Tetap'
+            ]}
+            onSelect={(value) => setStatusKependudukanJenazah(value)}
           />
         </Col>
       </Row>
+      <div style={{height: '4px'}}></div>
       <Row gutter={16}>
         <Col span={6}>
           <p>Tanggal Meninggal Dunia*</p>
@@ -242,6 +274,59 @@ const SkpkDataJenazah = (props) => {
           <TimePicker
             value={waktuMeninggalJenazah}
             onChange={(value) => setWaktuMeninggalJenazah(value)}
+          />
+        </Col>
+      </Row>
+      <Row gutter={16}>
+        <Col span={6}>
+          <p>Umur Saat Meninggal*</p>
+        </Col>
+        <Col span={4}>
+          <Input
+            value={umurTahunJenazah}
+            onChange={(e) => setUmurTahunJenazah(e.target.value)}
+            placeholder='Tahun'
+          />
+        </Col>
+        <Col span={4}>
+          <Input
+            value={umurBulanJenazah}
+            onChange={(e) => setUmurBulanJenazah(e.target.value)}
+            placeholder='Bulan'
+          />
+        </Col>
+        <Col span={4}>
+          <Input
+            value={umurHariJenazah}
+            onChange={(e) => setUmurHariJenazah(e.target.value)}
+            placeholder='Hari'
+          />
+        </Col>
+      </Row>
+      <Row gutter={16}>
+        <Col span={6}>
+          <p>Lahir Mati*</p>
+        </Col>
+        <Col span={18}>
+          <DropdownMenu
+            byIndex
+            list={[
+              'Ya',
+              'Tidak'
+            ]}
+            onSelect={(value) => value === '0'}
+          />
+        </Col>
+      </Row>
+      <Row gutter={16}>
+        <Col span={12}>
+          <p>Bila yang meninggal wanita umur 10-54 tahun, Almarhumah dalam keadaan :</p>
+        </Col>
+        <Col span={12}>
+          <Input
+            value={statusWanitaJenazah}
+            onChange={(e) => setStatusWanitaJenazah(e.target.value)}
+            placeholder='Isi kondisi'
           />
         </Col>
       </Row>
@@ -276,6 +361,48 @@ const SkpkDataJenazah = (props) => {
           <DropdownMenu
             list={['Jam', 'Hari']}
             onSelect={(value) => setSatuanLamaDirawatJenazah(value)}
+          />
+        </Col>
+      </Row>
+      <Row gutter={16}>
+        <Col span={6}>
+          <p>Dasar Diagnosis*</p>
+        </Col>
+        <Col span={18}>
+          <DropdownMenu
+            list={[
+              'Rekam Medis',
+              'Autopsi Verbal',
+              'Autopsi Forensik'
+            ]}
+            onSelect={(value) => setDasarDiagnosaJenazah(value)}
+          />
+        </Col>
+      </Row>
+      <Row gutter={16}>
+        <Col span={6}>
+          <p>Rencana Pemulasaran*</p>
+        </Col>
+        <Col span={18}>
+          <DropdownMenu
+            list={[
+              'Dikubur',
+              'Dikremasi',
+              'Transportasi Luar Kota',
+              'Transportasi Luar Negri'
+            ]}
+            onSelect={(value) => setRencanaPemulasaranJenazah(value)}
+          />
+        </Col>
+      </Row>
+      <Row gutter={16}>
+        <Col span={6}>
+          <p>Waktu Pemulasaran*</p>
+        </Col>
+        <Col span={6}>
+          <DatePicker
+            value={waktuPemulasaranJenazah}
+            onChange={(value) => setWaktuPemulasaranJenazah(value)}
           />
         </Col>
       </Row>
