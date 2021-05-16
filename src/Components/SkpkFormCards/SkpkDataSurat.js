@@ -1,5 +1,6 @@
 import { Card, Col, DatePicker, Input, Row } from 'antd';
 import React, { useState } from 'react';
+import DropdownMenu from '../DropdownMenu/DropdownMenu';
 
 const SkpkDataSurat = (props) => {
   const {
@@ -10,7 +11,19 @@ const SkpkDataSurat = (props) => {
     setNamaPembuatSurat,
     setNomorSurat,
     setTanggalSurat,
-    setNamaPenandatangan
+    setNamaPenandatangan,
+    namaRsPkm,               
+    kodeRsPkm,               
+    nomorUrutSurat,          
+    nomorRekamMedis,         
+    namaPenerima,            
+    hubunganPenerima,        
+    setNamaRsPkm,       
+    setKodeRsPkm,       
+    setNomorUrutSurat,  
+    setNomorRekamMedis, 
+    setNamaPenerima,    
+    setHubunganPenerima
   } = props;
 
   const [nomorUrut, setNomorUrut] = useState(null);
@@ -85,6 +98,65 @@ const SkpkDataSurat = (props) => {
           <DatePicker
             value={tanggalSurat}
             onChange={(value) => setTanggalSurat(value)}
+          />
+        </Col>
+      </Row>
+      <Row gutter={16}>
+        <Col span={6}>
+          <p>Nama RS/PKM*</p>
+        </Col>
+        <Col span={18}>
+          <Input
+            value={namaRsPkm}
+            onChange={(e) => setNamaRsPkm(e.target.value)}
+            placeholder='Nama Rumah Sakit/Puskesmas'
+          />
+        </Col>
+      </Row>
+      <Row gutter={16}>
+        <Col span={6}>
+          <p>Kode RS/PKM</p>
+        </Col>
+        <Col span={18}>
+          <Input
+            value={kodeRsPkm}
+            onChange={(e) => setKodeRsPkm(e.target.value)}
+            placeholder='Kode Rumah Sakit/Puskesmas'
+          />
+        </Col>
+      </Row>
+      <Row gutter={16}>
+        <Col span={6}>
+          <p>Nomor Rekam Medis</p>
+        </Col>
+        <Col span={18}>
+          <Input
+            value={nomorRekamMedis}
+            onChange={(e) => setNomorRekamMedis(e.target.value)}
+            placeholder='No. Rekam Medis'
+          />
+        </Col>
+      </Row>
+      <Row gutter={16}>
+        <Col span={6}>
+          <p>Nama Penerima*</p>
+        </Col>
+        <Col span={18}>
+          <Input
+            value={namaPenerima}
+            onChange={(e) => setNamaPenerima(e.target.value)}
+            placeholder='Nama'
+          />
+        </Col>
+      </Row>
+      <Row gutter={16}>
+        <Col span={6}>
+          <p>Hubungan Dengan Mendiang*</p>
+        </Col>
+        <Col span={18}>
+          <DropdownMenu
+            list={['Suami', 'Istri', 'Anak', 'Orang Tua', 'Lainnya']}
+            onSelect={(value) => setHubunganPenerima(value)}
           />
         </Col>
       </Row>
