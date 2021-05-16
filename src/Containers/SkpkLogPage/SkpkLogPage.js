@@ -2,20 +2,19 @@ import { Button, Col, Input, Row, Space, Table, DatePicker } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { getSkpkLogs } from '../../supabase';
 import moment from 'moment';
-import Highlighter from 'react-highlight-words';
-import { SearchOutlined } from '@ant-design/icons';
+import { PlusOutlined } from '@ant-design/icons';
+import { useHistory } from 'react-router';
 //import './SkpkLogPage.css';
 
 const SkpkLogPage = () => {
+  const { Search } = Input;
 
   const [searchText, setSearchText] = useState('');
-  const [searchedColumn, setSearchedColumn] = useState('');
-
-  const [searchDate, setSearchDate] = useState(new Date());
-  const [searchedTanggalMeninggal, setSearchedTanggalMeninggal] = useState('');
+  const [searchDate, setSearchDate] = useState(null);
 
   const stringDiff = (a, b) => a.localeCompare(b, 'en', { numeric: true });
 
+  const [allSkpkData, setAllSkpkData] = useState([]);
   const [skpkData, setSkpkData] = useState([]);
 
   useEffect(() => {
@@ -30,119 +29,36 @@ const SkpkLogPage = () => {
           ...diagnosa_skpk_list
         }
       });
-      console.log(formattedSkpkLogs);
       setSkpkData(formattedSkpkLogs);
+      setAllSkpkData(formattedSkpkLogs);
     }
     fetchData();
   }, []);
 
-  const getColumnSearchProps = dataIndex => ({
-    filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
-      <div style={{ padding: 8 }}>
-        <Input
-          placeholder={`Nama`}
-          value={selectedKeys[0]}
-          onChange={e => setSelectedKeys(e.target.value ? [e.target.value] : [])}
-          onPressEnter={() => handleSearch(selectedKeys, confirm, dataIndex)}
-          style={{ marginBottom: 8, display: 'block' }}
-        />
-        <Space>
-          <Button
-            type="primary"
-            onClick={() => handleSearch(selectedKeys, confirm, dataIndex)}
-            icon={<SearchOutlined />}
-            size="small"
-            style={{ width: 90 }}
-          >
-            Search
-          </Button>
-          <Button onClick={() => handleReset(clearFilters)} size="small" style={{ width: 90 }}>
-            Reset
-          </Button>
-          <Button
-            type="link"
-            size="small"
-            onClick={() => {
-              confirm({ closeDropdown: false });
-              setSearchText(selectedKeys[0]);
-              setSearchedColumn(dataIndex)
-            }}
-          >
-            Filter
-          </Button>
-        </Space>
-      </div>
-    ),
-    filterIcon: filtered => <SearchOutlined style={{ color: filtered ? '#1890ff' : undefined }} />,
-    onFilter: (value, record) =>
-      record[dataIndex]
-        ? record[dataIndex].toString().toLowerCase().includes(value.toLowerCase())
-        : '',
-    render: text =>
-      searchedColumn === dataIndex ? (
-        <Highlighter
-          highlightStyle={{ backgroundColor: '#ffc069', padding: 0 }}
-          searchWords={[searchText]}
-          autoEscape
-          textToHighlight={text ? text.toString() : ''}
-        />
-      ) : (
-        text
-      ),
-  });
+  useEffect(() => {
+    const fetchData = async () => {
+      const filteredSkpkByNamaJenazah = allSkpkData.filter(logs => {
+        return logs.nama_jenazah.toString().toLowerCase().includes(searchText.toLowerCase())
+      })
+      setSkpkData(filteredSkpkByNamaJenazah);
+      setSearchDate(null);
+    }
+    fetchData();
+  }, [searchText]);
 
-  const handleSearch = (selectedKeys, confirm, dataIndex) => {
-    confirm();
-    setSearchText(selectedKeys[0]);
-    setSearchedColumn(dataIndex);
-  };
-
-  const handleReset = clearFilters => {
-    clearFilters();
-    setSearchText('');
-  };
-
-  const getColumnSearchTanggalMeninggalProps = dataIndex => ({
-    filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
-      <div style={{ padding: 8 }}>
-        <DatePicker
-          onChange={value => setSelectedKeys(value ? [value] : [])}
-          picker="month"
-          style={{ marginBottom: 8, display: 'block' }}
-        />
-        <Space>
-          <Button
-            type="primary"
-            onClick={() => handleSearchTanggalMeninggal(selectedKeys, confirm, dataIndex)}
-            icon={<SearchOutlined />}
-            size="small"
-            style={{ width: 90 }}
-          >
-            Search
-          </Button>
-          <Button onClick={() => handleResetSearchTanggalMeninggal(clearFilters)} size="small" style={{ width: 90 }}>
-            Reset
-          </Button>
-        </Space>
-      </div>
-    ),
-    filterIcon: filtered => <SearchOutlined style={{ color: filtered ? '#1890ff' : undefined }} />,
-    onFilter: (value, record) =>
-      record[dataIndex]
-        ? moment(record[dataIndex]).isSame(moment(value), 'month')
-        : '',
-  });
-
-  const handleSearchTanggalMeninggal = (selectedKeys, confirm, dataIndex) => {
-    confirm();
-    setSearchDate(selectedKeys[0]);
-    setSearchedTanggalMeninggal(dataIndex);
-  };
-
-  const handleResetSearchTanggalMeninggal = clearFilters => {
-    clearFilters();
-    setSearchDate(new Date());
-  };
+  useEffect(() => {
+    const fetchData = async () => {
+      if (searchDate === null) {
+        setSkpkData(allSkpkData);
+      }
+      const filteredSkpkByTanggalMeninggal = allSkpkData.filter(logs => {
+        return moment(logs.tanggal_meninggal).isSame(moment(searchDate), 'month')
+      })
+      setSkpkData(filteredSkpkByTanggalMeninggal);
+      setSearchText('')
+    }
+    fetchData();
+  }, [searchDate]);
 
   const columns = [
     {
@@ -150,7 +66,6 @@ const SkpkLogPage = () => {
       dataIndex: 'nama_jenazah',
       key: 'nama_jenazah',
       width: 100,
-      ...getColumnSearchProps('nama_jenazah')
     },
     {
       title: 'Jenis Kelamin',
@@ -197,7 +112,6 @@ const SkpkLogPage = () => {
       dataIndex: 'tanggal_meninggal',
       key: 'tanggal_meninggal',
       width: 100,
-      ...getColumnSearchTanggalMeninggalProps('tanggal_meninggal')
     },
     {
       title: 'Diagnosa',
@@ -238,12 +152,49 @@ const SkpkLogPage = () => {
     }
   ]
 
+  const history = useHistory();
+
   return (
     <div style={{margin: '120px 20px'}}>
+      <h1>Detail Surat Keterangan Penyebab Kematian (SKPK)</h1>
       <Row>
-        <Col span={24}>
-          <h1>Detail Surat Keterangan Penyebab Kematian (SKPK)</h1>
+        <Col span={6}>
+        <p style={{margin: 0, color: '#9F9F9F'}}>FILTER DATA BY MONTH</p>
+          <DatePicker
+            onChange={value => setSearchDate(value || null)}
+            picker="month"
+            style={{width: '100%'}}
+          />
         </Col>
+        <Col span={5}></Col>
+        <Col span={6}>
+          <div style={{
+            float: 'right',
+            padding: '24px 40px',
+            cursor: 'pointer'
+          }}
+            onClick={() => history.push('/skpk/form')}
+          >
+            <Row>
+              <Col>
+                <PlusOutlined style={{color: '#1D914A', fontSize: '24px', marginRight: '4px'}}/>
+              </Col>
+              <Col>
+                <h3 style={{textDecoration: 'underline'}}>TAMBAH BARU</h3>
+              </Col>
+            </Row>
+          </div>
+        </Col>
+        <Col span={6}>
+          <p style={{margin: 0, color: '#9F9F9F'}}>SEARCH</p>
+          <Search
+            placeholder="Search"
+            onSearch={(value) => setSearchText(value || '')}
+          />
+        </Col>
+      </Row>
+      <br/>
+      <Row>
         <Col span={24}>
           <Table
             columns={columns}
