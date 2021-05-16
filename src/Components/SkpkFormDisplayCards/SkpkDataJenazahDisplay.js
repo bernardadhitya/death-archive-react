@@ -27,6 +27,14 @@ const SkmkDataJenazah = (props) => {
     lamaDirawatJenazah,
     nilaiLamaDirawatJenazah,
     satuanLamaDirawatJenazah,
+    jenisKelaminJenazah,      
+    statusKependudukanJenazah,
+    statusWanitaJenazah,      
+    dasarDiagnosaJenazah,     
+    waktuPemulasaranJenazah,  
+    rencanaPemulasaranJenazah,
+    pendidikanJenazah,        
+    lahirMatiJenazah,         
   } = props;
 
   return (
@@ -44,6 +52,22 @@ const SkmkDataJenazah = (props) => {
       </Row>
       <Row gutter={16}>
         <Col span={6}>
+          <p>Nomor Induk Kependudukan</p>
+        </Col>
+        <Col span={18}>
+          <p>{nomorKtpJenazah}</p>
+        </Col>
+      </Row>
+      <Row gutter={16}>
+        <Col span={6}>
+          <p>Jenis Kelamin</p>
+        </Col>
+        <Col span={18}>
+          <p>{jenisKelaminJenazah}</p>
+        </Col>
+      </Row>
+      <Row gutter={16}>
+        <Col span={6}>
           <p>Tempat / Tanggal Lahir</p>
         </Col>
         <Col span={16}>
@@ -52,10 +76,10 @@ const SkmkDataJenazah = (props) => {
       </Row>
       <Row gutter={16}>
         <Col span={6}>
-          <p>Umur</p>
+          <p>Pendidikan</p>
         </Col>
         <Col span={18}>
-          <p>{`${umurTahunJenazah} Tahun ${umurBulanJenazah} Bulan ${umurHariJenazah} Hari`}</p>
+          <p>{pendidikanJenazah}</p>
         </Col>
       </Row>
       <Row gutter={16}>
@@ -78,13 +102,12 @@ const SkmkDataJenazah = (props) => {
           </Row>
         </Col>
       </Row>
-      <div style={{height: '4px'}}></div>
       <Row gutter={16}>
         <Col span={6}>
-          <p>Nomor KTP</p>
+          <p>Status Kependudukan</p>
         </Col>
         <Col span={18}>
-          <p>{nomorKtpJenazah}</p>
+          <p>{statusKependudukanJenazah}</p>
         </Col>
       </Row>
       <Row gutter={16}>
@@ -105,6 +128,22 @@ const SkmkDataJenazah = (props) => {
       </Row>
       <Row gutter={16}>
         <Col span={6}>
+          <p>Umur</p>
+        </Col>
+        <Col span={18}>
+          <p>{`${umurTahunJenazah} Tahun ${umurBulanJenazah} Bulan ${umurHariJenazah} Hari`}</p>
+        </Col>
+      </Row>
+      <Row gutter={16}>
+        <Col span={6}>
+          <p>Lahir Mati</p>
+        </Col>
+        <Col span={18}>
+          <p>{lahirMatiJenazah ? 'Ya' : 'Tidak'}</p>
+        </Col>
+      </Row>
+      <Row gutter={16}>
+        <Col span={6}>
           <p>Tempat Meninggal</p>
         </Col>
         <Col span={18}>
@@ -117,6 +156,30 @@ const SkmkDataJenazah = (props) => {
         </Col>
         <Col span={6}>
           <p>{`${nilaiLamaDirawatJenazah} ${satuanLamaDirawatJenazah}`}</p>
+        </Col>
+      </Row>
+      <Row gutter={16}>
+        <Col span={6}>
+          <p>Dasar Diagnosis</p>
+        </Col>
+        <Col span={18}>
+          <p>{dasarDiagnosaJenazah}</p>
+        </Col>
+      </Row>
+      <Row gutter={16}>
+        <Col span={6}>
+          <p>Rencan Pemulasaran</p>
+        </Col>
+        <Col span={18}>
+          <p>{rencanaPemulasaranJenazah}</p>
+        </Col>
+      </Row>
+      <Row gutter={16}>
+        <Col span={6}>
+          <p>Waktu Pemulasaran</p>
+        </Col>
+        <Col span={18}>
+          <p>{waktuPemulasaranJenazah}</p>
         </Col>
       </Row>
     </Card>

@@ -83,7 +83,7 @@ const SkpkDataJenazah = (props) => {
       </Row>
       <Row gutter={16}>
         <Col span={6}>
-          <p>Nomor KTP*</p>
+          <p>Nomor Induk Kependudukan*</p>
         </Col>
         <Col span={18}>
           <Input
