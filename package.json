@@ -17,6 +17,7 @@
     "lodash": "^4.17.21",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-highlight-words": "^0.17.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.3",
     "spotify-web-api-node": "^5.0.0"

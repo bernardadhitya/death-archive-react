@@ -1,12 +1,103 @@
-import { Col, Row, Table } from 'antd';
+import { Button, Col, Input, Row, Space, Table } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { getSkmkLogs } from '../../supabase';
 import moment from 'moment';
+import Highlighter from 'react-highlight-words';
+import { SearchOutlined } from '@ant-design/icons';
 //import './SkmkLogPage.css';
 
 const SkmkLogPage = () => {
   
+  const [searchText, setSearchText] = useState('');
+  const [searchedColumn, setSearchedColumn] = useState('');
+
   const stringDiff = (a, b) => a.localeCompare(b, 'en', { numeric: true });
+
+  const [skmkData, setSkmkData] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const fetchedSkmkLogs = await getSkmkLogs();
+      console.log(fetchedSkmkLogs);
+      const formattedSkmkLogs = fetchedSkmkLogs.map(log => {
+        const {jenazah_skmk, nama_penandatangan, diagnosa_skmk_list} = log;
+        return {
+          ...jenazah_skmk,
+          nama_penandatangan,
+          ...diagnosa_skmk_list
+        }
+      });
+      console.log(formattedSkmkLogs);
+      setSkmkData(formattedSkmkLogs);
+    }
+    fetchData();
+  }, []);
+
+  const getColumnSearchProps = dataIndex => ({
+    filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
+      <div style={{ padding: 8 }}>
+        <Input
+          placeholder={`Nama`}
+          value={selectedKeys[0]}
+          onChange={e => setSelectedKeys(e.target.value ? [e.target.value] : [])}
+          onPressEnter={() => handleSearch(selectedKeys, confirm, dataIndex)}
+          style={{ marginBottom: 8, display: 'block' }}
+        />
+        <Space>
+          <Button
+            type="primary"
+            onClick={() => handleSearch(selectedKeys, confirm, dataIndex)}
+            icon={<SearchOutlined />}
+            size="small"
+            style={{ width: 90 }}
+          >
+            Search
+          </Button>
+          <Button onClick={() => handleReset(clearFilters)} size="small" style={{ width: 90 }}>
+            Reset
+          </Button>
+          <Button
+            type="link"
+            size="small"
+            onClick={() => {
+              confirm({ closeDropdown: false });
+              setSearchText(selectedKeys[0]);
+              setSearchedColumn(dataIndex)
+            }}
+          >
+            Filter
+          </Button>
+        </Space>
+      </div>
+    ),
+    filterIcon: filtered => <SearchOutlined style={{ color: filtered ? '#1890ff' : undefined }} />,
+    onFilter: (value, record) =>
+      record[dataIndex]
+        ? record[dataIndex].toString().toLowerCase().includes(value.toLowerCase())
+        : '',
+    render: text =>
+      searchedColumn === dataIndex ? (
+        <Highlighter
+          highlightStyle={{ backgroundColor: '#ffc069', padding: 0 }}
+          searchWords={[searchText]}
+          autoEscape
+          textToHighlight={text ? text.toString() : ''}
+        />
+      ) : (
+        text
+      ),
+  });
+
+  const handleSearch = (selectedKeys, confirm, dataIndex) => {
+    confirm();
+    setSearchText(selectedKeys[0]);
+    setSearchedColumn(dataIndex);
+  };
+
+  const handleReset = clearFilters => {
+    clearFilters();
+    setSearchText('');
+  };
 
   const columns = [
     {
@@ -14,7 +105,8 @@ const SkmkLogPage = () => {
       dataIndex: 'nama_jenazah',
       key: 'nama_jenazah',
       width: 100,
-      sorter: (a, b) => stringDiff(a.nama_jenazah, b.nama_jenazah),
+      ...getColumnSearchProps('nama_jenazah')
+      //sorter: (a, b) => stringDiff(a.nama_jenazah, b.nama_jenazah),
     },
     {
       title: 'Jenis Kelamin',
@@ -105,26 +197,6 @@ const SkmkLogPage = () => {
       width: 150,
     }
   ]
-
-  const [skmkData, setSkmkData] = useState([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const fetchedSkmkLogs = await getSkmkLogs();
-      console.log(fetchedSkmkLogs);
-      const formattedSkmkLogs = fetchedSkmkLogs.map(log => {
-        const {jenazah_skmk, nama_penandatangan, diagnosa_skmk_list} = log;
-        return {
-          ...jenazah_skmk,
-          nama_penandatangan,
-          ...diagnosa_skmk_list
-        }
-      });
-      console.log(formattedSkmkLogs);
-      setSkmkData(formattedSkmkLogs);
-    }
-    fetchData();
-  }, []);
 
   return (
     <div style={{margin: '120px 20px'}}>
