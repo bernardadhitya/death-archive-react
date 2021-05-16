@@ -213,4 +213,5 @@ export const handleSubmitData = async () => {
   );
 
   console.log('skmk entry:', result);
+  return result;
 }

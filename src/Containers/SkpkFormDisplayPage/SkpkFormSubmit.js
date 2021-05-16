@@ -96,7 +96,29 @@ const tahunPenyebabDasar =       sessionStorage.getItem('tahunPenyebabDasar');
 const jamPenyebabDasar =         sessionStorage.getItem('jamPenyebabDasar');          
 const menitPenyebabDasar =       sessionStorage.getItem('menitPenyebabDasar');        
 const icdxPenyebabDasar =        sessionStorage.getItem('icdxPenyebabDasar');
-const lamaKematian =             sessionStorage.getItem('lamaKematian');  
+const lamaKematian =             sessionStorage.getItem('lamaKematian'); 
+
+const namaRsPkm                   = sessionStorage.getItem('namaRsPkm');    
+const kodeRsPkm                   = sessionStorage.getItem('kodeRsPkm');    
+const nomorUrutSurat              = sessionStorage.getItem('nomorUrutSurat');    
+const nomorRekamMedis             = sessionStorage.getItem('nomorRekamMedis');    
+const namaPenerima                = sessionStorage.getItem('namaPenerima');    
+const hubunganPenerima            = sessionStorage.getItem('hubunganPenerima');              
+const jenisKelaminJenazah         = sessionStorage.getItem('jenisKelaminJenazah');    
+const statusKependudukanJenazah   = sessionStorage.getItem('statusKependudukanJenazah');    
+const statusWanitaJenazah         = sessionStorage.getItem('statusWanitaJenazah');    
+const dasarDiagnosaJenazah        = sessionStorage.getItem('dasarDiagnosaJenazah');    
+const waktuPemulasaranJenazah     = sessionStorage.getItem('waktuPemulasaranJenazah');    
+const rencanaPemulasaranJenazah   = sessionStorage.getItem('rencanaPemulasaranJenazah');    
+const pendidikanJenazah           = sessionStorage.getItem('pendidikanJenazah');    
+const lahirMatiJenazah            = sessionStorage.getItem('lahirMatiJenazah');      
+const namaFinalUcod               = sessionStorage.getItem('namaFinalUcod');        
+const hariFinalUcod               = sessionStorage.getItem('hariFinalUcod');        
+const bulanFinalUcod              = sessionStorage.getItem('bulanFinalUcod');        
+const tahunFinalUcod              = sessionStorage.getItem('tahunFinalUcod');        
+const jamFinalUcod                = sessionStorage.getItem('jamFinalUcod');        
+const menitFinalUcod              = sessionStorage.getItem('menitFinalUcod');        
+const icdxFinalUcod               = sessionStorage.getItem('icdxFinalUcod');  
 
 export const handleSubmitData = async () => {
   //diagnosa umum
@@ -122,6 +144,12 @@ export const handleSubmitData = async () => {
     penyebab      : namaPenyebabDasar,
     selang_waktu  : `${hariPenyebabDasar} Hari ${bulanPenyebabDasar} Bulan ${tahunPenyebabDasar} Tahun ${jamPenyebabDasar} Jam ${menitPenyebabDasar} Menit`,
     icdx          : icdxPenyebabDasar,
+    keterangan    : null
+  }
+  const diagnosaFinalUcod = {
+    penyebab      : namaFinalUcod,
+    selang_waktu  : `${hariFinalUcod} Hari ${bulanFinalUcod} Bulan ${tahunFinalUcod} Tahun ${jamFinalUcod} Jam ${menitFinalUcod} Menit`,
+    icdx          : icdxFinalUcod,
     keterangan    : null
   }
   //diagnosa ibu bayi
@@ -154,7 +182,8 @@ export const handleSubmitData = async () => {
     diagnosaPenyebabLangsung,
     diagnosaPenyebabAntara1,
     diagnosaPenyebabAntara2,
-    diagnosaPenyebabDasar
+    diagnosaPenyebabDasar,
+    diagnosaFinalUcod
   ].map(diagnosa => diagnosa.icdx !== '' ? diagnosa : null);
 
   const diagnosaIbuAnakData = [
@@ -167,7 +196,7 @@ export const handleSubmitData = async () => {
   const jenazahData = {
     nama_jenazah: namaJenazah,
     ktp: nomorKtpJenazah,
-    jenis_kelamin: '',
+    jenis_kelamin: jenisKelaminJenazah,
     tempat_lahir: tempatLahirJenazah,
     tanggal_lahir: moment(tanggalLahirJenazah).format('YYYY-MM-DD'),
     umur_tahun: umurTahunJenazah,
@@ -181,19 +210,14 @@ export const handleSubmitData = async () => {
     tempat_meninggal: tempatMeninggalJenazah,
     lama_dirawat:
       !!nilaiLamaDirawatJenazah ?
-      `${nilaiLamaDirawatJenazah} ${satuanLamaDirawatJenazah}` : null
-  }
-
-  const pelaporData = {
-    nama_pelapor: namaPelapor,
-    ktp: nomorKtpPelapor,
-    tempat_lahir: tempatLahirPelapor,
-    tanggal_lahir: moment(tanggalLahirPelapor).format('YYYY-MM-DD'),
-    pekerjaan: pekerjaanPelapor,
-    alamat: `${alamatJalanPelapor} no ${alamatNomorPelapor}, RT/RW ${alamatRtRwPelapor}, ${alamatKelurahanPelapor}, ${alamatKecamatanPelapor}, ${alamatKotaPelapor}, ${alamatKodePosPelapor} - ${nomorTeleponPelapor}`,
-    alamat_kelurahan: alamatKelurahanPelapor,
-    alamat_kecamatan: alamatKecamatanPelapor, 
-    hubungan: hubunganPelapor
+      `${nilaiLamaDirawatJenazah} ${satuanLamaDirawatJenazah}` : null,     
+    status_penduduk: statusKependudukanJenazah,
+    status_wanita: statusWanitaJenazah,      
+    dasar_diagnosis: dasarDiagnosaJenazah,     
+    tanggal_pemulasaran: moment(waktuPemulasaranJenazah).format('YYYY-MM-DD'),  
+    rencana_pemulasaran: rencanaPemulasaranJenazah,
+    pendidikan: pendidikanJenazah,        
+    lahir_mati: lahirMatiJenazah,         
   }
 
   const suratSkpkData = {
@@ -201,11 +225,16 @@ export const handleSubmitData = async () => {
     nomor_surat: nomorSurat,
     tanggal_surat: moment(tanggalSurat).format('YYYY-MM-DD'),
     nama_penandatangan: namaPenandatangan,
+    nama_rs_pkm: namaRsPkm,       
+    kode_rs_pkm: kodeRsPkm,       
+    no_urut: nomorUrutSurat,  
+    no_rekam_medis: nomorRekamMedis, 
+    nama_penerima: namaPenerima,   
+    hubungan: hubunganPenerima,
   }
 
   const result = await createSkpkEntry(
     suratSkpkData,
-    pelaporData,
     jenazahData,
     diagnosaUmumData,
     diagnosaIbuAnakData,
@@ -213,4 +242,5 @@ export const handleSubmitData = async () => {
   );
 
   console.log('Skpk entry:', result);
+  return result;
 }
