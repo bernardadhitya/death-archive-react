@@ -280,13 +280,13 @@ export const getSkmkLogs = async () => {
     const skmkDiagnosaIds = skmkData.map(data => data.diagnosa_skmk);
     return Promise.all(
       skmkDiagnosaIds.map(async (diagnosaIds, idx) => {
-        let skmkDiagnosaList = [];
+        let skmkDiagnosaList = {};
         for (const diagnosaId in diagnosaIds){
           if (diagnosaIds[diagnosaId] === null){
-            skmkDiagnosaList.push({ icdx: null });
+            skmkDiagnosaList[diagnosaId] = null
           } else {
             const { data: diagnosaItem } = await supabase.from('diagnosa').select(`icdx`).eq('diagnosa_id', diagnosaIds[diagnosaId]);
-            skmkDiagnosaList.push(diagnosaItem[0]);
+            skmkDiagnosaList[diagnosaId] = diagnosaItem[0].icdx
           }
         }
         return {

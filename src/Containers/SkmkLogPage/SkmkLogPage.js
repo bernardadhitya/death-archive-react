@@ -1,16 +1,11 @@
 import { Col, Row, Table } from 'antd';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { getSkmkLogs } from '../../supabase';
 import './SkmkLogPage.css';
 
 const SkmkLogPage = () => {
   
   const columns = [
-    {
-      title: 'No',
-      dataIndex: 'nomor',
-      key: 'nomor',
-      width: 100,
-    },
     {
       title: 'Nama Jenazah',
       dataIndex: 'nama_jenazah',
@@ -63,26 +58,26 @@ const SkmkLogPage = () => {
       children: [
         {
           title: 'Dasar',
-          dataIndex: 'diagnosa_umum_dasat',
-          key: 'diagnosa_umum_dasat',
+          dataIndex: 'penyebab_dasar_id',
+          key: 'penyebab_dasar_id',
           width: 100,
         },
         {
           title: 'Antara',
-          dataIndex: 'diagnosa_umum_antara_1',
-          key: 'diagnosa_umum_antara_1',
+          dataIndex: 'penyebab_antara_1_id',
+          key: 'penyebab_antara_1_id',
           width: 100,
         },
         {
           title: 'Antara',
-          dataIndex: 'diagnosa_umum_antara_2',
-          key: 'diagnosa_umum_antara_2',
+          dataIndex: 'penyebab_antara_2_id',
+          key: 'penyebab_antara_2_id',
           width: 100,
         },
         {
           title: 'Langsung',
-          dataIndex: 'diagnosa_langsung',
-          key: 'diagnosa_langsung',
+          dataIndex: 'penyebab_langsung_id',
+          key: 'penyebab_langsung_id',
           width: 100,
         }
       ]
@@ -95,7 +90,25 @@ const SkmkLogPage = () => {
     }
   ]
 
-  const data = [];
+  const [skmkData, setSkmkData] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const fetchedSkmkLogs = await getSkmkLogs();
+      console.log(fetchedSkmkLogs);
+      const formattedSkmkLogs = fetchedSkmkLogs.map(log => {
+        const {jenazah_skmk, nama_penandatangan, diagnosa_skmk_list} = log;
+        return {
+          ...jenazah_skmk,
+          nama_penandatangan,
+          ...diagnosa_skmk_list
+        }
+      });
+      console.log(formattedSkmkLogs);
+      setSkmkData(formattedSkmkLogs);
+    }
+    fetchData();
+  }, []);
 
   return (
     <div style={{margin: '120px 20px'}}>
@@ -106,7 +119,7 @@ const SkmkLogPage = () => {
         <Col span={24}>
           <Table
             columns={columns}
-            dataSource={data}
+            dataSource={skmkData}
             bordered
             size="middle"
             scroll={{ x: 'calc(700px + 50%)', y: 240 }}
