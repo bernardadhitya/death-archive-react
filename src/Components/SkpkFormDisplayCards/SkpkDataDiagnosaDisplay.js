@@ -128,6 +128,16 @@ const SkmkDataDiagnosa = (props) => {
         menit:      props.menitPenyebabDasar, 
         icdx:       props.icdxPenyebabDasar,  
       }
+      {
+        judul:      'Final UCoD',
+        nama:       props.namaFinalUcod, 
+        hari:       props.hariFinalUcod, 
+        bulan:      props.bulanFinalUcod,
+        tahun:      props.tahunFinalUcod,
+        jam:        props.jamFinalUcod,  
+        menit:      props.menitFinalUcod,
+        icdx:       props.icdxFinalUcod, 
+      }
     ];
     return renderDiagnosaForm(diagnosaUmumList);
   }
