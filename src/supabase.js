@@ -301,3 +301,51 @@ export const getSkmkLogs = async () => {
   
   return skmkDataWithDiagnosa;
 }
+
+export const getSkpkLogs = async () => {
+  const { data: skpkData } = await supabase
+    .from('surat_skpk')
+    .select(`
+      jenazah_skpk (
+        nama_jenazah,
+        jenis_kelamin,
+        umur_tahun,
+        umur_bulan,
+        alamat_kecamatan,
+        alamat_kelurahan,
+        tanggal_meninggal
+      ),
+      diagnosa_skpk (
+        penyebab_langsung_id,
+        penyebab_antara_1_id,
+        penyebab_antara_2_id,
+        penyebab_dasar_id
+      ),
+      nama_penandatangan
+    `);
+  
+  const getSkpkDataWithDiagnosa = async () => {
+    const skpkDiagnosaIds = skpkData.map(data => data.diagnosa_skpk);
+    return Promise.all(
+      skpkDiagnosaIds.map(async (diagnosaIds, idx) => {
+        let skpkDiagnosaList = {};
+        for (const diagnosaId in diagnosaIds){
+          if (diagnosaIds[diagnosaId] === null){
+            skpkDiagnosaList[diagnosaId] = null
+          } else {
+            const { data: diagnosaItem } = await supabase.from('diagnosa').select(`icdx`).eq('diagnosa_id', diagnosaIds[diagnosaId]);
+            skpkDiagnosaList[diagnosaId] = diagnosaItem[0].icdx
+          }
+        }
+        return {
+          ...skpkData[idx],
+          diagnosa_skpk_list: skpkDiagnosaList
+        }
+      })
+    );
+  }
+
+  const skpkDataWithDiagnosa = await getSkpkDataWithDiagnosa();
+  
+  return skpkDataWithDiagnosa;
+}
