@@ -253,3 +253,51 @@ export const createSkpkEntry = async (
 
   return suratSkpkEntry;
 }
+
+export const getSkmkLogs = async () => {
+  const { data: skmkData } = await supabase
+    .from('surat_skmk')
+    .select(`
+      jenazah_skmk (
+        nama_jenazah,
+        jenis_kelamin,
+        umur_tahun,
+        umur_bulan,
+        alamat_kecamatan,
+        alamat_kelurahan,
+        tanggal_meninggal
+      ),
+      diagnosa_skmk (
+        penyebab_langsung_id,
+        penyebab_antara_1_id,
+        penyebab_antara_2_id,
+        penyebab_dasar_id
+      ),
+      nama_penandatangan
+    `);
+  
+  const getSkmkDataWithDiagnosa = async () => {
+    const skmkDiagnosaIds = skmkData.map(data => data.diagnosa_skmk);
+    return Promise.all(
+      skmkDiagnosaIds.map(async (diagnosaIds, idx) => {
+        let skmkDiagnosaList = [];
+        for (const diagnosaId in diagnosaIds){
+          if (diagnosaIds[diagnosaId] === null){
+            skmkDiagnosaList.push({ icdx: null });
+          } else {
+            const { data: diagnosaItem } = await supabase.from('diagnosa').select(`icdx`).eq('diagnosa_id', diagnosaIds[diagnosaId]);
+            skmkDiagnosaList.push(diagnosaItem[0]);
+          }
+        }
+        return {
+          ...skmkData[idx],
+          diagnosa_skmk_list: skmkDiagnosaList
+        }
+      })
+    );
+  }
+
+  const skmkDataWithDiagnosa = await getSkmkDataWithDiagnosa();
+  
+  return skmkDataWithDiagnosa;
+}
