@@ -33,7 +33,8 @@ const SkpkDataSurat = (props) => {
   const renderNomorSuratForm = () => {
     
     const handleNomorSurat = () => {
-      setNomorSurat(`${nomorUrut}/SKPK-KD/${bulanSurat}/${tahunSurat}`)
+      setNomorSurat(`${nomorUrut}/SKPK-KD/${bulanSurat}/${tahunSurat}`);
+      setNomorUrutSurat(nomorUrut);
     };
 
     return (
