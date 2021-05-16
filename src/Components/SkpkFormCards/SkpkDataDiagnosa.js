@@ -230,6 +230,23 @@ const SkpkDataDiagnosa = (props) => {
         setJam:     props.setJamPenyebabDasar,  
         setMenit:   props.setMenitPenyebabDasar,
         setIcdx:    props.setIcdxPenyebabDasar, 
+      },
+      {
+        judul:      'Final UCoD*',
+        nama:       props.namaFinalUcod,             
+        hari:       props.hariFinalUcod,             
+        bulan:      props.bulanFinalUcod,            
+        tahun:      props.tahunFinalUcod,            
+        jam:        props.jamFinalUcod,              
+        menit:      props.menitFinalUcod,            
+        icdx:       props.icdxFinalUcod,             
+        setNama:    props.setNamaFinalUcod,      
+        setHari:    props.setHariFinalUcod,      
+        setBulan:   props.setBulanFinalUcod,     
+        setTahun:   props.setTahunFinalUcod,     
+        setJam:     props.setJamFinalUcod,       
+        setMenit:   props.setMenitFinalUcod,     
+        setIcdx:    props.setIcdxFinalUcod,      
       }
     ];
     return renderDiagnosaForm(diagnosaUmumList);
