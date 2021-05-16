@@ -12,20 +12,6 @@ const SkpkFormDisplayPage = () => {
   const nomorSurat =               sessionStorage.getItem('nomorSurat');                
   const tanggalSurat =             sessionStorage.getItem('tanggalSurat');              
   const namaPenandatangan =        sessionStorage.getItem('namaPenandatangan');         
-  const namaPelapor =              sessionStorage.getItem('namaPelapor');               
-  const tempatLahirPelapor =       sessionStorage.getItem('tempatLahirPelapor');        
-  const tanggalLahirPelapor =      sessionStorage.getItem('tanggalLahirPelapor');       
-  const pekerjaanPelapor =         sessionStorage.getItem('pekerjaanPelapor');          
-  const alamatJalanPelapor =       sessionStorage.getItem('alamatJalanPelapor');        
-  const alamatNomorPelapor =       sessionStorage.getItem('alamatNomorPelapor');        
-  const alamatRtRwPelapor =        sessionStorage.getItem('alamatRtRwPelapor');         
-  const alamatKelurahanPelapor =   sessionStorage.getItem('alamatKelurahanPelapor');    
-  const alamatKecamatanPelapor =   sessionStorage.getItem('alamatKecamatanPelapor');    
-  const alamatKotaPelapor =        sessionStorage.getItem('alamatKotaPelapor');         
-  const alamatKodePosPelapor =     sessionStorage.getItem('alamatKodePosPelapor');      
-  const nomorTeleponPelapor =      sessionStorage.getItem('nomorTeleponPelapor');       
-  const nomorKtpPelapor =          sessionStorage.getItem('nomorKtpPelapor');           
-  const hubunganPelapor =          sessionStorage.getItem('hubunganPelapor');           
   const namaJenazah =              sessionStorage.getItem('namaJenazah');               
   const tempatLahirJenazah =       sessionStorage.getItem('tempatLahirJenazah');        
   const umurTahunJenazah =         sessionStorage.getItem('umurTahunJenazah');          
@@ -105,35 +91,42 @@ const SkpkFormDisplayPage = () => {
   const icdxPenyebabDasar =        sessionStorage.getItem('icdxPenyebabDasar');
   const lamaKematian =             sessionStorage.getItem('lamaKematian');       
 
+  const namaRsPkm                   = sessionStorage.getItem('namaRsPkm');    
+  const kodeRsPkm                   = sessionStorage.getItem('kodeRsPkm');    
+  const nomorUrutSurat              = sessionStorage.getItem('nomorUrutSurat');    
+  const nomorRekamMedis             = sessionStorage.getItem('nomorRekamMedis');    
+  const namaPenerima                = sessionStorage.getItem('namaPenerima');    
+  const hubunganPenerima            = sessionStorage.getItem('hubunganPenerima');              
+  const jenisKelaminJenazah         = sessionStorage.getItem('jenisKelaminJenazah');    
+  const statusKependudukanJenazah   = sessionStorage.getItem('statusKependudukanJenazah');    
+  const statusWanitaJenazah         = sessionStorage.getItem('statusWanitaJenazah');    
+  const dasarDiagnosaJenazah        = sessionStorage.getItem('dasarDiagnosaJenazah');    
+  const waktuPemulasaranJenazah     = sessionStorage.getItem('waktuPemulasaranJenazah');    
+  const rencanaPemulasaranJenazah   = sessionStorage.getItem('rencanaPemulasaranJenazah');    
+  const pendidikanJenazah           = sessionStorage.getItem('pendidikanJenazah');    
+  const lahirMatiJenazah            = sessionStorage.getItem('lahirMatiJenazah');      
+  const namaFinalUcod               = sessionStorage.getItem('namaFinalUcod');        
+  const hariFinalUcod               = sessionStorage.getItem('hariFinalUcod');        
+  const bulanFinalUcod              = sessionStorage.getItem('bulanFinalUcod');        
+  const tahunFinalUcod              = sessionStorage.getItem('tahunFinalUcod');        
+  const jamFinalUcod                = sessionStorage.getItem('jamFinalUcod');        
+  const menitFinalUcod              = sessionStorage.getItem('menitFinalUcod');        
+  const icdxFinalUcod               = sessionStorage.getItem('icdxFinalUcod');        
+
   const renderDataSurat = () => {
     return (
      <SkpkDataSuratDisplay
-        namaPembuatSurat={namaPembuatSurat}
-        nomorSurat={nomorSurat}
-        tanggalSurat={tanggalSurat}
-        namaPenandatangan={namaPenandatangan}
+        namaPembuatSurat = {namaPembuatSurat}
+        nomorSurat       = {nomorSurat}
+        tanggalSurat     = {tanggalSurat}
+        namaPenandatangan= {namaPenandatangan}
+        namaRsPkm        = {namaRsPkm       }
+        kodeRsPkm        = {kodeRsPkm       }
+        nomorUrutSurat   = {nomorUrutSurat  }
+        nomorRekamMedis  = {nomorRekamMedis }
+        namaPenerima     = {namaPenerima    }
+        hubunganPenerima = {hubunganPenerima}
      /> 
-    )
-  }
-  
-  const renderDataPelapor = () => {
-    return (
-      <SkpkDataPelaporDisplay
-        namaPelapor={namaPelapor}              
-        tempatLahirPelapor={tempatLahirPelapor}              
-        tanggalLahirPelapor={tanggalLahirPelapor}          
-        pekerjaanPelapor={pekerjaanPelapor}           
-        alamatJalanPelapor={alamatJalanPelapor}           
-        alamatNomorPelapor={alamatNomorPelapor}           
-        alamatRtRwPelapor={alamatRtRwPelapor}            
-        alamatKelurahanPelapor={alamatKelurahanPelapor}     
-        alamatKecamatanPelapor={alamatKecamatanPelapor}     
-        alamatKotaPelapor={alamatKotaPelapor}        
-        alamatKodePosPelapor={alamatKodePosPelapor}       
-        nomorTeleponPelapor={nomorTeleponPelapor}        
-        nomorKtpPelapor={nomorKtpPelapor}
-        hubunganPelapor={hubunganPelapor}                
-      />
     )
   }
 
@@ -161,6 +154,14 @@ const SkpkFormDisplayPage = () => {
         tempatMeninggalJenazah={tempatMeninggalJenazah}       
         nilaiLamaDirawatJenazah={nilaiLamaDirawatJenazah}
         satuanLamaDirawatJenazah={satuanLamaDirawatJenazah}
+        jenisKelaminJenazah       ={jenisKelaminJenazah       }
+        statusKependudukanJenazah ={statusKependudukanJenazah }
+        statusWanitaJenazah       ={statusWanitaJenazah       }
+        dasarDiagnosaJenazah      ={dasarDiagnosaJenazah      }
+        waktuPemulasaranJenazah   ={waktuPemulasaranJenazah   }
+        rencanaPemulasaranJenazah ={rencanaPemulasaranJenazah }
+        pendidikanJenazah         ={pendidikanJenazah         }
+        lahirMatiJenazah          ={lahirMatiJenazah          }
       />
     )
   }
@@ -225,6 +226,13 @@ const SkpkFormDisplayPage = () => {
         menitPenyebabDasar={menitPenyebabDasar}      
         icdxPenyebabDasar={icdxPenyebabDasar}
         lamaKematian={lamaKematian}       
+        namaFinalUcod  ={namaFinalUcod  }
+        hariFinalUcod  ={hariFinalUcod  }
+        bulanFinalUcod ={bulanFinalUcod }
+        tahunFinalUcod ={tahunFinalUcod }
+        jamFinalUcod   ={jamFinalUcod   }
+        menitFinalUcod ={menitFinalUcod }
+        icdxFinalUcod  ={icdxFinalUcod  }
       />
     )
   }
@@ -236,8 +244,6 @@ const SkpkFormDisplayPage = () => {
       <h1>Input Surat Keterangan Melapor Kematian (SKPK)</h1>
       <br/>
       {renderDataSurat()}
-      <br/><br/>
-      {renderDataPelapor()}
       <br/><br/>
       {renderDataJenazah()}
       <br/><br/>
