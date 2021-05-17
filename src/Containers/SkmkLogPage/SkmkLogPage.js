@@ -37,7 +37,36 @@ const SkmkLogPage = () => {
   useEffect(() => {
     const fetchData = async () => {
       const filteredSkmkByNamaJenazah = allSkmkData.filter(logs => {
-        return logs.nama_jenazah.toString().toLowerCase().includes(searchText.toLowerCase())
+        const {
+          nama_jenazah,
+          jenis_kelamin,
+          umur_bulan,
+          umur_tahun,
+          alamat_kecamatan,
+          alamat_kelurahan,
+          penyebab_dasar_id,
+          penyebab_antara_1_id,
+          penyebab_antara_2_id,
+          penyebab_langsung_id,
+          nama_penandatangan
+        } = logs ;
+
+        const stringify = (value) => {
+          if (value === null) return '';
+          return value.toString().toLowerCase();
+        }
+
+        return stringify(nama_jenazah).includes(stringify(searchText)) ||
+          stringify(jenis_kelamin).includes(stringify(searchText)) ||
+          stringify(umur_bulan).includes(stringify(searchText)) ||
+          stringify(umur_tahun).includes(stringify(searchText)) ||
+          stringify(alamat_kecamatan).includes(stringify(searchText)) ||
+          stringify(alamat_kelurahan).includes(stringify(searchText)) ||
+          stringify(penyebab_dasar_id).includes(stringify(searchText)) ||
+          stringify(penyebab_antara_1_id).includes(stringify(searchText)) ||
+          stringify(penyebab_antara_2_id).includes(stringify(searchText)) ||
+          stringify(penyebab_langsung_id).includes(stringify(searchText)) ||
+          stringify(nama_penandatangan).includes(stringify(searchText))
       })
       setSkmkData(filteredSkmkByNamaJenazah);
       setSearchDate(null);
@@ -155,7 +184,7 @@ const SkmkLogPage = () => {
 
   return (
     <div style={{margin: '120px 20px'}}>
-      <h1>Detail Surat Keterangan Penyebab Kematian (SKPK)</h1>
+      <h1>Database Surat Keterangan Melapor Kematian (SKMK)</h1>
       <Row>
         <Col span={6}>
         <p style={{margin: 0, color: '#9F9F9F'}}>FILTER DATA BY MONTH</p>

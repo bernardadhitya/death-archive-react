@@ -38,7 +38,36 @@ const SkpkLogPage = () => {
   useEffect(() => {
     const fetchData = async () => {
       const filteredSkpkByNamaJenazah = allSkpkData.filter(logs => {
-        return logs.nama_jenazah.toString().toLowerCase().includes(searchText.toLowerCase())
+        const {
+          nama_jenazah,
+          jenis_kelamin,
+          umur_bulan,
+          umur_tahun,
+          alamat_kecamatan,
+          alamat_kelurahan,
+          penyebab_dasar_id,
+          penyebab_antara_1_id,
+          penyebab_antara_2_id,
+          penyebab_langsung_id,
+          nama_penandatangan
+        } = logs ;
+
+        const stringify = (value) => {
+          if (value === null) return '';
+          return value.toString().toLowerCase();
+        }
+
+        return stringify(nama_jenazah).includes(stringify(searchText)) ||
+          stringify(jenis_kelamin).includes(stringify(searchText)) ||
+          stringify(umur_bulan).includes(stringify(searchText)) ||
+          stringify(umur_tahun).includes(stringify(searchText)) ||
+          stringify(alamat_kecamatan).includes(stringify(searchText)) ||
+          stringify(alamat_kelurahan).includes(stringify(searchText)) ||
+          stringify(penyebab_dasar_id).includes(stringify(searchText)) ||
+          stringify(penyebab_antara_1_id).includes(stringify(searchText)) ||
+          stringify(penyebab_antara_2_id).includes(stringify(searchText)) ||
+          stringify(penyebab_langsung_id).includes(stringify(searchText)) ||
+          stringify(nama_penandatangan).includes(stringify(searchText))
       })
       setSkpkData(filteredSkpkByNamaJenazah);
       setSearchDate(null);
