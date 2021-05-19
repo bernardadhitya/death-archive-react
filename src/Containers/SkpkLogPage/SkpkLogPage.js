@@ -1,6 +1,6 @@
 import { Button, Col, Input, Row, Space, Table, DatePicker } from 'antd';
 import React, { useEffect, useState } from 'react';
-import { getSkpkLogs } from '../../supabase';
+import { getSkpkDetail, getSkpkLogs } from '../../supabase';
 import moment from 'moment';
 import { useHistory } from 'react-router';
 import { PlusOutlined, EyeFilled, DeleteFilled } from '@ant-design/icons';
@@ -19,7 +19,9 @@ const SkpkLogPage = () => {
 
   const history = useHistory();
 
-  const handleRedirect = (surat_skpk_id) => {
+  const handleRedirect = async (surat_skpk_id) => {
+    const fetchedSkpkDetail = await getSkpkDetail(surat_skpk_id);
+    console.log(fetchedSkpkDetail);
     history.push(`/skpk/${surat_skpk_id}`);
   }
 

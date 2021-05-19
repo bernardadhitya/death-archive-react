@@ -454,3 +454,110 @@ export const getSkmkDetail = async (surat_skmk_id) => {
   
   return skmkDataWithDiagnosa;
 }
+
+export const getSkpkDetail = async (surat_skpk_id) => {
+  const { data: skpkData } = await supabase
+    .from('surat_skpk')
+    .select(`
+      surat_skpk_id,
+      nama_pembuat_surat,
+      nomor_surat,
+      tanggal_surat,
+      nama_rs_pkm,
+      kode_rs_pkm,
+      no_urut,
+      no_rekam_medis,
+      nama_penerima,
+      hubungan,
+      nama_penandatangan,
+      jenazah_skpk (
+        nama_jenazah,
+        jenis_kelamin,
+        tempat_lahir,
+        tanggal_lahir,
+        umur_tahun,
+        umur_bulan,
+        pendidikan,
+        alamat,
+        alamat_kecamatan,
+        alamat_kelurahan,
+        status_penduduk,
+        tanggal_meninggal,
+        waktu_meninggal,
+        lahir_mati,
+        tempat_meninggal,
+        lama_dirawat,
+        dasar_diagnosis,
+        rencana_pemulasaran,
+        tanggal_pemulasaran,
+        status_wanita,
+        ktp,
+        pekerjaan
+      ),
+      diagnosa_skpk (
+        penyebab_langsung_id,
+        penyebab_antara_1_id,
+        penyebab_antara_2_id,
+        penyebab_dasar_id,
+        diagnosa_ibu_bayi_id
+      ),
+      nama_penandatangan
+    `)
+    .eq('surat_skpk_id', surat_skpk_id);
+
+  const getAllSkpkDiagnosaIds = async () => {
+    return Promise.all(
+      skpkData.map(async (data) => {
+        const { diagnosa_skpk } = data;
+        const { diagnosa_ibu_bayi_id } = diagnosa_skpk;
+        delete diagnosa_skpk.diagnosa_ibu_bayi_id;
+    
+        if (diagnosa_ibu_bayi_id === null) return diagnosa_skpk;
+  
+        const { data: skpkDiagnosaIbuAnakIds } = await supabase.from('diagnosa_ibu_bayi')
+          .select(`
+            penyebab_utama_bayi_id,
+            penyebab_lain_bayi_id, 
+            penyebab_utama_ibu_id, 
+            penyebab_lain_ibu_id  
+          `)
+          .eq('diagnosa_ibu_bayi_id', diagnosa_ibu_bayi_id)
+        return { ...diagnosa_skpk, ...skpkDiagnosaIbuAnakIds[0] }
+      })
+    );
+  }
+  
+
+  const getSkpkDataWithDiagnosa = async (skpkDiagnosaIdList) => {
+    return Promise.all(
+      skpkDiagnosaIdList.map(async (diagnosaIds, idx) => {
+        let skpkDiagnosaList = {};
+        for (const diagnosaId in diagnosaIds){
+          if (diagnosaIds[diagnosaId] === null){
+            skpkDiagnosaList[diagnosaId] = null
+          } else {
+            const { data: diagnosaItem } = await supabase.from('diagnosa')
+              .select(`
+                icdx,
+                penyebab,
+                selang_waktu,
+                keterangan
+              `)
+              .eq('diagnosa_id', diagnosaIds[diagnosaId]);
+            skpkDiagnosaList[diagnosaId] = diagnosaItem[0]
+          }
+        }
+        return {
+          ...skpkData[idx],
+          diagnosa_skpk_list: skpkDiagnosaList
+        }
+      })
+    );
+  }
+
+
+  const allSkpkDiagnosaIds = await getAllSkpkDiagnosaIds();
+  const skpkDataWithDiagnosa = await getSkpkDataWithDiagnosa(allSkpkDiagnosaIds);
+  
+  return skpkDataWithDiagnosa;
+}
