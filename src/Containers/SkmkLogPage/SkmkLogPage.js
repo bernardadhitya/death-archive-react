@@ -2,9 +2,9 @@ import { Button, Col, DatePicker, Input, Row, Space, Table } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { getSkmkLogs } from '../../supabase';
 import moment from 'moment';
-import { PlusOutlined } from '@ant-design/icons';
 import { useHistory } from 'react-router';
-//import './SkmkLogPage.css';
+import { PlusOutlined, EyeFilled, DeleteFilled } from '@ant-design/icons';
+import './SkmkLogPage.css';
 
 const SkmkLogPage = () => {
   const { Search } = Input;
@@ -17,6 +17,24 @@ const SkmkLogPage = () => {
 
   const stringDiff = (a, b) => a.localeCompare(b, 'en', { numeric: true });
 
+  const renderActionCell = () => {
+    return (
+      <Row>
+        <Col span={10}>
+          <div className='action-icon-wrapper' style={{backgroundColor: '#3990B2'}}>
+            <EyeFilled style={{color: '#FFFFFF', fontSize: '18px'}}/>
+          </div>
+        </Col>
+        <Col span={2}/>
+        <Col span={10}>
+          <div className='action-icon-wrapper' style={{backgroundColor: '#CD2733'}}>
+            <DeleteFilled style={{color: '#FFFFFF', fontSize: '18px'}}/>
+          </div>
+        </Col>
+      </Row>
+    )
+  }
+
   useEffect(() => {
     const fetchData = async () => {
       const fetchedSkmkLogs = await getSkmkLogs();
@@ -25,7 +43,8 @@ const SkmkLogPage = () => {
         return {
           ...jenazah_skmk,
           nama_penandatangan,
-          ...diagnosa_skmk_list
+          ...diagnosa_skmk_list,
+          aksi: renderActionCell()
         }
       });
       setSkmkData(formattedSkmkLogs);
@@ -175,8 +194,13 @@ const SkmkLogPage = () => {
       dataIndex: 'nama_penandatangan',
       key: 'nama_penandatangan',
       sorter: (a, b) => stringDiff(a.nama_penandatangan, b.nama_penandatangan),
-      
       width: 150,
+    },
+    {
+      title: 'Aksi',
+      dataIndex: 'aksi',
+      key: 'aksi',
+      width: 100
     }
   ]
 
