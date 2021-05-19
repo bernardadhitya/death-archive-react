@@ -2,9 +2,9 @@ import { Button, Col, Input, Row, Space, Table, DatePicker } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { getSkpkLogs } from '../../supabase';
 import moment from 'moment';
-import { PlusOutlined } from '@ant-design/icons';
 import { useHistory } from 'react-router';
-//import './SkpkLogPage.css';
+import { PlusOutlined, EyeFilled, DeleteFilled } from '@ant-design/icons';
+import './SkpkLogPage.css';
 
 const SkpkLogPage = () => {
   const { Search } = Input;
@@ -17,6 +17,24 @@ const SkpkLogPage = () => {
   const [allSkpkData, setAllSkpkData] = useState([]);
   const [skpkData, setSkpkData] = useState([]);
 
+  const renderActionCell = () => {
+    return (
+      <Row>
+        <Col span={10}>
+          <div className='action-icon-wrapper' style={{backgroundColor: '#3990B2'}}>
+            <EyeFilled style={{color: '#FFFFFF', fontSize: '18px'}}/>
+          </div>
+        </Col>
+        <Col span={2}/>
+        <Col span={10}>
+          <div className='action-icon-wrapper' style={{backgroundColor: '#CD2733'}}>
+            <DeleteFilled style={{color: '#FFFFFF', fontSize: '18px'}}/>
+          </div>
+        </Col>
+      </Row>
+    )
+  }
+
   useEffect(() => {
     const fetchData = async () => {
       const fetchedSkpkLogs = await getSkpkLogs();
@@ -26,7 +44,8 @@ const SkpkLogPage = () => {
         return {
           ...jenazah_skpk,
           nama_penandatangan,
-          ...diagnosa_skpk_list
+          ...diagnosa_skpk_list,
+          aksi: renderActionCell()
         }
       });
       setSkpkData(formattedSkpkLogs);
@@ -178,6 +197,12 @@ const SkpkLogPage = () => {
       sorter: (a, b) => stringDiff(a.nama_penandatangan, b.nama_penandatangan),
       
       width: 150,
+    },
+    {
+      title: 'Aksi',
+      dataIndex: 'aksi',
+      key: 'aksi',
+      width: 100
     }
   ]
 
