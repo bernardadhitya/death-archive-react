@@ -17,11 +17,21 @@ const SkpkLogPage = () => {
   const [allSkpkData, setAllSkpkData] = useState([]);
   const [skpkData, setSkpkData] = useState([]);
 
-  const renderActionCell = () => {
+  const history = useHistory();
+
+  const handleRedirect = (surat_skpk_id) => {
+    history.push(`/skpk/${surat_skpk_id}`);
+  }
+
+  const renderActionCell = (surat_skpk_id) => {
     return (
       <Row>
         <Col span={10}>
-          <div className='action-icon-wrapper' style={{backgroundColor: '#3990B2'}}>
+          <div
+            className='action-icon-wrapper'
+            style={{backgroundColor: '#3990B2'}}
+            onClick={() => handleRedirect(surat_skpk_id)}
+          >
             <EyeFilled style={{color: '#FFFFFF', fontSize: '18px'}}/>
           </div>
         </Col>
@@ -40,12 +50,17 @@ const SkpkLogPage = () => {
       const fetchedSkpkLogs = await getSkpkLogs();
       console.log(fetchedSkpkLogs);
       const formattedSkpkLogs = fetchedSkpkLogs.map(log => {
-        const {jenazah_skpk, nama_penandatangan, diagnosa_skpk_list} = log;
+        const {
+          surat_skpk_id,
+          jenazah_skpk,
+          nama_penandatangan,
+          diagnosa_skpk_list
+        } = log;
         return {
           ...jenazah_skpk,
           nama_penandatangan,
           ...diagnosa_skpk_list,
-          aksi: renderActionCell()
+          aksi: renderActionCell(surat_skpk_id)
         }
       });
       setSkpkData(formattedSkpkLogs);
@@ -205,8 +220,6 @@ const SkpkLogPage = () => {
       width: 100
     }
   ]
-
-  const history = useHistory();
 
   return (
     <div style={{margin: '120px 20px'}}>

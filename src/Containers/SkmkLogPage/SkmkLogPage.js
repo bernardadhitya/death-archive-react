@@ -17,11 +17,21 @@ const SkmkLogPage = () => {
 
   const stringDiff = (a, b) => a.localeCompare(b, 'en', { numeric: true });
 
-  const renderActionCell = () => {
+  const history = useHistory();
+
+  const handleRedirect = (surat_skmk_id) => {
+    history.push(`/skmk/${surat_skmk_id}`);
+  }
+
+  const renderActionCell = (surat_skmk_id) => {
     return (
       <Row>
         <Col span={10}>
-          <div className='action-icon-wrapper' style={{backgroundColor: '#3990B2'}}>
+          <div
+            className='action-icon-wrapper'
+            style={{backgroundColor: '#3990B2'}}
+            onClick={() => handleRedirect(surat_skmk_id)}
+          >
             <EyeFilled style={{color: '#FFFFFF', fontSize: '18px'}}/>
           </div>
         </Col>
@@ -39,12 +49,17 @@ const SkmkLogPage = () => {
     const fetchData = async () => {
       const fetchedSkmkLogs = await getSkmkLogs();
       const formattedSkmkLogs = fetchedSkmkLogs.map(log => {
-        const {jenazah_skmk, nama_penandatangan, diagnosa_skmk_list} = log;
+        const {
+          surat_skmk_id,
+          jenazah_skmk,
+          nama_penandatangan,
+          diagnosa_skmk_list
+        } = log;
         return {
           ...jenazah_skmk,
           nama_penandatangan,
           ...diagnosa_skmk_list,
-          aksi: renderActionCell()
+          aksi: renderActionCell(surat_skmk_id)
         }
       });
       setSkmkData(formattedSkmkLogs);
@@ -203,8 +218,6 @@ const SkmkLogPage = () => {
       width: 100
     }
   ]
-
-  const history = useHistory();
 
   return (
     <div style={{margin: '120px 20px'}}>
