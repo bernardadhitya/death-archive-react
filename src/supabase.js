@@ -258,6 +258,7 @@ export const getSkmkLogs = async () => {
   const { data: skmkData } = await supabase
     .from('surat_skmk')
     .select(`
+      surat_skmk_id,
       jenazah_skmk (
         nama_jenazah,
         jenis_kelamin,
@@ -306,6 +307,7 @@ export const getSkpkLogs = async () => {
   const { data: skpkData } = await supabase
     .from('surat_skpk')
     .select(`
+      surat_skpk_id,
       jenazah_skpk (
         nama_jenazah,
         jenis_kelamin,
