@@ -1,6 +1,6 @@
 import { Button, Col, DatePicker, Input, Row, Space, Table } from 'antd';
 import React, { useEffect, useState } from 'react';
-import { getSkmkLogs } from '../../supabase';
+import { getSkmkDetail, getSkmkLogs } from '../../supabase';
 import moment from 'moment';
 import { useHistory } from 'react-router';
 import { PlusOutlined, EyeFilled, DeleteFilled } from '@ant-design/icons';
@@ -19,7 +19,9 @@ const SkmkLogPage = () => {
 
   const history = useHistory();
 
-  const handleRedirect = (surat_skmk_id) => {
+  const handleRedirect = async(surat_skmk_id) => {
+    const fetchedSkmkDetail = await getSkmkDetail(surat_skmk_id);
+    console.log(fetchedSkmkDetail);
     history.push(`/skmk/${surat_skmk_id}`);
   }
 
