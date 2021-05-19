@@ -241,7 +241,7 @@ const SkpkFormDisplayPage = () => {
 
   return (
     <div style={{margin: '120px 160px'}}>
-      <h1>Input Surat Keterangan Melapor Kematian (SKPK)</h1>
+      <h1>Pratinjau Surat Keterangan Melapor Kematian (SKPK)</h1>
       <br/>
       {renderDataSurat()}
       <br/><br/>
