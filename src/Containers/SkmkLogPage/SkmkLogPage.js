@@ -22,7 +22,7 @@ const SkmkLogPage = () => {
   const handleRedirect = async(surat_skmk_id) => {
     const fetchedSkmkDetail = await getSkmkDetail(surat_skmk_id);
     console.log(fetchedSkmkDetail);
-    history.push(`/skmk/${surat_skmk_id}`);
+    history.push(`/skmk/${surat_skmk_id}`, fetchedSkmkDetail);
   }
 
   const renderActionCell = (surat_skmk_id) => {
