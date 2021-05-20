@@ -561,3 +561,37 @@ export const getSkpkDetail = async (surat_skpk_id) => {
   
   return skpkDataWithDiagnosa;
 }
+
+export const deleteSkmkData = async (surat_skmk_id) => {
+  const skmkData = await getSkmkDetail(surat_skmk_id);
+  const { jenazah_skmk: { jenazah_id } } = skmkData[0];
+
+  const { data: deletedSurat } = await supabase
+    .from('surat_skmk')
+    .delete()
+    .match({ surat_skmk_id });
+
+  const { data: deletedJenazah } = await supabase
+    .from('jenazah_skmk')
+    .delete()
+    .match({ jenazah_id });
+  
+  return { deletedSurat, deletedJenazah };
+}
+
+export const deleteSkpkData = async (surat_skpk_id) => {
+  const skpkData = await getSkpkDetail(surat_skpk_id);
+  const { jenazah_skpk: { jenazah_id } } = skpkData[0];
+
+  const { data: deletedSurat } = await supabase
+    .from('surat_skpk')
+    .delete()
+    .match({ surat_skpk_id });
+
+  const { data: deletedJenazah } = await supabase
+    .from('jenazah_skpk')
+    .delete()
+    .match({ jenazah_id });
+  
+  return { deletedSurat, deletedJenazah };
+}
