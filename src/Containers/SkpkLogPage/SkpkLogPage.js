@@ -22,7 +22,7 @@ const SkpkLogPage = () => {
   const handleRedirect = async (surat_skpk_id) => {
     const fetchedSkpkDetail = await getSkpkDetail(surat_skpk_id);
     console.log(fetchedSkpkDetail);
-    history.push(`/skpk/${surat_skpk_id}`);
+    history.push(`/skpk/${surat_skpk_id}`, fetchedSkpkDetail);
   }
 
   const renderActionCell = (surat_skpk_id) => {
