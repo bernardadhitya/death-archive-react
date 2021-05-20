@@ -6,6 +6,8 @@ import SkpkDataJenazah from '../../Components/SkpkFormCards/SkpkDataJenazah';
 import SkpkDataSurat from '../../Components/SkpkFormCards/SkpkDataSurat';
 
 const SkpkFormPage = () => {
+  sessionStorage.clear();
+
   const [namaPembuatSurat,        setNamaPembuatSurat        ] = useState('');
   const [nomorSurat,              setNomorSurat              ] = useState('');
   const [tanggalSurat,            setTanggalSurat            ] = useState(null);

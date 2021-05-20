@@ -7,6 +7,8 @@ import SkmkDataPelapor from '../../Components/SkmkFormCards/SkmkDataPelapor';
 import SkmkDataSurat from '../../Components/SkmkFormCards/SkmkDataSurat';
 
 const SkmkFormPage = () => {
+  sessionStorage.clear();
+
   const [namaPembuatSurat,        setNamaPembuatSurat        ] = useState('');
   const [nomorSurat,              setNomorSurat              ] = useState('');
   const [tanggalSurat,            setTanggalSurat            ] = useState(null);

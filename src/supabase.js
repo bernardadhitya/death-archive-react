@@ -82,10 +82,10 @@ const postDiagnosaSkmk = async (diagnosaUmumData, diagnosaIbuAnakData, lamaKemat
 const postPelaporSkmk = async (pelaporData) => {
   let { data: matchingPelapor } = await supabase
   .from('pelapor_skmk')
-  .select('nama_pelapor')
+  .select('pelapor_skmk_id')
   .filter('ktp', 'eq', pelaporData.ktp)
 
-  if (matchingPelapor.length > 0) return null;
+  if (matchingPelapor.length > 0) return matchingPelapor[0].pelapor_skmk_id;
 
   const { data, error } = await supabase
   .from('pelapor_skmk')
@@ -195,6 +195,8 @@ const postDiagnosaSkpk = async (diagnosaUmumData, diagnosaIbuAnakData, lamaKemat
       final_ucod: diagnosaUmumIds[4]
     }
   ])
+
+  console.log(data[0]);
 
   return data[0].diagnosa_skpk_id
 }
@@ -563,9 +565,6 @@ export const getSkpkDetail = async (surat_skpk_id) => {
 }
 
 export const deleteSkmkData = async (surat_skmk_id) => {
-  const skmkData = await getSkmkDetail(surat_skmk_id);
-  const { jenazah_skmk: { jenazah_id } } = skmkData[0];
-
   const { data: deletedSurat } = await supabase
     .from('surat_skmk')
     .delete()
@@ -574,15 +573,12 @@ export const deleteSkmkData = async (surat_skmk_id) => {
   const { data: deletedJenazah } = await supabase
     .from('jenazah_skmk')
     .delete()
-    .match({ jenazah_id });
+    .match({ jenazah_id: deletedSurat[0].jenazah_id });
   
   return { deletedSurat, deletedJenazah };
 }
 
 export const deleteSkpkData = async (surat_skpk_id) => {
-  const skpkData = await getSkpkDetail(surat_skpk_id);
-  const { jenazah_skpk: { jenazah_id } } = skpkData[0];
-
   const { data: deletedSurat } = await supabase
     .from('surat_skpk')
     .delete()
@@ -591,7 +587,7 @@ export const deleteSkpkData = async (surat_skpk_id) => {
   const { data: deletedJenazah } = await supabase
     .from('jenazah_skpk')
     .delete()
-    .match({ jenazah_id });
+    .match({ jenazah_id: deletedSurat[0].jenazah_id });
   
   return { deletedSurat, deletedJenazah };
 }

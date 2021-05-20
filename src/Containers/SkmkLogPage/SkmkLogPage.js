@@ -1,6 +1,6 @@
 import { Button, Col, DatePicker, Input, Row, Space, Table } from 'antd';
 import React, { useEffect, useState } from 'react';
-import { getSkmkDetail, getSkmkLogs } from '../../supabase';
+import { deleteSkmkData, getSkmkDetail, getSkmkLogs } from '../../supabase';
 import moment from 'moment';
 import { useHistory } from 'react-router';
 import { PlusOutlined, EyeFilled, DeleteFilled } from '@ant-design/icons';
@@ -11,6 +11,7 @@ const SkmkLogPage = () => {
 
   const [searchText, setSearchText] = useState('');
   const [searchDate, setSearchDate] = useState(null);
+  const [refresh, setRefresh] = useState(0);
 
   const [allSkmkData, setAllSkmkData] = useState([]);
   const [skmkData, setSkmkData] = useState([]);
@@ -23,6 +24,13 @@ const SkmkLogPage = () => {
     const fetchedSkmkDetail = await getSkmkDetail(surat_skmk_id);
     console.log(fetchedSkmkDetail);
     history.push(`/skmk/${surat_skmk_id}`, fetchedSkmkDetail);
+  }
+
+  const handleDelete = async(surat_skmk_id) => {
+    const deletedSkmkDetail = await deleteSkmkData(surat_skmk_id);
+    console.log(deletedSkmkDetail);
+    window.alert('Data berhasil dihapus!');
+    setRefresh(refresh + 1)
   }
 
   const renderActionCell = (surat_skmk_id) => {
@@ -39,7 +47,11 @@ const SkmkLogPage = () => {
         </Col>
         <Col span={2}/>
         <Col span={10}>
-          <div className='action-icon-wrapper' style={{backgroundColor: '#CD2733'}}>
+          <div
+            className='action-icon-wrapper'
+            style={{backgroundColor: '#CD2733'}}
+            onClick={() => handleDelete(surat_skmk_id)}
+          >
             <DeleteFilled style={{color: '#FFFFFF', fontSize: '18px'}}/>
           </div>
         </Col>
@@ -68,7 +80,7 @@ const SkmkLogPage = () => {
       setAllSkmkData(formattedSkmkLogs);
     }
     fetchData();
-  }, []);
+  }, [refresh]);
 
   useEffect(() => {
     const fetchData = async () => {

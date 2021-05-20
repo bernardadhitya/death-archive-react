@@ -1,6 +1,6 @@
 import { Button, Col, Input, Row, Space, Table, DatePicker } from 'antd';
 import React, { useEffect, useState } from 'react';
-import { getSkpkDetail, getSkpkLogs } from '../../supabase';
+import { deleteSkpkData, getSkpkDetail, getSkpkLogs } from '../../supabase';
 import moment from 'moment';
 import { useHistory } from 'react-router';
 import { PlusOutlined, EyeFilled, DeleteFilled } from '@ant-design/icons';
@@ -11,6 +11,7 @@ const SkpkLogPage = () => {
 
   const [searchText, setSearchText] = useState('');
   const [searchDate, setSearchDate] = useState(null);
+  const [refresh, setRefresh] = useState(0);
 
   const stringDiff = (a, b) => a.localeCompare(b, 'en', { numeric: true });
 
@@ -23,6 +24,13 @@ const SkpkLogPage = () => {
     const fetchedSkpkDetail = await getSkpkDetail(surat_skpk_id);
     console.log(fetchedSkpkDetail);
     history.push(`/skpk/${surat_skpk_id}`, fetchedSkpkDetail);
+  }
+
+  const handleDelete = async(surat_skpk_id) => {
+    const deletedSkpkDetail = await deleteSkpkData(surat_skpk_id);
+    console.log(deletedSkpkDetail);
+    window.alert('Data berhasil dihapus!');
+    setRefresh(refresh + 1);
   }
 
   const renderActionCell = (surat_skpk_id) => {
@@ -39,7 +47,11 @@ const SkpkLogPage = () => {
         </Col>
         <Col span={2}/>
         <Col span={10}>
-          <div className='action-icon-wrapper' style={{backgroundColor: '#CD2733'}}>
+          <div
+            className='action-icon-wrapper'
+            style={{backgroundColor: '#CD2733'}}
+            onClick={() => handleDelete(surat_skpk_id)}
+          >
             <DeleteFilled style={{color: '#FFFFFF', fontSize: '18px'}}/>
           </div>
         </Col>
@@ -69,7 +81,7 @@ const SkpkLogPage = () => {
       setAllSkpkData(formattedSkpkLogs);
     }
     fetchData();
-  }, []);
+  }, [refresh]);
 
   useEffect(() => {
     const fetchData = async () => {
