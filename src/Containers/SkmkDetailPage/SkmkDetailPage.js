@@ -106,7 +106,7 @@ const SkmkDetailPage = () => {
       <br/><br/>
       <Button
         size='large'
-        style={{backgroundColor: '#3990B2', float: 'right', color: '#FFFFFF'}}
+        style={{backgroundColor: '#3990B2', float: 'left', color: '#FFFFFF'}}
         onClick={async () => {
           history.push('/skmk/rekap')
         }}

@@ -38,60 +38,77 @@ const SkpkDataDiagnosa = (props) => {
   }
 
   const renderDiagnosaIbuAnak = () => {
+    if (lamaKematian === 1) return;
+
+    const {
+      penyebab_utama_bayi_id,
+      penyebab_lain_bayi_id,
+      penyebab_utama_ibu_id,
+      penyebab_lain_ibu_id
+    } = diagnosaSkmkList;
+
     const diagnosaIbuAnakList = [
       {
         judul:      'Penyebab Utama Bayi',
-        nama:       diagnosaSkmkList.penyebab_utama_bayi_id.penyebab,           
-        waktu:      diagnosaSkmkList.penyebab_utama_bayi_id.selang_waktu,   
-        icdx:       diagnosaSkmkList.penyebab_utama_bayi_id.icdx,           
+        nama:       penyebab_utama_bayi_id !== null ? penyebab_utama_bayi_id.penyebab : '-',           
+        waktu:      penyebab_utama_bayi_id !== null ? penyebab_utama_bayi_id.selang_waktu: '-',   
+        icdx:       penyebab_utama_bayi_id !== null ? penyebab_utama_bayi_id.icdx: '-',           
       },
       {
         judul:      'Penyebab Lain Bayi',
-        nama:       diagnosaSkmkList.penyebab_lain_bayi_id.penyebab,    
-        waktu:      diagnosaSkmkList.penyebab_lain_bayi_id.selang_waktu,
-        icdx:       diagnosaSkmkList.penyebab_lain_bayi_id.icdx,        
+        nama:       penyebab_lain_bayi_id !== null ? penyebab_lain_bayi_id.penyebab : '',    
+        waktu:      penyebab_lain_bayi_id !== null ? penyebab_lain_bayi_id.selang_waktu : '-',
+        icdx:       penyebab_lain_bayi_id !== null ? penyebab_lain_bayi_id.icdx: '',        
       },
       {
         judul:      'Penyebab Utama Ibu',
-        nama:       diagnosaSkmkList.penyebab_utama_ibu_id.penyebab,    
-        waktu:      diagnosaSkmkList.penyebab_utama_ibu_id.selang_waktu,
-        icdx:       diagnosaSkmkList.penyebab_utama_ibu_id.icdx,        
+        nama:       penyebab_utama_ibu_id !== null ? penyebab_utama_ibu_id.penyebab : '',    
+        waktu:      penyebab_utama_ibu_id !== null ? penyebab_utama_ibu_id.selang_waktu : '-',
+        icdx:       penyebab_utama_ibu_id !== null ? penyebab_utama_ibu_id.icdx : '',        
       },
       {
         judul:      'Penyebab Lain Ibu',
-        nama:       diagnosaSkmkList.penyebab_lain_ibu_id.penyebab,    
-        waktu:      diagnosaSkmkList.penyebab_lain_ibu_id.selang_waktu,
-        icdx:       diagnosaSkmkList.penyebab_lain_ibu_id.icdx,          
+        nama:       penyebab_lain_ibu_id !== null ? penyebab_lain_ibu_id.penyebab : '',    
+        waktu:      penyebab_lain_ibu_id !== null ? penyebab_lain_ibu_id.selang_waktu : '-',
+        icdx:       penyebab_lain_ibu_id !== null ? penyebab_lain_ibu_id.icdx : '',          
       }
     ];
     return renderDiagnosaForm(diagnosaIbuAnakList);
   }
 
   const renderDiagnosaUmum = () => {
+
+    const {
+      penyebab_langsung_id,
+      penyebab_antara_1_id,
+      penyebab_antara_2_id,
+      penyebab_dasar_id
+    } = diagnosaSkmkList;
+
     const diagnosaUmumList = [
       {
         judul:      'Penyebab Langsung',
-        nama:       diagnosaSkmkList.penyebab_langsung_id.penyebab,    
-        waktu:      diagnosaSkmkList.penyebab_langsung_id.selang_waktu,
-        icdx:       diagnosaSkmkList.penyebab_langsung_id.icdx,  
+        nama:       penyebab_langsung_id !== null ? penyebab_langsung_id.penyebab : '',    
+        waktu:      penyebab_langsung_id !== null ? penyebab_langsung_id.selang_waktu : '-',
+        icdx:       penyebab_langsung_id !== null ? penyebab_langsung_id.icdx : '',  
       },
       {
         judul:      'Penyebab Antara 1',
-        nama:       diagnosaSkmkList.penyebab_antara_1_id.penyebab,    
-        waktu:      diagnosaSkmkList.penyebab_antara_1_id.selang_waktu,
-        icdx:       diagnosaSkmkList.penyebab_antara_1_id.icdx,  
+        nama:       penyebab_antara_1_id !== null ? penyebab_antara_1_id.penyebab : '',    
+        waktu:      penyebab_antara_1_id !== null ? penyebab_antara_1_id.selang_waktu : '-',
+        icdx:       penyebab_antara_1_id !== null ? penyebab_antara_1_id.icdx : '',  
       },
       {
         judul:      'Penyebab Antara 2',
-        nama:       diagnosaSkmkList.penyebab_antara_2_id.penyebab,    
-        waktu:      diagnosaSkmkList.penyebab_antara_2_id.selang_waktu,
-        icdx:       diagnosaSkmkList.penyebab_antara_2_id.icdx, 
+        nama:       penyebab_antara_2_id !== null ? penyebab_antara_2_id.penyebab : '',    
+        waktu:      penyebab_antara_2_id !== null ? penyebab_antara_2_id.selang_waktu : '-', 
+        icdx:       penyebab_antara_2_id !== null ? penyebab_antara_2_id.icdx : '', 
       },
       {
         judul:      'Penyebab Dasar',
-        nama:       diagnosaSkmkList.penyebab_dasar_id.penyebab,    
-        waktu:      diagnosaSkmkList.penyebab_dasar_id.selang_waktu,
-        icdx:       diagnosaSkmkList.penyebab_dasar_id.icdx,  
+        nama:       penyebab_dasar_id !== null ? penyebab_dasar_id.penyebab : '-',    
+        waktu:      penyebab_dasar_id !== null ? penyebab_dasar_id.selang_waktu : '-', 
+        icdx:       penyebab_dasar_id !== null ? penyebab_dasar_id.icdx : '-',  
       }
     ];
     return renderDiagnosaForm(diagnosaUmumList);
