@@ -7,6 +7,7 @@ import { PlusOutlined, EyeFilled, DeleteFilled, WarningOutlined, DownloadOutline
 import './SkmkLogPage.css';
 import Modal from 'antd/lib/modal/Modal';
 import { Button } from '@material-ui/core';
+import { exportSkmkLogByDate } from '../../exporter';
 
 const SkmkLogPage = () => {
   const { Search } = Input;
@@ -16,6 +17,8 @@ const SkmkLogPage = () => {
   const [searchDate, setSearchDate] = useState(null);
   const [refresh, setRefresh] = useState(0);
   const [showModal, setShowModal] = useState(false);
+  const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null)
 
   const [allSkmkData, setAllSkmkData] = useState([]);
   const [skmkData, setSkmkData] = useState([]);
@@ -24,20 +27,19 @@ const SkmkLogPage = () => {
 
   const history = useHistory();
 
-  const handleExportData = () => {
-    console.log('triggered');
+  const handleExportData = async () => {
+    const sortedSkmkLogs = await exportSkmkLogByDate(startDate, endDate);
+    console.log('sortedSkmkLogs:', sortedSkmkLogs);
     setShowModal(false)
   }
 
   const handleRedirect = async(surat_skmk_id) => {
     const fetchedSkmkDetail = await getSkmkDetail(surat_skmk_id);
-    console.log(fetchedSkmkDetail);
     history.push(`/skmk/${surat_skmk_id}`, fetchedSkmkDetail);
   }
 
   const handleDelete = async(surat_skmk_id) => {
     const deletedSkmkDetail = await deleteSkmkData(surat_skmk_id);
-    console.log(deletedSkmkDetail);
     window.alert('Data berhasil dihapus!');
     setRefresh(refresh + 1)
   }
@@ -262,7 +264,10 @@ const SkmkLogPage = () => {
         <p>Tanggal Awal</p>
         <Row>
           <Col span={24}>
-            <RangePicker />
+            <RangePicker
+              value={[startDate, endDate]}
+              onChange={(value) => { setStartDate(value[0]); setEndDate(value[1])}}
+            />
           </Col>
         </Row>
         <br/>
