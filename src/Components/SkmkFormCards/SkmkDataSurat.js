@@ -7,10 +7,12 @@ const SkmkDataSurat = (props) => {
     nomorSurat,
     tanggalSurat,
     namaPenandatangan,
+    nomorIzinPegawai,
     setNamaPembuatSurat,
     setNomorSurat,
     setTanggalSurat,
-    setNamaPenandatangan
+    setNamaPenandatangan,
+    setNomorIzinPegawai
   } = props;
 
   const [nomorUrut, setNomorUrut] = useState(null);
@@ -97,6 +99,18 @@ const SkmkDataSurat = (props) => {
             placeholder='Nama'
             value={namaPenandatangan}
             onChange={(e) => setNamaPenandatangan(e.target.value)}
+          />
+        </Col>
+      </Row>
+      <Row gutter={16}>
+        <Col span={6}>
+          <p>Nomor Izin Pegawai*</p>
+        </Col>
+        <Col span={18}>
+          <Input
+            placeholder='NIP'
+            value={nomorIzinPegawai}
+            onChange={(e) => setNomorIzinPegawai(e.target.value)}
           />
         </Col>
       </Row>

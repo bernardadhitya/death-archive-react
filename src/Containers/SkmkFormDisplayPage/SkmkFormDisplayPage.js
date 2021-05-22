@@ -12,6 +12,7 @@ const SkmkFormDisplayPage = () => {
   const nomorSurat =               sessionStorage.getItem('nomorSurat');                
   const tanggalSurat =             sessionStorage.getItem('tanggalSurat');              
   const namaPenandatangan =        sessionStorage.getItem('namaPenandatangan');         
+  const nomorIzinPegawai =         sessionStorage.getItem('nomorIzinPegawai');
   const namaPelapor =              sessionStorage.getItem('namaPelapor');               
   const tempatLahirPelapor =       sessionStorage.getItem('tempatLahirPelapor');        
   const tanggalLahirPelapor =      sessionStorage.getItem('tanggalLahirPelapor');       
@@ -112,6 +113,7 @@ const SkmkFormDisplayPage = () => {
         nomorSurat={nomorSurat}
         tanggalSurat={tanggalSurat}
         namaPenandatangan={namaPenandatangan}
+        nomorIzinPegawai={nomorIzinPegawai}
      /> 
     )
   }

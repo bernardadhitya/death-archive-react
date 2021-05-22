@@ -13,6 +13,7 @@ const SkmkFormPage = () => {
   const [nomorSurat,              setNomorSurat              ] = useState('');
   const [tanggalSurat,            setTanggalSurat            ] = useState(null);
   const [namaPenandatangan,       setNamaPenandatangan       ] = useState('');
+  const [nomorIzinPegawai,        setNomorIzinPegawai        ] = useState('');
   
   const [namaPelapor,             setNamaPelapor             ] = useState('');
   const [tempatLahirPelapor,      setTempatLahirPelapor      ] = useState('');
@@ -117,10 +118,12 @@ const SkmkFormPage = () => {
         nomorSurat={nomorSurat}
         tanggalSurat={tanggalSurat}
         namaPenandatangan={namaPenandatangan}
+        nomorIzinPegawai={nomorIzinPegawai}
         setNamaPembuatSurat={setNamaPembuatSurat}
         setNomorSurat={setNomorSurat}
         setTanggalSurat={setTanggalSurat}
         setNamaPenandatangan={setNamaPenandatangan}
+        setNomorIzinPegawai={setNomorIzinPegawai}
      /> 
     )
   }
@@ -337,9 +340,10 @@ const SkmkFormPage = () => {
     sessionStorage.setItem('nomorSurat',                nomorSurat);                
     sessionStorage.setItem('tanggalSurat',              tanggalSurat);              
     sessionStorage.setItem('namaPenandatangan',         namaPenandatangan);         
+    sessionStorage.setItem('nomorIzinPegawai',          nomorIzinPegawai);
     sessionStorage.setItem('namaPelapor',               namaPelapor);               
     sessionStorage.setItem('tempatLahirPelapor',        tempatLahirPelapor);        
-    sessionStorage.setItem('tanggalLahirPelapor',       tanggalLahirPelapor);       
+    sessionStorage.setItem('tanggalLahirPelapor',       tanggalLahirPelapor);
     sessionStorage.setItem('pekerjaanPelapor',          pekerjaanPelapor);          
     sessionStorage.setItem('alamatJalanPelapor',        alamatJalanPelapor);        
     sessionStorage.setItem('alamatNomorPelapor',        alamatNomorPelapor);        

@@ -5,6 +5,7 @@ const namaPembuatSurat =         sessionStorage.getItem('namaPembuatSurat');
 const nomorSurat =               sessionStorage.getItem('nomorSurat');                
 const tanggalSurat =             sessionStorage.getItem('tanggalSurat');              
 const namaPenandatangan =        sessionStorage.getItem('namaPenandatangan');         
+const nomorIzinPegawai =         sessionStorage.getItem('nomorIzinPegawai');
 const namaPelapor =              sessionStorage.getItem('namaPelapor');               
 const tempatLahirPelapor =       sessionStorage.getItem('tempatLahirPelapor');        
 const tanggalLahirPelapor =      sessionStorage.getItem('tanggalLahirPelapor');       
@@ -201,6 +202,7 @@ export const handleSubmitData = async () => {
     nomor_surat: nomorSurat,
     tanggal_surat: moment(tanggalSurat).format('YYYY-MM-DD'),
     nama_penandatangan: namaPenandatangan,
+    nomor_izin_pegawai: nomorIzinPegawai
   }
 
   const result = await createSkmkEntry(

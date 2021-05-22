@@ -16,6 +16,7 @@ const SkmkDetailPage = () => {
     nomor_surat: nomorSurat,
     tanggal_surat: tanggalSurat,
     nama_penandatangan: namaPenandatangan,
+    nomor_izin_pegawai: nomorIzinPegawai,
     jenazah_skmk: {
       nama_jenazah: namaJenazah,
       tempat_lahir: tempatLahirJenazah,
@@ -48,6 +49,7 @@ const SkmkDetailPage = () => {
       nomorSurat={nomorSurat}
       tanggalSurat={tanggalSurat}
       namaPenandatangan={namaPenandatangan}
+      nomorIzinPegawai={nomorIzinPegawai}
      /> 
     )
   }

@@ -8,6 +8,7 @@ const SkpkDataSurat = (props) => {
     nomorSurat,
     tanggalSurat,
     namaPenandatangan,
+    nomorIzinPegawai
   } = props;
   
   return (
@@ -45,6 +46,14 @@ const SkpkDataSurat = (props) => {
         </Col>
         <Col span={18}>
           <p>{namaPenandatangan}</p>
+        </Col>
+      </Row>
+      <Row gutter={16}>
+        <Col span={6}>
+          <p>Nomor Izin Pegawai</p>
+        </Col>
+        <Col span={18}>
+          <p>{nomorIzinPegawai}</p>
         </Col>
       </Row>
     </Card>

@@ -363,6 +363,7 @@ export const getSkmkDetail = async (surat_skmk_id) => {
       nomor_surat,       
       tanggal_surat,     
       nama_penandatangan,
+      nomor_izin_pegawai,
       jenazah_skmk (
         nama_jenazah,
         jenis_kelamin,
