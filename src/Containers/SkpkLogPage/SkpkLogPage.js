@@ -1,17 +1,24 @@
-import { Button, Col, Input, Row, Space, Table, DatePicker } from 'antd';
+import { Col, Input, Row, Space, Table, DatePicker } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { deleteSkpkData, getSkpkDetail, getSkpkLogs } from '../../supabase';
 import moment from 'moment';
 import { useHistory } from 'react-router';
-import { PlusOutlined, EyeFilled, DeleteFilled } from '@ant-design/icons';
+import { PlusOutlined, EyeFilled, DeleteFilled, WarningOutlined, DownloadOutlined } from '@ant-design/icons';
 import './SkpkLogPage.css';
+import Modal from 'antd/lib/modal/Modal';
+import { Button } from '@material-ui/core';
+import { exportSkpkLogByDate } from '../../exporter';
 
 const SkpkLogPage = () => {
   const { Search } = Input;
+  const { RangePicker } = DatePicker;
 
   const [searchText, setSearchText] = useState('');
   const [searchDate, setSearchDate] = useState(null);
   const [refresh, setRefresh] = useState(0);
+  const [showModal, setShowModal] = useState(false);
+  const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null)
 
   const stringDiff = (a, b) => a.localeCompare(b, 'en', { numeric: true });
 
@@ -19,6 +26,12 @@ const SkpkLogPage = () => {
   const [skpkData, setSkpkData] = useState([]);
 
   const history = useHistory();
+
+  const handleExportData = async () => {
+    const sortedSkpkLogs = await exportSkpkLogByDate(startDate, endDate);
+    console.log('sortedSkpkLogs:', sortedSkpkLogs);
+    setShowModal(false)
+  }
 
   const handleRedirect = async (surat_skpk_id) => {
     const fetchedSkpkDetail = await getSkpkDetail(surat_skpk_id);
@@ -235,9 +248,47 @@ const SkpkLogPage = () => {
     }
   ]
 
-  return (
-    <div style={{margin: '120px 20px'}}>
-      <h1>Detail Surat Keterangan Penyebab Kematian (SKPK)</h1>
+  const renderExportModal = () => {
+    return (
+      <Modal
+        title='Export Excel'
+        visible={showModal}
+        onCancel={() => setShowModal(false)}
+        footer={[
+          <Button
+            variant="contained"
+            size="large"
+            style={{ backgroundColor: '#F6B931'}}
+            onClick={() => handleExportData()}  
+          >
+            Export
+          </Button>
+        ]}
+      >
+        <p>Tanggal Awal</p>
+        <Row>
+          <Col span={24}>
+            <RangePicker
+              value={[startDate, endDate]}
+              onChange={(value) => { setStartDate(value[0]); setEndDate(value[1])}}
+            />
+          </Col>
+        </Row>
+        <br/>
+        <Row gutter={16}>
+          <Col span={2}>
+            <WarningOutlined style={{fontSize: '24px', color: '#CD2733'}}/>
+          </Col>
+          <Col span={20}>
+            Harap bersabar menunggu hingga proses download selesai dan jangan menutup browser anda!
+          </Col>
+        </Row>
+      </Modal>
+    )
+  }
+
+  const renderTableMenu = () => {
+    return (
       <Row>
         <Col span={6}>
         <p style={{margin: 0, color: '#9F9F9F'}}>FILTER DATA BY MONTH</p>
@@ -247,8 +298,8 @@ const SkpkLogPage = () => {
             style={{width: '100%'}}
           />
         </Col>
-        <Col span={5}></Col>
-        <Col span={6}>
+        <Col span={3}></Col>
+        <Col span={4}>
           <div style={{
             float: 'right',
             padding: '24px 40px',
@@ -266,6 +317,24 @@ const SkpkLogPage = () => {
             </Row>
           </div>
         </Col>
+        <Col span={4}>
+          <div style={{
+            float: 'right',
+            padding: '24px 40px',
+            cursor: 'pointer'
+          }}
+            onClick={() => setShowModal(true)}
+          >
+            <Row>
+              <Col>
+                <DownloadOutlined style={{color: '#1D914A', fontSize: '24px', marginRight: '4px'}}/>
+              </Col>
+              <Col>
+                <h3 style={{textDecoration: 'underline'}}>EXPORT DATA</h3>
+              </Col>
+            </Row>
+          </div>
+        </Col>
         <Col span={6}>
           <p style={{margin: 0, color: '#9F9F9F'}}>SEARCH</p>
           <Search
@@ -274,7 +343,11 @@ const SkpkLogPage = () => {
           />
         </Col>
       </Row>
-      <br/>
+    )
+  }
+
+  const renderTableContent = () => {
+    return (
       <Row>
         <Col span={24}>
           <Table
@@ -286,6 +359,16 @@ const SkpkLogPage = () => {
           />
         </Col>
       </Row>
+    )
+  }
+
+  return (
+    <div style={{margin: '120px 20px'}}>
+      <h1>Detail Surat Keterangan Penyebab Kematian (SKPK)</h1>
+      {renderTableMenu()}
+      <br/>
+      {renderTableContent()}
+      {renderExportModal()}
     </div>
   )
 }

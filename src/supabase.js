@@ -600,3 +600,11 @@ export const getSkmkLogsSortedByDate = async () => {
   
   return skmkData;
 }
+
+export const getSkpkLogsSortedByDate = async () => {
+  const { data: skpkData } = await supabase
+    .from('surat_skpk_sorted_by_date')
+    .select();
+  
+  return skpkData;
+}

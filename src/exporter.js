@@ -1,18 +1,10 @@
-import { getSkmkLogsSortedByDate } from "./supabase"
+import { getSkmkLogsSortedByDate, getSkpkLogsSortedByDate } from "./supabase"
 import moment from 'moment';
 
 import * as ExcelJS from "exceljs";
 var FileSaver = require('file-saver');
 
-export const exportSkmkLogByDate = async (startDate, endDate) => {
-  console.log({startDate, endDate})
-  const skmkLogsSortedByDate = await getSkmkLogsSortedByDate();
-  const filteredLogsByDateRange = skmkLogsSortedByDate.filter(log => {
-    const { tanggal_meninggal } = log;
-    return moment(tanggal_meninggal).isAfter(startDate) &&
-      moment(tanggal_meninggal).isBefore(endDate);
-  })
-
+const createLogWorkbook = (logs, type) => {
   const workbook = new ExcelJS.Workbook();
 
   workbook.creator = 'admin';
@@ -84,11 +76,11 @@ export const exportSkmkLogByDate = async (startDate, endDate) => {
   worksheet.addRow(columnHeaders);
   worksheet.addRow(columnHeaders);
 
-  filteredLogsByDateRange.forEach((log, idx) => {
+  logs.forEach((log, idx) => {
     worksheet.addRow({idx, ...log});
   });
 
-  worksheet.mergeCells('A1:N1'); worksheet.getCell('A1').value = 'Register SKMK';
+  worksheet.mergeCells('A1:N1'); worksheet.getCell('A1').value = `Register ${type}`;
 
   worksheet.mergeCells('A2:A3');
   worksheet.mergeCells('B2:B3');
@@ -115,11 +107,40 @@ export const exportSkmkLogByDate = async (startDate, endDate) => {
     }
   };
 
-  //await workbook.xlsx.writeBuffer('skmk-log');
+  return workbook;
+}
+
+export const exportSkmkLogByDate = async (startDate, endDate) => {
+  const skmkLogsSortedByDate = await getSkmkLogsSortedByDate();
+  const filteredLogsByDateRange = skmkLogsSortedByDate.filter(log => {
+    const { tanggal_meninggal } = log;
+    return moment(tanggal_meninggal).isAfter(startDate) &&
+      moment(tanggal_meninggal).isBefore(endDate);
+  })
+
+  const workbook = createLogWorkbook(filteredLogsByDateRange, 'SKMK');
 
   await workbook.xlsx.writeBuffer().then(function (data) {
       var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
       FileSaver.saveAs(blob, 'skmk-log.xlsx');
+  });
+
+  return filteredLogsByDateRange;
+}
+
+export const exportSkpkLogByDate = async (startDate, endDate) => {
+  const skpkLogsSortedByDate = await getSkpkLogsSortedByDate();
+  const filteredLogsByDateRange = skpkLogsSortedByDate.filter(log => {
+    const { tanggal_meninggal } = log;
+    return moment(tanggal_meninggal).isAfter(startDate) &&
+      moment(tanggal_meninggal).isBefore(endDate);
+  })
+
+  const workbook = createLogWorkbook(filteredLogsByDateRange, 'SKPK');
+
+  await workbook.xlsx.writeBuffer().then(function (data) {
+      var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
+      FileSaver.saveAs(blob, 'skpk-log.xlsx');
   });
 
   return filteredLogsByDateRange;
