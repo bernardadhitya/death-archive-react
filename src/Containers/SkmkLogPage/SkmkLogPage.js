@@ -1,17 +1,21 @@
-import { Button, Col, DatePicker, Input, Row, Space, Table } from 'antd';
+import { Col, DatePicker, Input, Row, Space, Table } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { deleteSkmkData, getSkmkDetail, getSkmkLogs } from '../../supabase';
 import moment from 'moment';
 import { useHistory } from 'react-router';
-import { PlusOutlined, EyeFilled, DeleteFilled } from '@ant-design/icons';
+import { PlusOutlined, EyeFilled, DeleteFilled, WarningOutlined, DownloadOutlined } from '@ant-design/icons';
 import './SkmkLogPage.css';
+import Modal from 'antd/lib/modal/Modal';
+import { Button } from '@material-ui/core';
 
 const SkmkLogPage = () => {
   const { Search } = Input;
+  const { RangePicker } = DatePicker;
 
   const [searchText, setSearchText] = useState('');
   const [searchDate, setSearchDate] = useState(null);
   const [refresh, setRefresh] = useState(0);
+  const [showModal, setShowModal] = useState(false);
 
   const [allSkmkData, setAllSkmkData] = useState([]);
   const [skmkData, setSkmkData] = useState([]);
@@ -19,6 +23,11 @@ const SkmkLogPage = () => {
   const stringDiff = (a, b) => a.localeCompare(b, 'en', { numeric: true });
 
   const history = useHistory();
+
+  const handleExportData = () => {
+    console.log('triggered');
+    setShowModal(false)
+  }
 
   const handleRedirect = async(surat_skmk_id) => {
     const fetchedSkmkDetail = await getSkmkDetail(surat_skmk_id);
@@ -233,9 +242,44 @@ const SkmkLogPage = () => {
     }
   ]
 
-  return (
-    <div style={{margin: '120px 20px'}}>
-      <h1>Database Surat Keterangan Melapor Kematian (SKMK)</h1>
+  const renderExportModal = () => {
+    return (
+      <Modal
+        title='Export Excel'
+        visible={showModal}
+        onCancel={() => setShowModal(false)}
+        footer={[
+          <Button
+            variant="contained"
+            size="large"
+            style={{ backgroundColor: '#F6B931'}}
+            onClick={() => handleExportData()}  
+          >
+            Export
+          </Button>
+        ]}
+      >
+        <p>Tanggal Awal</p>
+        <Row>
+          <Col span={24}>
+            <RangePicker />
+          </Col>
+        </Row>
+        <br/>
+        <Row gutter={16}>
+          <Col span={2}>
+            <WarningOutlined style={{fontSize: '24px', color: '#CD2733'}}/>
+          </Col>
+          <Col span={20}>
+            Harap bersabar menunggu hingga proses download selesai dan jangan menutup browser anda!
+          </Col>
+        </Row>
+      </Modal>
+    )
+  }
+
+  const renderTableMenu = () => {
+    return (
       <Row>
         <Col span={6}>
         <p style={{margin: 0, color: '#9F9F9F'}}>FILTER DATA BY MONTH</p>
@@ -245,8 +289,8 @@ const SkmkLogPage = () => {
             style={{width: '100%'}}
           />
         </Col>
-        <Col span={5}></Col>
-        <Col span={6}>
+        <Col span={3}></Col>
+        <Col span={4}>
           <div style={{
             float: 'right',
             padding: '24px 40px',
@@ -264,6 +308,24 @@ const SkmkLogPage = () => {
             </Row>
           </div>
         </Col>
+        <Col span={4}>
+          <div style={{
+            float: 'right',
+            padding: '24px 40px',
+            cursor: 'pointer'
+          }}
+            onClick={() => setShowModal(true)}
+          >
+            <Row>
+              <Col>
+                <DownloadOutlined style={{color: '#1D914A', fontSize: '24px', marginRight: '4px'}}/>
+              </Col>
+              <Col>
+                <h3 style={{textDecoration: 'underline'}}>EXPORT DATA</h3>
+              </Col>
+            </Row>
+          </div>
+        </Col>
         <Col span={6}>
           <p style={{margin: 0, color: '#9F9F9F'}}>SEARCH</p>
           <Search
@@ -272,7 +334,11 @@ const SkmkLogPage = () => {
           />
         </Col>
       </Row>
-      <br/>
+    )
+  }
+
+  const renderTableContent = () => {
+    return (
       <Row>
         <Col span={24}>
           <Table
@@ -284,6 +350,16 @@ const SkmkLogPage = () => {
           />
         </Col>
       </Row>
+    )
+  }
+
+  return (
+    <div style={{margin: '120px 20px'}}>
+      <h1>Database Surat Keterangan Melapor Kematian (SKMK)</h1>
+      {renderTableMenu()}
+      <br/>
+      {renderTableContent()}
+      {renderExportModal()}
     </div>
   )
 }
