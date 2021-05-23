@@ -592,3 +592,19 @@ export const deleteSkpkData = async (surat_skpk_id) => {
   
   return { deletedSurat, deletedJenazah };
 }
+
+export const getSkmkLogsSortedByDate = async () => {
+  const { data: skmkData } = await supabase
+    .from('surat_skmk_sorted_by_date')
+    .select();
+  
+  return skmkData;
+}
+
+export const getSkpkLogsSortedByDate = async () => {
+  const { data: skpkData } = await supabase
+    .from('surat_skpk_sorted_by_date')
+    .select();
+  
+  return skpkData;
+}
