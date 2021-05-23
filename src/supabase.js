@@ -377,6 +377,7 @@ export const getSkmkDetail = async (surat_skmk_id) => {
         alamat_kelurahan,
         tanggal_meninggal,
         waktu_meninggal,
+        tempat_meninggal,
         lama_dirawat,
         ktp
       ),

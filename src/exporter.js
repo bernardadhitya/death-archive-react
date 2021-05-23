@@ -1,7 +1,7 @@
 import { getSkmkLogsSortedByDate, getSkpkLogsSortedByDate } from './supabase';
 import moment from 'moment';
 import * as ExcelJS from 'exceljs';
-import { AlignmentType, Document, Header, Packer, Paragraph, TextRun, UnderlineType } from 'docx';
+import { AlignmentType, Document, Footer, Header, Packer, Paragraph, TextRun, UnderlineType } from 'docx';
 
 var FileSaver = require('file-saver');
 
@@ -650,11 +650,538 @@ const createSkpkLogDocs = (log) => {
   return doc
 }
 
+const createSkmkLogDocs = (log) => {
+  const {
+    nama_pembuat_surat: namaPembuatSurat,
+    nomor_surat: nomorSurat,
+    tanggal_surat: tanggalSurat,
+    nama_penandatangan: namaPenandatangan,
+    nomor_izin_pegawai: nomorIzinPegawai,
+    jenazah_skmk: {
+      nama_jenazah: namaJenazah,
+      tempat_lahir: tempatLahirJenazah,
+      tanggal_lahir: tanggalLahirJenazah,
+      umur_tahun: umurTahunJenazah,
+      umur_bulan: umurBulanJenazah,
+      pekerjaan: pekerjaanJenazah,
+      alamat: alamatJalanJenazah,
+      tanggal_meninggal: tanggalMeninggalJenazah,
+      waktu_meninggal: waktuMeninggalJenazah,
+      tempat_meninggal: tempatMeninggalJenazah,
+      lama_dirawat: nilaiLamaDirawatJenazah,
+      ktp: nomorKtpJenazah
+    },
+    pelapor_skmk: {
+      nama_pelapor: namaPelapor,
+      tempat_lahir: tempatLahirPelapor,
+      tanggal_lahir: tanggalLahirPelapor,
+      pekerjaan: pekerjaanPelapor,
+      alamat: alamatJalanPelapor,
+      hubungan: hubunganPelapor,
+      ktp: nomorKtpPelapor
+    },
+    diagnosa_skmk_list: diagnosaSkmkList
+  } = log;
+
+  let image = new Image();
+  image.src = './Assets/images/kop-surat.png';
+
+  return new Document({
+    sections: [{
+      properties: {},
+      headers: {
+        default: new Header({
+          children: [
+            new Paragraph({
+              alignment: AlignmentType.CENTER,
+              children: [
+                new TextRun(
+                  {
+                    text: 'PEMERINTAH DAERAH KHUSUS IBUKOTA JAKARTA',
+                    font: 'Times New Roman',
+                    bold: true,
+                    size: 18,
+                  }
+                )
+              ]}
+            ),
+            new Paragraph({
+              alignment: AlignmentType.CENTER,
+              children: [
+                new TextRun(
+                  {
+                    text: 'SUKU DINAS KESEHATAN KOTA ADMINISTRASI JAKARTA BARAT',
+                    font: 'Times New Roman',
+                    bold: true,
+                    size: 18,
+                  }
+                )
+              ]}
+            ),
+            new Paragraph({
+              alignment: AlignmentType.CENTER,
+              children: [
+                new TextRun(
+                  {
+                    text: 'PUSKESMAS KECAMATAN KALIDERES',
+                    font: 'Times New Roman',
+                    bold: true,
+                    size: 32,
+                  }
+                )
+              ]}
+            ),
+            new Paragraph({
+              alignment: AlignmentType.CENTER,
+              children: [
+                new TextRun(
+                  {
+                    text: 'JL. TANJUNG PURA RAYA RT. 006 / 05 KELURAHAN PEGADUNGAN KECAMATAN KALIDERES',
+                    font: 'Times New Roman',
+                    bold: true,
+                    size: 16,
+                  }
+                )
+              ]}
+            ),
+            new Paragraph({
+              alignment: AlignmentType.CENTER,
+              children: [
+                new TextRun(
+                  {
+                    text: 'TELP. (021)-54313154 JAKARTA',
+                    font: 'Times New Roman',
+                    bold: true,
+                    size: 16,
+                  }
+                )
+              ]}
+            ),
+          ]
+        })
+      },
+      children: [
+        new Paragraph({ text: '' }),
+        new Paragraph({ text: '' }),
+        new Paragraph({ text: '' }),
+        new Paragraph({
+          alignment: AlignmentType.CENTER,
+          children: [
+            new TextRun(
+              {
+                text: 'SURAT KETERANGAN MELAPOR KEMATIAN (SKMK)',
+                font: 'Times New Roman',
+                bold: true,
+                size: 26,
+                underline: {
+                  type: UnderlineType.SINGLE,
+                  color: '000000'
+                },
+              }
+            )
+          ]}
+        ),
+        new Paragraph({
+          alignment: AlignmentType.CENTER,
+          children: [
+            new TextRun(
+              {
+                text: `Nomor : ${nomorSurat}`,
+                font: `Times New Roman`,
+                size: 22
+              }
+            )
+          ]
+        }),
+        new Paragraph({ text: `` }),
+        new Paragraph({
+          alignment: AlignmentType.LEFT,
+          children: [
+            new TextRun(
+              {
+                text: `\tYang bertandatangan di bawah ini Kepala Puskesmas Kecamatan Kalideres Kota Administrasi Jakarta Barat telah menerima laporan dari : `,
+                font: `Times New Roman`,
+                size: 22
+              }
+            )
+          ],
+          spacing: {
+            line: 300
+          },
+        }),
+        new Paragraph({ text: `` }),
+        new Paragraph({
+          alignment: AlignmentType.LEFT,
+          children: [
+            new TextRun(
+              {
+                text: `\tNama 			: ${namaPelapor}`,
+                font: `Times New Roman`,
+                size: 22
+              }
+            )
+          ],
+        }),
+        new Paragraph({
+          alignment: AlignmentType.LEFT,
+          children: [
+            new TextRun(
+              {
+                text: `\tTempat/Tgl. Lahir 	: ${tempatLahirPelapor}, ${tanggalLahirPelapor}`,
+                font: `Times New Roman`,
+                size: 22,
+                bold: true
+              }
+            )
+          ]
+        }),
+        new Paragraph({
+          alignment: AlignmentType.LEFT,
+          children: [
+            new TextRun(
+              {
+                text: `\tPekerjaan 		: ${pekerjaanPelapor}`,
+                font: `Times New Roman`,
+                size: 22,
+                
+              }
+            )
+          ]
+        }),
+        new Paragraph({
+          alignment: AlignmentType.LEFT,
+          children: [
+            new TextRun(
+              {
+                text: `\tAlamat 			: ${alamatJalanPelapor}`,
+                font: `Times New Roman`,
+                size: 22,
+                
+              }
+            )
+          ]
+        }),
+        new Paragraph({ text: "" }),
+        new Paragraph({
+          alignment: AlignmentType.LEFT,
+          children: [
+            new TextRun(
+              {
+                text: `\tNomor KTP 		: ${nomorKtpPelapor}`,
+                font: `Times New Roman`,
+                size: 22,
+                
+              }
+            )
+          ]
+        }),
+        new Paragraph({
+          alignment: AlignmentType.LEFT,
+          children: [
+            new TextRun(
+              {
+                text: `\tHubungan dengan 	: ${hubunganPelapor}`,
+                font: `Times New Roman`,
+                size: 22,
+                
+              }
+            )
+          ]
+        }),
+        new Paragraph({
+          alignment: AlignmentType.LEFT,
+          children: [
+            new TextRun(
+              {
+                text: `\tMendiang`,
+                font: `Times New Roman`,
+                size: 22,
+                
+              }
+            )
+          ]
+        }),
+        new Paragraph({
+          alignment: AlignmentType.LEFT,
+          children: [
+            new TextRun(
+              {
+                text:  `Atas kematian seseorang, sebagai berikut :`,
+                font: `Times New Roman`,
+                size: 22,
+              }
+            )
+          ],
+          spacing: {
+            after: 200
+          },
+        }),
+        new Paragraph({
+          alignment: AlignmentType.LEFT,
+          children: [
+            new TextRun(
+              {
+                text: `\tNama 			: ${namaJenazah}`,
+                font: `Times New Roman`,
+                size: 22,
+                
+              }
+            )
+          ]
+        }),
+        new Paragraph({
+          alignment: AlignmentType.LEFT,
+          children: [
+            new TextRun(
+              {
+                text: `\tTempat/Tgl. Lahir 	: ${tempatLahirJenazah}, ${tanggalLahirJenazah}`,
+                font: `Times New Roman`,
+                size: 22,
+                
+              }
+            )
+          ]
+        }),
+        new Paragraph({
+          alignment: AlignmentType.LEFT,
+          children: [
+            new TextRun(
+              {
+                text: `\tPekerjaan 		: ${pekerjaanJenazah}`,
+                font: `Times New Roman`,
+                size: 22,
+                
+              }
+            )
+          ]
+        }),
+        new Paragraph({
+          alignment: AlignmentType.LEFT,
+          children: [
+            new TextRun(
+              {
+                text: `\tAlamat 			: ${alamatJalanJenazah}`,
+                font: `Times New Roman`,
+                size: 22,
+                
+              }
+            )
+          ]
+        }),
+        new Paragraph({ text: "" }),
+        new Paragraph({
+          alignment: AlignmentType.LEFT,
+          children: [
+            new TextRun(
+              {
+                text: `\tNomor KTP 		: ${nomorKtpJenazah}`,
+                font: `Times New Roman`,
+                size: 22,
+              }
+            )
+          ]
+        }),
+        new Paragraph({
+          alignment: AlignmentType.LEFT,
+          children: [
+            new TextRun(
+              {
+                text: `\tTgl. Meninggal Dunia	: ${tanggalMeninggalJenazah}`,
+                font: `Times New Roman`,
+                size: 22,
+              }
+            )
+          ]
+        }),
+        new Paragraph({
+          alignment: AlignmentType.LEFT,
+          children: [
+            new TextRun(
+              {
+                text: `\tWaktu Meninggal 	: ${waktuMeninggalJenazah}`,
+                font: `Times New Roman`,
+                size: 22,
+              }
+            )
+          ]
+        }),
+        new Paragraph({
+          alignment: AlignmentType.LEFT,
+          children: [
+            new TextRun(
+              {
+                text: `\tTempat Meninggal 	: ${tempatMeninggalJenazah}`,
+                font: `Times New Roman`,
+                size: 22,
+              }
+            )
+          ]
+        }),
+        new Paragraph({ text: "" }),
+        new Paragraph({
+          alignment: AlignmentType.LEFT,
+          children: [
+            new TextRun(
+              {
+                text: `Sehubungan dengan jenazah telah dikuburkan maka tidak dapat diterbitkan Surat Keterangan Penyebab Kematian (SKPK), sebagai pengganti diterbitkan Surat Keterangan Melapor Kematian (SKMK) berdasarkan surat pernyataan dan kelengkapan administrasi lainnya yang diserahkan oleh keluarga.`,
+                font: `Times New Roman`,
+                size: 22,
+              }
+            )
+          ]
+        }),
+        new Paragraph({ text: "" }),
+        new Paragraph({
+          alignment: AlignmentType.CENTER,
+          children: [
+            new TextRun(
+              {
+                text: `Demikian surat keterangan ini, untuk dipergunakan sebagaimana mestinya.`,
+                font: `Times New Roman`,
+                size: 22,
+              }
+            )
+          ]
+        }),
+        new Paragraph({ text: "" }),
+        new Paragraph({ text: "" }),
+        new Paragraph({
+          alignment: AlignmentType.RIGHT,
+          children: [
+            new TextRun(
+              {
+                text: `Jakarta, ${tanggalSurat}`,
+                font: `Times New Roman`,
+                size: 22,
+              }
+            )
+          ]
+        }),
+        new Paragraph({
+          alignment: AlignmentType.RIGHT,
+          children: [
+            new TextRun(
+              {
+                text: `An. KEPALA PUSKESMAS KEC.KALIDERES`,
+                font: `Times New Roman`,
+                size: 22,
+              }
+            )
+          ]
+        }),
+        new Paragraph({
+          alignment: AlignmentType.RIGHT,
+          children: [
+            new TextRun(
+              {
+                text: `KOTA ADMINISTRASI JAKARTA BARAT,`,
+                font: `Times New Roman`,
+                size: 22,
+              }
+            )
+          ]
+        }),
+        new Paragraph({
+          alignment: AlignmentType.RIGHT,
+          children: [
+            new TextRun(
+              {
+                text: `Ka, SATPEL UKP,`,
+                font: `Times New Roman`,
+                size: 22,
+              }
+            )
+          ]
+        }),
+        new Paragraph({ text: "" }),
+        new Paragraph({ text: "" }),
+        new Paragraph({ text: "" }),
+        new Paragraph({ text: "" }),
+        new Paragraph({
+          alignment: AlignmentType.RIGHT,
+          children: [
+            new TextRun(
+              {
+                text: `${namaPenandatangan}`,
+                font: `Times New Roman`,
+                size: 22,
+              }
+            )
+          ]
+        }),
+        new Paragraph({
+          alignment: AlignmentType.RIGHT,
+          children: [
+            new TextRun(
+              {
+                text: `NIP. ${nomorIzinPegawai}`,
+                font: `Times New Roman`,
+                size: 22,
+              }
+            )
+          ]
+        })
+      ],
+      footers: {
+        default: new Footer({
+          children: [
+            new Paragraph({
+              alignment: AlignmentType.LEFT,
+              children: [
+                new TextRun(
+                  {
+                    text: `Kepada Yth.`,
+                    font: `Times New Roman`,
+                    size: 22,
+                  }
+                )
+              ]
+            }),
+            new Paragraph({
+              alignment: AlignmentType.LEFT,
+              children: [
+                new TextRun(
+                  {
+                    text: `1.	Kepala Dinas Kesehatan Provinsi DKI Jakarta`,
+                    font: `Times New Roman`,
+                    size: 22,
+                  }
+                )
+              ]
+            }),
+            new Paragraph({
+              alignment: AlignmentType.LEFT,
+              children: [
+                new TextRun(
+                  {
+                    text: `2.	Kepala Sudin Kesehatan Kota Administrasi Jakarta Barat`,
+                    font: `Times New Roman`,
+                    size: 22,
+                  }
+                )
+              ]
+            })
+          ]
+        })
+      }
+    }]
+  });
+}
+
 export const exportSkpkDetail = async (skpkDetailData) => {
   const doc = createSkpkLogDocs(skpkDetailData)
 
   Packer.toBuffer(doc).then((buffer) => {
     const blob = new Blob([buffer], {type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'})
     FileSaver.saveAs(blob, 'skpk');
+  })
+}
+
+export const exportSkmkDetail = async (skmkDetailData) => {
+  const doc = createSkmkLogDocs(skmkDetailData)
+
+  Packer.toBuffer(doc).then((buffer) => {
+    const blob = new Blob([buffer], {type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'})
+    FileSaver.saveAs(blob, 'skmk');
   })
 }
