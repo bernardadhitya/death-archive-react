@@ -1,9 +1,12 @@
 import { Button } from '@material-ui/core';
+import { Col, Row } from 'antd';
 import React from 'react';
 import { useHistory, useLocation } from 'react-router';
 import SkpkDataDiagnosaDisplay from '../../Components/SkpkDetailCards/SkpkDataDiagnosaDisplay';
 import SkpkDataJenazahDisplay from '../../Components/SkpkDetailCards/SkpkDataJenazahDisplay';
 import SkpkDataSuratDisplay from '../../Components/SkpkDetailCards/SkpkDataSuratDisplay';
+import { DownloadOutlined } from '@ant-design/icons';
+import { exportSkpkDetail } from '../../exporter';
 
 const SkpkDetailPage = () => {
 
@@ -97,6 +100,50 @@ const SkpkDetailPage = () => {
     )
   }
 
+  const handleExportDetail = async () => {
+    await exportSkpkDetail(location.state[0]);
+  }
+
+  const renderActionButtons = () => {
+    return (
+      <Row>
+        <Col span={12}>
+          <Button
+            size='large'
+            style={{backgroundColor: '#F6B931', float: 'left', color: '#000000'}}
+            onClick={async () => {
+              history.push('/skpk/rekap')
+            }}
+          >
+            KEMBALI
+          </Button>
+        </Col>
+        <Col span={12}>
+          <div style={{float: 'right'}}>
+            <Button
+              size='large'
+              style={{backgroundColor: '#3990B2', float: 'left', color: '#FFFFFF'}}
+              onClick={() => handleExportDetail()}
+            >
+              <Row>
+                <Col>
+                  <DownloadOutlined style={{
+                    color: '#FFFFFF',
+                    fontSize: '24px',
+                    marginRight: '4px'
+                  }}/>
+                </Col>
+                <Col>
+                  SIMPAN & EKSPOR
+                </Col>
+              </Row>
+            </Button>
+          </div>
+        </Col>
+      </Row>
+    )
+  }
+
   const history = useHistory();
 
   return (
@@ -109,15 +156,7 @@ const SkpkDetailPage = () => {
       <br/><br/>
       {renderDataDiagnosa()}
       <br/><br/>
-      <Button
-        size='large'
-        style={{backgroundColor: '#3990B2', float: 'left', color: '#FFFFFF'}}
-        onClick={async () => {
-          history.push('/skpk/rekap');
-        }}
-      >
-        Kembali
-      </Button>
+      {renderActionButtons()}
       <br/><br/><br/><br/>
     </div>
   )

@@ -1,7 +1,8 @@
-import { getSkmkLogsSortedByDate, getSkpkLogsSortedByDate } from "./supabase"
+import { getSkmkLogsSortedByDate, getSkpkLogsSortedByDate } from './supabase';
 import moment from 'moment';
+import * as ExcelJS from 'exceljs';
+import { AlignmentType, Document, Header, Packer, Paragraph, TextRun, UnderlineType } from 'docx';
 
-import * as ExcelJS from "exceljs";
 var FileSaver = require('file-saver');
 
 const createLogWorkbook = (logs, type) => {
@@ -80,7 +81,7 @@ const createLogWorkbook = (logs, type) => {
     worksheet.addRow({idx, ...log});
   });
 
-  worksheet.mergeCells('A1:N1'); worksheet.getCell('A1').value = `Register ${type}`;
+  worksheet.mergeCells('A1:N1'); worksheet.getCell('A1').value = 'Register ${type}';
 
   worksheet.mergeCells('A2:A3');
   worksheet.mergeCells('B2:B3');
@@ -94,16 +95,16 @@ const createLogWorkbook = (logs, type) => {
   worksheet.mergeCells('N2:N3');
 
   const cellName = (col, row) => {
-    return `${String.fromCharCode(65 + col)}${row + 1}`
+    return '${String.fromCharCode(65 + col)}${row + 1}'
   }
 
   worksheet.getCell('A1').font = { size: 14 }
 
   for (let i=0; i < worksheet.columnCount; i++) {
     for (let j=0; j < worksheet.rowCount; j++) {
-      worksheet.getCell(`${cellName(i, j)}`).alignment = alignmentStyle;
+      worksheet.getCell('${cellName(i, j)}').alignment = alignmentStyle;
       if (j+1 === 1) continue;
-      worksheet.getCell(`${cellName(i, j)}`).border = borderStyle;
+      worksheet.getCell('${cellName(i, j)}').border = borderStyle;
     }
   };
 
@@ -121,7 +122,7 @@ export const exportSkmkLogByDate = async (startDate, endDate) => {
   const workbook = createLogWorkbook(filteredLogsByDateRange, 'SKMK');
 
   await workbook.xlsx.writeBuffer().then(function (data) {
-      var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
+      var blob = new Blob([data], {type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'});
       FileSaver.saveAs(blob, 'skmk-log.xlsx');
   });
 
@@ -139,9 +140,521 @@ export const exportSkpkLogByDate = async (startDate, endDate) => {
   const workbook = createLogWorkbook(filteredLogsByDateRange, 'SKPK');
 
   await workbook.xlsx.writeBuffer().then(function (data) {
-      var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
+      var blob = new Blob([data], {type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'});
+      console.log(data);
+      console.log(blob);
       FileSaver.saveAs(blob, 'skpk-log.xlsx');
   });
 
   return filteredLogsByDateRange;
+}
+
+const createSkpkLogDocs = (log) => {
+  const {
+    nama_pembuat_surat: namaPembuatSurat,
+    nomor_surat: nomorSurat,
+    tanggal_surat: tanggalSurat,
+    nama_rs_pkm: namaRsPkm,
+    kode_rs_pkm: kodeRsPkm,
+    no_urut: nomorUrutSurat,
+    no_rekam_medis: nomorRekamMedis,
+    nama_penerima: namaPenerima,
+    hubungan: hubunganPenerima,
+    nama_penandatangan: namaPenandatangan,
+    jenazah_skpk : {
+      nama_jenazah: namaJenazah,
+      jenis_kelamin: jenisKelaminJenazah,
+      tempat_lahir: tempatLahirJenazah,
+      tanggal_lahir: tanggalLahirJenazah,
+      umur_tahun: umurTahunJenazah,
+      umur_bulan: umurBulanJenazah,
+      pendidikan: pendidikanJenazah,
+      alamat: alamatJalanJenazah,
+      status_penduduk: statusKependudukanJenazah,
+      tanggal_meninggal: tanggalMeninggalJenazah,
+      waktu_meninggal: waktuMeninggalJenazah,
+      lahir_mati: lahirMatiJenazah,
+      tempat_meninggal: tempatMeninggalJenazah,
+      lama_dirawat: nilaiLamaDirawatJenazah,
+      dasar_diagnosis: dasarDiagnosaJenazah,
+      rencana_pemulasaran: rencanaPemulasaranJenazah,
+      tanggal_pemulasaran: waktuPemulasaranJenazah,
+      status_wanita: statusWanitaJenazah,
+      ktp: nomorKtpJenazah,
+      pekerjaan: pekerjaanJenazah
+    },
+    diagnosa_skpk_list: diagnosaSkpkList
+  } = log;
+
+  let image = new Image();
+  image.src = './Assets/images/kop-surat.png';
+
+  const doc = new Document({
+    sections: [{
+      properties: {},
+      headers: {
+        default: new Header({
+          children: [
+            new Paragraph({
+              alignment: AlignmentType.CENTER,
+              children: [
+                new TextRun(
+                  {
+                    text: 'PEMERINTAH PROVINSI DAERAH KHUSUS IBUKOTA JAKARTA',
+                    font: 'Roboto',
+                    bold: true,
+                    size: 24,
+                    underline: {
+                      type: UnderlineType.SINGLE,
+                      color: '000000'
+                    },
+                  }
+                )
+              ]}
+            ),
+            new Paragraph({
+              alignment: AlignmentType.CENTER,
+              children: [
+                new TextRun(
+                  {
+                    text: 'DINAS KESEHATAN',
+                    font: 'Roboto',
+                    bold: true,
+                    size: 24,
+                    underline: {
+                      type: UnderlineType.SINGLE,
+                      color: '000000'
+                    },
+                  }
+                )
+              ]}
+            ),
+          ]
+        })
+      },
+      children: [
+        new Paragraph({ text: '' }),
+        new Paragraph({ text: '' }),
+        new Paragraph({ text: '' }),
+        new Paragraph({
+          alignment: AlignmentType.CENTER,
+          children: [
+            new TextRun(
+              {
+                text: 'SURAT KETERANGAN PENYEBAB KEMATIAN',
+                font: 'Roboto',
+                bold: true,
+                size: 24,
+                underline: {
+                  type: UnderlineType.SINGLE,
+                  color: '000000'
+                },
+              }
+            )
+          ]}
+        ),
+        new Paragraph({ text: '' }),
+        new Paragraph({
+          alignment: AlignmentType.LEFT,
+          children: [
+            new TextRun(
+              {
+                text: `No. Surat : ${nomorSurat}`,
+                font: `Roboto`,
+                size: 20
+              }
+            )
+          ]
+        }),
+        new Paragraph({ text: `` }),
+        new Paragraph({
+          alignment: AlignmentType.LEFT,
+          children: [
+            new TextRun(
+              {
+                text: `Bulan/Tahun Kematian : ${tanggalMeninggalJenazah} Nama RS/PKM : ${namaRsPkm} Kode RS/PKM : ${kodeRsPkm}`,
+                font: `Roboto`,
+                size: 20
+              }
+            )
+          ],
+          spacing: {
+            line: 300
+          },
+        }),
+        new Paragraph({ text: `` }),
+        new Paragraph({
+          alignment: AlignmentType.LEFT,
+          children: [
+            new TextRun(
+              {
+                text: `No. Urut Pencatatan Kematian Tiap Bulan : ${nomorUrutSurat}	 No. Rekam Medis : ${nomorRekamMedis}`,
+                font: `Roboto`,
+                size: 20
+              }
+            )
+          ],
+          spacing: {
+            line: 300
+          },
+        }),
+        new Paragraph({ text: `` }),
+        new Paragraph({
+          alignment: AlignmentType.LEFT,
+          children: [
+            new TextRun(
+              {
+                text: `Identitas Jenazah`,
+                font: `Roboto`,
+                size: 20,
+                bold: true
+              }
+            )
+          ]
+        }),
+        new Paragraph({ text: `` }),
+        new Paragraph({
+          alignment: AlignmentType.LEFT,
+          children: [
+            new TextRun(
+              {
+                text: `1.	Nama Lengkap			: ${namaJenazah}`,
+                font: `Roboto`,
+                size: 20,
+                
+              }
+            )
+          ]
+        }),
+        new Paragraph({
+          alignment: AlignmentType.LEFT,
+          children: [
+            new TextRun(
+              {
+                text: `2.	No. Induk Kependudukan	: ${nomorKtpJenazah}`,
+                font: `Roboto`,
+                size: 20,
+                
+              }
+            )
+          ]
+        }),
+        new Paragraph({
+          alignment: AlignmentType.LEFT,
+          children: [
+            new TextRun(
+              {
+                text: `3.	Jenis Kelamin	 		: ${jenisKelaminJenazah}`,
+                font: `Roboto`,
+                size: 20,
+                
+              }
+            )
+          ]
+        }),
+        new Paragraph({
+          alignment: AlignmentType.LEFT,
+          children: [
+            new TextRun(
+              {
+                text: `4.	Tempat/Tanggal Lahir		: ${tempatLahirJenazah}, ${tanggalLahirJenazah}`,
+                font: `Roboto`,
+                size: 20,
+                
+              }
+            )
+          ]
+        }),
+        new Paragraph({
+          alignment: AlignmentType.LEFT,
+          children: [
+            new TextRun(
+              {
+                text: `5.	Pendidikan almarhum/ah	: ${pendidikanJenazah}`,
+                font: `Roboto`,
+                size: 20,
+                
+              }
+            )
+          ]
+        }),
+        new Paragraph({
+          alignment: AlignmentType.LEFT,
+          children: [
+            new TextRun(
+              {
+                text:  `6.	Pekerjaan almarhum/ah 	: ${pekerjaanJenazah}`,
+                font: `Roboto`,
+                size: 20,
+                
+              }
+            )
+          ]
+        }),
+        new Paragraph({
+          alignment: AlignmentType.LEFT,
+          children: [
+            new TextRun(
+              {
+                text: `7.	Alamat Sesuai KTP/KK		: ${alamatJalanJenazah} `,
+                font: `Roboto`,
+                size: 20,
+                
+              }
+            )
+          ]
+        }),
+        new Paragraph({
+          alignment: AlignmentType.LEFT,
+          children: [
+            new TextRun(
+              {
+                text: `8.	Status Kependudukan 		: ${statusKependudukanJenazah}`,
+                font: `Roboto`,
+                size: 20,
+                
+              }
+            )
+          ]
+        }),
+        new Paragraph({ text: `` }),
+        new Paragraph({
+          alignment: AlignmentType.LEFT,
+          children: [
+            new TextRun(
+              {
+                text: `- - - - - - - - - - - - - - - -YANG BERSANGKUTAN DINYATAKAN MENINGGAL DUNIA- - - - - - - - - - - - - - - - `,
+                font: `Roboto`,
+                size: 20,
+                
+              }
+            )
+          ],
+          spacing: {
+            after: 200
+          },
+        }),
+        new Paragraph({
+          alignment: AlignmentType.LEFT,
+          children: [
+            new TextRun(
+              {
+                text: `9.	Waktu Meninggal		: ${tanggalMeninggalJenazah}, ${waktuMeninggalJenazah}`,
+                font: `Roboto`,
+                size: 20,
+                
+              }
+            )
+          ]
+        }),
+        new Paragraph({
+          alignment: AlignmentType.LEFT,
+          children: [
+            new TextRun(
+              {
+                text: `10.	Umur Saat Meninggal 		: 	0	Hari ( < 29 hari )	           Lahir Mati : ${lahirMatiJenazah ? 'Ya' : 'tidak'}`,
+                font: `Roboto`,
+                size: 20,
+              }
+            )
+          ]
+        }),
+        new Paragraph({
+          alignment: AlignmentType.LEFT,
+          children: [
+            new TextRun(
+              {
+                text: `						${umurBulanJenazah}	Bulan ( 29 hari s.d < 5 tahun)`,
+                font: `Roboto`,
+                size: 20,
+              }
+            )
+          ]
+        }),
+        new Paragraph({
+          alignment: AlignmentType.LEFT,
+          children: [
+            new TextRun(
+              {
+                text: `						${umurTahunJenazah}	Tahun ( >= 5 tahun )`,
+                font: `Roboto`,
+                size: 20,
+              }
+            )
+          ]
+        }),
+        new Paragraph({
+          alignment: AlignmentType.LEFT,
+          children: [
+            new TextRun(
+              {
+                text: `11.	Bila yang meninggal wanita umur 10-54 tahun, Almarhumah dalam keadaan: ${statusWanitaJenazah || '-'}`,
+                font: `Roboto`,
+                size: 20,
+              }
+            )
+          ]
+        }),
+        new Paragraph({
+          alignment: AlignmentType.LEFT,
+          children: [
+            new TextRun(
+              {
+                text: `12.	Tempat Meninggal	 	: ${tempatMeninggalJenazah} lama dirawat : ${nilaiLamaDirawatJenazah}`,
+                font: `Roboto`,
+                size: 20,
+              }
+            )
+          ]
+        }),
+        new Paragraph({
+          alignment: AlignmentType.LEFT,
+          children: [
+            new TextRun(
+              {
+                text: `13.	Dasar Diagnosis 		: ${dasarDiagnosaJenazah}`,
+                font: `Roboto`,
+                size: 20,
+              }
+            )
+          ]
+        }),
+        new Paragraph({
+          alignment: AlignmentType.LEFT,
+          children: [
+            new TextRun(
+              {
+                text: `14.	Rencana Pemulasaran 		: ${rencanaPemulasaranJenazah}		`,
+                font: `Roboto`,
+                size: 20,
+              }
+            )
+          ]
+        }),
+        new Paragraph({
+          alignment: AlignmentType.LEFT,
+          children: [
+            new TextRun(
+              {
+                text: `15.	Waktu Pemulasaran		: ${waktuPemulasaranJenazah}`,
+                font: `Roboto`,
+                size: 20,
+              }
+            )
+          ]
+        }),
+        new Paragraph({ text: `` }),
+        new Paragraph({ text: `` }),
+        new Paragraph({ text: `` }),
+        new Paragraph({
+          alignment: AlignmentType.LEFT,
+          children: [
+            new TextRun(
+              {
+                text: `									      Jakarta, ${tanggalSurat}`,
+                font: `Roboto`,
+                size: 20,
+              }
+            )
+          ]
+        }),
+        new Paragraph({
+          alignment: AlignmentType.LEFT,
+          children: [
+            new TextRun(
+              {
+                text: `Pihak Yang Menerima,							Dokter Yang Menerangkan,`,
+                font: `Roboto`,
+                size: 20,
+              }
+            )
+          ]
+        }),
+        new Paragraph({ text: `` }),
+        new Paragraph({ text: `` }),
+        new Paragraph({ text: `` }),
+        new Paragraph({ text: `` }),
+        new Paragraph({ text: `` }),
+        new Paragraph({
+          alignment: AlignmentType.LEFT,
+          children: [
+            new TextRun(
+              {
+                text: `${namaPenerima} `,
+                font: `Roboto`,
+                size: 20,
+                underline: {
+                  type: UnderlineType.SINGLE,
+                  color: `000000`
+                },
+              }
+            ),
+            new TextRun(
+              {
+                text: `\t\t\t\t\t\t\t\t`,
+                font: `Roboto`,
+                size: 20,
+              }
+            ),
+            new TextRun(
+              {
+                text: `${namaPenandatangan}`,
+                font: `Roboto`,
+                size: 20,
+                underline: {
+                  type: UnderlineType.SINGLE,
+                  color: `000000`
+                },
+              }
+            )
+          ]
+        }),
+        new Paragraph({
+          alignment: AlignmentType.LEFT,
+          children: [
+            new TextRun(
+              {
+                text: `${hubunganPenerima} Almarhum/ah`,
+                font: `Roboto`,
+                size: 20,
+                underline: {
+                  type: UnderlineType.SINGLE,
+                  color: `000000`
+                },
+              }
+            ),
+            new TextRun(
+              {
+                text: `\t\t\t\t\t\t\t`,
+                font: `Roboto`,
+                size: 20,
+              }
+            ),
+            new TextRun(
+              {
+                text: `Jabatan & Cap Instansi`,
+                font: `Roboto`,
+                size: 20,
+                underline: {
+                  type: UnderlineType.SINGLE,
+                  color: `000000`
+                },
+              }
+            )
+          ]
+        }),
+      ],
+    }]
+  });
+
+  return doc
+}
+
+export const exportSkpkDetail = async (skpkDetailData) => {
+  const doc = createSkpkLogDocs(skpkDetailData)
+
+  Packer.toBuffer(doc).then((buffer) => {
+    const blob = new Blob([buffer], {type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'})
+    FileSaver.saveAs(blob, 'skpk');
+  })
 }
