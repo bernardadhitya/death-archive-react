@@ -1,11 +1,20 @@
 import { SentimentDissatisfiedOutlined } from '@material-ui/icons';
 import { Card, Col, Input, Row } from 'antd';
-import React, { useState } from 'react';
-import { icdxList } from '../../Constants/icdx';
+import React, { useEffect, useState } from 'react';
+import { getPenyebabKematian } from '../../supabase';
 import DropdownMenu from '../DropdownMenu/DropdownMenu';
 
 const SkmkDataDiagnosa = (props) => {
   const {lamaKematian, setLamaKematian} = props;
+  const [icdxList, setIcdxList] = useState([]);
+  
+  useEffect(() => {
+    const fetchData = async () => {
+      const fetchedIcdxList = await getPenyebabKematian();
+      setIcdxList(fetchedIcdxList);
+    }
+    fetchData();
+  }, []);
 
   const renderDiagnosaForm = (diagnosaList = []) => {
     return diagnosaList.map((item, idx) => {
@@ -30,9 +39,9 @@ const SkmkDataDiagnosa = (props) => {
           <Col span={18}>
             <DropdownMenu
               byIndex
-              list={icdxList.map(icdxItem => `${icdxItem.icdx} - ${icdxItem.penyakit}`)}
+              list={icdxList.map(icdxItem => `${icdxItem.icdx} - ${icdxItem.nama}`)}
               onSelect={(value) => {
-                setNama(icdxList[value].penyakit);
+                setNama(icdxList[value].nama);
                 setIcdx(icdxList[value].icdx)
               }}
             />

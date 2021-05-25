@@ -1,7 +1,6 @@
 import { SentimentDissatisfiedOutlined } from '@material-ui/icons';
 import { Card, Col, Input, Row } from 'antd';
 import React, { useState } from 'react';
-import { icdxList } from '../../Constants/icdx';
 import DropdownMenu from '../DropdownMenu/DropdownMenu';
 
 const SkmkDataDiagnosa = (props) => {
