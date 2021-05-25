@@ -29,7 +29,6 @@ const SkmkLogPage = () => {
 
   const handleExportData = async () => {
     const sortedSkmkLogs = await exportSkmkLogByDate(startDate, endDate);
-    console.log('sortedSkmkLogs:', sortedSkmkLogs);
     setShowModal(false)
   }
 
@@ -137,6 +136,7 @@ const SkmkLogPage = () => {
     const fetchData = async () => {
       if (searchDate === null) {
         setSkmkData(allSkmkData);
+        return;
       }
       const filteredSkmkByTanggalMeninggal = allSkmkData.filter(logs => {
         return moment(logs.tanggal_meninggal).isSame(moment(searchDate), 'month')

@@ -140,6 +140,7 @@ const SkpkLogPage = () => {
     const fetchData = async () => {
       if (searchDate === null) {
         setSkpkData(allSkpkData);
+        return;
       }
       const filteredSkpkByTanggalMeninggal = allSkpkData.filter(logs => {
         return moment(logs.tanggal_meninggal).isSame(moment(searchDate), 'month')
