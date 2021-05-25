@@ -249,13 +249,7 @@ const SkmkFormDisplayPage = () => {
         size='large'
         style={{backgroundColor: '#3990B2', float: 'right', color: '#FFFFFF'}}
         onClick={async () => {
-          const result = await handleSubmitData();
-          if(result === null){
-            window.alert('Data gagal dimasukkan. Mohon memastikan data terisi dengan lengkap dan memastikan tidak memasukkan NIK jenazah yang sudah pernah dimasukkan');
-          } else {
-            window.alert('Data berhasil disimpan!');
-            history.push('/home');
-          }
+          history.push('/skmk/form/submit');
         }}
       >
         Simpan

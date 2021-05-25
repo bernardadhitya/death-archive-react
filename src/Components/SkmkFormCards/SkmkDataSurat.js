@@ -1,5 +1,5 @@
 import { Card, Col, DatePicker, Input, Row } from 'antd';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 const SkmkDataSurat = (props) => {
   const {
@@ -19,11 +19,16 @@ const SkmkDataSurat = (props) => {
   const [bulanSurat, setBulanSurat] = useState(null);
   const [tahunSurat, setTahunSurat] = useState(null);
 
+  console.log(`${nomorUrut}/SKMK-KD/${bulanSurat}/${tahunSurat}`);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setNomorSurat(`${nomorUrut}/SKMK-KD/${bulanSurat}/${tahunSurat}`);
+    }
+    fetchData();
+  }, [bulanSurat, tahunSurat, nomorUrut]);
+
   const renderNomorSuratForm = () => {
-    
-    const handleNomorSurat = () => {
-      setNomorSurat(`${nomorUrut}/SKMK-KD/${bulanSurat}/${tahunSurat}`)
-    };
 
     return (
       <Row gutter={16}>
@@ -33,7 +38,7 @@ const SkmkDataSurat = (props) => {
         <Col span={4}>
           <Input
             value={nomorUrut}
-            onChange={(e) => {setNomorUrut(e.target.value); handleNomorSurat()}}
+            onChange={(e) => setNomorUrut(e.target.value)}
             placeholder='No. Urut'
           />
         </Col>
@@ -43,7 +48,7 @@ const SkmkDataSurat = (props) => {
         <Col span={4}>
           <Input
             value={bulanSurat}
-            onChange={(e) => {setBulanSurat(e.target.value); handleNomorSurat();}}
+            onChange={(e) => setBulanSurat(e.target.value)}
             placeholder='Bulan'
           />
         </Col>
@@ -53,7 +58,7 @@ const SkmkDataSurat = (props) => {
         <Col span={4}>
           <Input
             value={tahunSurat}
-            onChange={(e) => {setTahunSurat(e.target.value); handleNomorSurat();}}
+            onChange={(e) => setTahunSurat(e.target.value)}
             placeholder='Tahun Surat'
           />
         </Col>

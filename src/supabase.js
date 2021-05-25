@@ -8,13 +8,13 @@ const supabase = createClient(url, apiKey);
 const postDiagnosaIbuBayi = async (diagnosaIbuAnakData) => {
   const emptyData = { data: [{ diagnosa_id: null}] };
 
-  const { data: penyebabUtamaBayi } = diagnosaIbuAnakData[0] !== null ?
+  const { data: penyebabUtamaBayi } = !!diagnosaIbuAnakData[0] ?
     await supabase.from('diagnosa').insert(diagnosaIbuAnakData[0]) : emptyData;
-  const { data: penyebabLainnyaBayi } = diagnosaIbuAnakData[1] !== null ?
+  const { data: penyebabLainnyaBayi } = !!diagnosaIbuAnakData[1] ?
     await supabase.from('diagnosa').insert(diagnosaIbuAnakData[1]) : emptyData;
-  const { data: penyebabUtamaIbu } = diagnosaIbuAnakData[2] !== null ?
+  const { data: penyebabUtamaIbu } = !!diagnosaIbuAnakData[2] ?
     await supabase.from('diagnosa').insert(diagnosaIbuAnakData[2]) : emptyData;
-  const { data: penyebabLainnyaIbu } = diagnosaIbuAnakData[3] !== null ?
+  const { data: penyebabLainnyaIbu } = !!diagnosaIbuAnakData[3] ?
     await supabase.from('diagnosa').insert(diagnosaIbuAnakData[3]) : emptyData;
 
   const diagnosaIbuBayi = [
@@ -46,13 +46,13 @@ const postDiagnosaSkmk = async (diagnosaUmumData, diagnosaIbuAnakData, lamaKemat
 
   const emptyData = { data: [{ diagnosa_id: null}] };
 
-  const { data: penyebabLangsung } = diagnosaUmumData[0] !== null ?
+  const { data: penyebabLangsung } = !!diagnosaUmumData[0] ?
     await supabase.from('diagnosa').insert(diagnosaUmumData[0]) : emptyData;
-  const { data: penyebabAntara1 } = diagnosaUmumData[1] !== null ?
+  const { data: penyebabAntara1 } = !!diagnosaUmumData[1] ?
     await supabase.from('diagnosa').insert(diagnosaUmumData[1]) : emptyData;
-  const { data: penyebabAntara2 } = diagnosaUmumData[2] !== null ?
+  const { data: penyebabAntara2 } = !!diagnosaUmumData[2] ?
     await supabase.from('diagnosa').insert(diagnosaUmumData[2]) : emptyData;
-  const { data: penyebabDasar } = diagnosaUmumData[3] !== null ?
+  const { data: penyebabDasar } = !!diagnosaUmumData[3] ?
     await supabase.from('diagnosa').insert(diagnosaUmumData[3]) : emptyData;
 
   const diagnosaUmum = [
@@ -142,6 +142,13 @@ export const createSkmkEntry = async (
   lamaKematian
 ) => {
   
+  console.log(suratSkmkData);
+  console.log(pelaporData);
+  console.log(jenazahData);
+  console.log(diagnosaUmumData);
+  console.log(diagnosaIbuAnakData);
+  console.log(lamaKematian);
+
   const diagnosaEntry = await postDiagnosaSkmk(diagnosaUmumData, diagnosaIbuAnakData, lamaKematian);
   const pelaporEntry = await postPelaporSkmk(pelaporData);
   const jenazahEntry = await postJenazahSkmk(jenazahData);
@@ -162,16 +169,21 @@ const postDiagnosaSkpk = async (diagnosaUmumData, diagnosaIbuAnakData, lamaKemat
 
   const emptyData = { data: [{ diagnosa_id: null}] };
 
-  const { data: penyebabLangsung } = diagnosaUmumData[0] !== null ?
+  const { data: penyebabLangsung } = !!diagnosaUmumData[0] ?
     await supabase.from('diagnosa').insert(diagnosaUmumData[0]) : emptyData;
-  const { data: penyebabAntara1 } = diagnosaUmumData[1] !== null ?
+  console.log('penyebabLangsung:', penyebabLangsung);
+  const { data: penyebabAntara1 } = !!diagnosaUmumData[1] ?
     await supabase.from('diagnosa').insert(diagnosaUmumData[1]) : emptyData;
-  const { data: penyebabAntara2 } = diagnosaUmumData[2] !== null ?
+  console.log('penyebabAntara1:', penyebabAntara1);
+  const { data: penyebabAntara2 } = !!diagnosaUmumData[2] ?
     await supabase.from('diagnosa').insert(diagnosaUmumData[2]) : emptyData;
-  const { data: penyebabDasar } = diagnosaUmumData[3] !== null ?
+  console.log('penyebabAntara2:', penyebabAntara2);
+  const { data: penyebabDasar } = !!diagnosaUmumData[3] ?
     await supabase.from('diagnosa').insert(diagnosaUmumData[3]) : emptyData;
-  const { data: finalUcod } = diagnosaUmumData[4] !== null ?
+  console.log('penyebabDasar:', penyebabDasar);
+  const { data: finalUcod } = !!diagnosaUmumData[4] ?
     await supabase.from('diagnosa').insert(diagnosaUmumData[4]) : emptyData;
+  console.log('finalUcod:', finalUcod);
 
   const diagnosaUmum = [
     penyebabLangsung[0],
@@ -244,6 +256,12 @@ export const createSkpkEntry = async (
   lamaKematian
 ) => {
   
+  console.log(suratSkpkData);
+  console.log(jenazahData);
+  console.log(diagnosaUmumData);
+  console.log(diagnosaIbuAnakData);
+  console.log(lamaKematian);
+
   const diagnosaEntry = await postDiagnosaSkpk(diagnosaUmumData, diagnosaIbuAnakData, lamaKematian);
   const jenazahEntry = await postJenazahSkpk(jenazahData);
 

@@ -12,6 +12,8 @@ import SkpkLogPage from '../../Containers/SkpkLogPage/SkpkLogPage';
 import SkmkDetailPage from '../../Containers/SkmkDetailPage/SkmkDetailPage';
 import SkpkDetailPage from '../../Containers/SkpkDetailPage/SkpkDetailPage';
 import RekapBulananPage from '../../Containers/RekapBulananPage/RekapBulananPage';
+import SkmkFormSubmitPage from '../../Containers/SkmkFormDisplayPage/SkmkFormSubmitPage';
+import SkpkFormSubmitPage from '../../Containers/SkpkFormDisplayPage/SkpkFormSubmitPage';
 
 const DummyPage = () => (
   <div>
@@ -27,6 +29,7 @@ const SkmkNavigatior = ({match}) => {
       </PrivateRoute>
       <PrivateRoute path={`${match.url}/rekap`} component={SkmkLogPage}/>
       <PrivateRoute path={`${match.url}/form/display`} component={SkmkFormDisplayPage}/>
+      <PrivateRoute path={`${match.url}/form/submit`} component={SkmkFormSubmitPage}/>
       <PrivateRoute path={`${match.url}/form`} component={SkmkFormPage}/>
       <PrivateRoute path={`${match.url}/:id`} component={SkmkDetailPage}/>
     </Switch>
@@ -41,6 +44,7 @@ const SkpkNavigation = ({match}) => {
       </PrivateRoute>
       <PrivateRoute path={`${match.url}/rekap`} component={SkpkLogPage}/>
       <PrivateRoute path={`${match.url}/form/display`} component={SkpkFormDisplayPage}/>
+      <PrivateRoute path={`${match.url}/form/submit`} component={SkpkFormSubmitPage}/>
       <PrivateRoute path={`${match.url}/form`} component={SkpkFormPage}/>
       <PrivateRoute path={`${match.url}/:id`} component={SkpkDetailPage}/>
     </Switch>
