@@ -250,6 +250,7 @@ const RekapBulananPage = () => {
       {renderTableMenu()}
       <br/>
       {renderTableContent()}
+      <br/><br/>
       {renderExportModal()}
     </div>
   )
