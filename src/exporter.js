@@ -1,4 +1,4 @@
-import { getSkmkLogsSortedByDate, getSkpkLogsSortedByDate } from './supabase';
+import { getRekapDataByMonth, getSkmkLogsSortedByDate, getSkpkLogsSortedByDate } from './supabase';
 import moment from 'moment';
 import * as ExcelJS from 'exceljs';
 import { AlignmentType, Document, Footer, Header, Packer, Paragraph, TextRun, UnderlineType } from 'docx';
@@ -81,7 +81,7 @@ const createLogWorkbook = (logs, type) => {
     worksheet.addRow({idx, ...log});
   });
 
-  worksheet.mergeCells('A1:N1'); worksheet.getCell('A1').value = 'Register ${type}';
+  worksheet.mergeCells('A1:N1'); worksheet.getCell('A1').value = `Register ${type}`;
 
   worksheet.mergeCells('A2:A3');
   worksheet.mergeCells('B2:B3');
@@ -95,16 +95,114 @@ const createLogWorkbook = (logs, type) => {
   worksheet.mergeCells('N2:N3');
 
   const cellName = (col, row) => {
-    return '${String.fromCharCode(65 + col)}${row + 1}'
+    return `${String.fromCharCode(65 + col)}${row + 1}`
   }
 
   worksheet.getCell('A1').font = { size: 14 }
 
   for (let i=0; i < worksheet.columnCount; i++) {
     for (let j=0; j < worksheet.rowCount; j++) {
-      worksheet.getCell('${cellName(i, j)}').alignment = alignmentStyle;
+      worksheet.getCell(`${cellName(i, j)}`).alignment = alignmentStyle;
       if (j+1 === 1) continue;
-      worksheet.getCell('${cellName(i, j)}').border = borderStyle;
+      worksheet.getCell(`${cellName(i, j)}`).border = borderStyle;
+    }
+  };
+
+  return workbook;
+}
+
+const createRekapBulananWorkbook = (logs, month) => {
+  const workbook = new ExcelJS.Workbook();
+
+  workbook.creator = 'admin';
+  workbook.lastModifiedBy = 'admin';
+  workbook.created = new Date();
+  workbook.modified = new Date();
+  workbook.lastPrinted = new Date(2016, 9, 27);
+
+  workbook.calcProperties.fullCalcOnLoad = true;
+
+  workbook.views = [
+    {
+      x: 0, y: 0, width: 10000, height: 20000,
+      firstSheet: 0, activeTab: 1, visibility: 'visible'
+    }
+  ]
+
+  const worksheet = workbook.addWorksheet('rekap-bulanan');
+  worksheet.state = 'visible';
+
+  worksheet.properties.defaultRowHeight = 21;
+
+  const borderStyle = {
+    top: { style: 'medium' },
+    left: { style: 'medium' },
+    bottom: { style: 'medium' },
+    right: { style: 'medium' },
+  }
+
+  const alignmentStyle = {
+    vertical: 'middle',
+    horizontal: 'center'
+  }
+
+  worksheet.columns = [
+    { header: 'No.',          key: 'idx', width: 10 },
+    { header: 'ICDX',         key: 'icdx', width: 24 },
+    { header: 'Nama',         key: 'nama', width: 18 },
+    { header: 'Perempuan',    key: 'Perempuan', width: 14 },
+    { header: 'Laki-laki',    key: 'Laki-laki', width: 14 },
+    { header: '<1 tahun',     key: '<1 tahun', width: 18 },
+    { header: '1-14 tahun',   key: '1-14 tahun', width: 18 },
+    { header: '15-24 tahun',  key: '15-24 tahun', width: 18 },
+    { header: '25-44 tahun',  key: '25-44 tahun', width: 10 },
+    { header: '>45 tahun',    key: '>45 tahun', width: 10 },
+    { header: 'Total',        key: 'Total', width: 10 },
+  ];
+
+  const columnHeaders = {
+    'idx'         :'No.',        
+    'icdx'        :'ICDX',       
+    'nama'        :'Nama',       
+    'Perempuan'   :'Perempuan',  
+    'Laki-laki'   :'Laki-laki',  
+    '<1 tahun'    :'<1 tahun',   
+    '1-14 tahun'  :'1-14 tahun', 
+    '15-24 tahun' :'15-24 tahun',
+    '25-44 tahun' :'25-44 tahun',
+    '>45 tahun'   :'>45 tahun',  
+    'Total'       :'Total',      
+  }
+
+  worksheet.addRow(columnHeaders);
+  worksheet.addRow(columnHeaders);
+
+  logs.forEach((log, idx) => {
+    worksheet.addRow({idx, ...log});
+  });
+
+  const getMonth = month !== null ? moment(month).format('MMMM') : 'Semua'
+
+  worksheet.mergeCells('A1:K1'); worksheet.getCell('A1').value = `Rekap Bulanan - ${getMonth}`;
+
+  worksheet.mergeCells('A2:A3');
+  worksheet.mergeCells('B2:B3');
+  worksheet.mergeCells('C2:C3'); 
+  worksheet.mergeCells('D2:E2'); worksheet.getCell('D2').value = 'Jenis Kelamin';
+  worksheet.mergeCells('F2:J2'); worksheet.getCell('F2').value = 'Umur';
+  worksheet.mergeCells('K2:K3');
+
+  const cellName = (col, row) => {
+    return `${String.fromCharCode(65 + col)}${row + 1}`
+  }
+
+  worksheet.getCell('A1').font = { size: 14 }
+
+  for (let i=0; i < worksheet.columnCount; i++) {
+    for (let j=0; j < worksheet.rowCount; j++) {
+      worksheet.getCell(`${cellName(i, j)}`).alignment = alignmentStyle;
+      if (j+1 === 1) continue;
+      worksheet.getCell(`${cellName(i, j)}`).border = borderStyle;
     }
   };
 
@@ -1184,4 +1282,17 @@ export const exportSkmkDetail = async (skmkDetailData) => {
     const blob = new Blob([buffer], {type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'})
     FileSaver.saveAs(blob, 'skmk');
   })
+}
+
+export const exportRekamBulanan = async (month = null) => {
+  const rekapBulananData = await getRekapDataByMonth(month);
+
+  const workbook = createRekapBulananWorkbook(rekapBulananData, month);
+
+  await workbook.xlsx.writeBuffer().then(function (data) {
+      var blob = new Blob([data], {type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'});
+      FileSaver.saveAs(blob, 'rekap-bulanan.xlsx');
+  });
+
+  return rekapBulananData;
 }

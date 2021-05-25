@@ -669,19 +669,6 @@ export const getRekapDataByMonth = async (month=null) => {
       "Total": penyebabData.length
     }
   })
-
-  /*
-    turn into:
-    icdx
-    nama
-    Perempuan
-    Laki-laki
-    <1 tahun
-    1-14 tahun
-    15-24 tahun
-    25-44 tahun
-    >45 tahun
-    Total
-  */
+  
   return rekapData;
 }

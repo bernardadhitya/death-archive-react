@@ -7,7 +7,7 @@ import { PlusOutlined, EyeFilled, DeleteFilled, WarningOutlined, DownloadOutline
 import './RekapBulananPage.css';
 import Modal from 'antd/lib/modal/Modal';
 import { Button } from '@material-ui/core';
-import { exportSkmkLogByDate } from '../../exporter';
+import { exportRekamBulanan, exportSkmkLogByDate } from '../../exporter';
 
 const RekapBulananPage = () => {
   const { Search } = Input;
@@ -17,8 +17,7 @@ const RekapBulananPage = () => {
   const [searchDate, setSearchDate] = useState(null);
   const [refresh, setRefresh] = useState(0);
   const [showModal, setShowModal] = useState(false);
-  const [startDate, setStartDate] = useState(null);
-  const [endDate, setEndDate] = useState(null)
+  const [exportMonth, setExportMonth] = useState(null);
 
   const [allRekapData, setAllRekapData] = useState([]);
   const [rekapData, setRekapData] = useState([]);
@@ -28,7 +27,7 @@ const RekapBulananPage = () => {
   const history = useHistory();
 
   const handleExportData = async () => {
-    const sortedRekapData = await exportSkmkLogByDate(startDate, endDate);
+    const sortedRekapData = await exportRekamBulanan(exportMonth);
     setShowModal(false)
   }
 
@@ -42,45 +41,24 @@ const RekapBulananPage = () => {
     fetchData();
   }, [refresh]);
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     const filteredSkmkByNamaJenazah = allRekapData.filter(logs => {
-  //       const {
-  //         nama_jenazah,
-  //         jenis_kelamin,
-  //         umur_bulan,
-  //         umur_tahun,
-  //         alamat_kecamatan,
-  //         alamat_kelurahan,
-  //         penyebab_dasar_id,
-  //         penyebab_antara_1_id,
-  //         penyebab_antara_2_id,
-  //         penyebab_langsung_id,
-  //         nama_penandatangan
-  //       } = logs ;
+  useEffect(() => {
+    const fetchData = async () => {
+      const filteredRekap = allRekapData.filter(logs => {
+        const { icdx, nama } = logs ;
 
-        // const stringify = (value) => {
-        //   if (value === null) return '';
-        //   return value.toString().toLowerCase();
-        // }
+        const stringify = (value) => {
+          if (value === null) return '';
+          return value.toString().toLowerCase();
+        }
 
-  //       return stringify(nama_jenazah).includes(stringify(searchText)) ||
-  //         stringify(jenis_kelamin).includes(stringify(searchText)) ||
-  //         stringify(umur_bulan).includes(stringify(searchText)) ||
-  //         stringify(umur_tahun).includes(stringify(searchText)) ||
-  //         stringify(alamat_kecamatan).includes(stringify(searchText)) ||
-  //         stringify(alamat_kelurahan).includes(stringify(searchText)) ||
-  //         stringify(penyebab_dasar_id).includes(stringify(searchText)) ||
-  //         stringify(penyebab_antara_1_id).includes(stringify(searchText)) ||
-  //         stringify(penyebab_antara_2_id).includes(stringify(searchText)) ||
-  //         stringify(penyebab_langsung_id).includes(stringify(searchText)) ||
-  //         stringify(nama_penandatangan).includes(stringify(searchText))
-  //     })
-  //     setRekapData(filteredSkmkByNamaJenazah);
-  //     setSearchDate(null);
-  //   }
-  //   fetchData();
-  // }, [searchText]);
+        return stringify(icdx).includes(stringify(searchText)) ||
+          stringify(nama).includes(stringify(searchText)) 
+      })
+      setRekapData(filteredRekap);
+      setSearchDate(null);
+    }
+    fetchData();
+  }, [searchText]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -187,9 +165,10 @@ const RekapBulananPage = () => {
         <p>Tanggal Awal</p>
         <Row>
           <Col span={24}>
-            <RangePicker
-              value={[startDate, endDate]}
-              onChange={(value) => { setStartDate(value[0]); setEndDate(value[1])}}
+            <DatePicker
+              onChange={value => setExportMonth(value || null)}
+              picker="month"
+              style={{width: '100%'}}
             />
           </Col>
         </Row>
