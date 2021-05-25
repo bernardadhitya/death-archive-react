@@ -46,7 +46,8 @@ const SkmkDataJenazah = (props) => {
     setWaktuMeninggalJenazah,        
     setTempatMeninggalJenazah,       
     setNilaiLamaDirawatJenazah,
-    setSatuanLamaDirawatJenazah
+    setSatuanLamaDirawatJenazah,
+    setJenisKelaminJenazah
   } = props;
 
   return (
@@ -81,6 +82,17 @@ const SkmkDataJenazah = (props) => {
           <DatePicker
             value={tanggalLahirJenazah}
             onChange={(value) => setTanggalLahirJenazah(value)}
+          />
+        </Col>
+      </Row>
+      <Row gutter={16}>
+        <Col span={6}>
+          <p>Jenis Kelamin</p>
+        </Col>
+        <Col span={18}>
+          <DropdownMenu
+            list={['Laki-laki', 'Perempuan']}
+            onSelect={(value) => setJenisKelaminJenazah(value)}
           />
         </Col>
       </Row>

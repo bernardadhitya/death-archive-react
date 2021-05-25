@@ -31,6 +31,7 @@ const SkmkFormPage = () => {
   const [hubunganPelapor,         setHubunganPelapor         ] = useState('');
 
   const [namaJenazah,               setNamaJenazah             ] = useState('');
+  const [jenisKelaminJenazah,       setJenisKelaminJenazah     ] = useState('');
   const [tempatLahirJenazah,        setTempatLahirJenazah      ] = useState('');
   const [umurTahunJenazah,          setUmurTahunJenazah        ] = useState(null);
   const [umurBulanJenazah,          setUmurBulanJenazah        ] = useState(null);
@@ -168,6 +169,7 @@ const SkmkFormPage = () => {
       <SkmkDataJenazah
         namaJenazah={namaJenazah}              
         tempatLahirJenazah={tempatLahirJenazah}         
+        jenisKelaminJenazah={jenisKelaminJenazah}           
         umurTahunJenazah={umurTahunJenazah}           
         umurBulanJenazah={umurBulanJenazah}           
         umurHariJenazah={umurHariJenazah}          
@@ -189,6 +191,7 @@ const SkmkFormPage = () => {
         satuanLamaDirawatJenazah={satuanLamaDirawatJenazah}
         setNamaJenazah={setNamaJenazah}              
         setTempatLahirJenazah={setTempatLahirJenazah}         
+        setJenisKelaminJenazah={setJenisKelaminJenazah}
         setUmurTahunJenazah={setUmurTahunJenazah}           
         setUmurBulanJenazah={setUmurBulanJenazah}           
         setUmurHariJenazah={setUmurHariJenazah}          
@@ -357,6 +360,7 @@ const SkmkFormPage = () => {
     sessionStorage.setItem('hubunganPelapor',           hubunganPelapor);           
     sessionStorage.setItem('namaJenazah',               namaJenazah);               
     sessionStorage.setItem('tempatLahirJenazah',        tempatLahirJenazah);        
+    sessionStorage.setItem('jenisKelaminJenazah',       jenisKelaminJenazah);        
     sessionStorage.setItem('umurTahunJenazah',          umurTahunJenazah);          
     sessionStorage.setItem('umurBulanJenazah',          umurBulanJenazah);          
     sessionStorage.setItem('umurHariJenazah',           umurHariJenazah);           

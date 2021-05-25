@@ -22,6 +22,7 @@ const nomorKtpPelapor =          sessionStorage.getItem('nomorKtpPelapor');
 const hubunganPelapor =          sessionStorage.getItem('hubunganPelapor');           
 const namaJenazah =              sessionStorage.getItem('namaJenazah');               
 const tempatLahirJenazah =       sessionStorage.getItem('tempatLahirJenazah');        
+const jenisKelaminJenazah =      sessionStorage.getItem('jenisKelaminJenazah');          
 const umurTahunJenazah =         sessionStorage.getItem('umurTahunJenazah');          
 const umurBulanJenazah =         sessionStorage.getItem('umurBulanJenazah');          
 const umurHariJenazah =          sessionStorage.getItem('umurHariJenazah');           
@@ -168,7 +169,7 @@ export const handleSubmitData = async () => {
   const jenazahData = {
     nama_jenazah: namaJenazah,
     ktp: nomorKtpJenazah,
-    jenis_kelamin: '',
+    jenis_kelamin: jenisKelaminJenazah,
     tempat_lahir: tempatLahirJenazah,
     tanggal_lahir: moment(tanggalLahirJenazah).format('YYYY-MM-DD'),
     umur_tahun: umurTahunJenazah,

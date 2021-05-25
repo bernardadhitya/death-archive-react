@@ -29,6 +29,7 @@ const SkmkFormDisplayPage = () => {
   const hubunganPelapor =          sessionStorage.getItem('hubunganPelapor');           
   const namaJenazah =              sessionStorage.getItem('namaJenazah');               
   const tempatLahirJenazah =       sessionStorage.getItem('tempatLahirJenazah');        
+  const jenisKelaminJenazah =      sessionStorage.getItem('jenisKelaminJenazah');        
   const umurTahunJenazah =         sessionStorage.getItem('umurTahunJenazah');          
   const umurBulanJenazah =         sessionStorage.getItem('umurBulanJenazah');          
   const umurHariJenazah =          sessionStorage.getItem('umurHariJenazah');           
@@ -144,6 +145,7 @@ const SkmkFormDisplayPage = () => {
       <SkmkDataJenazahDisplay
         namaJenazah={namaJenazah}              
         tempatLahirJenazah={tempatLahirJenazah}         
+        jenisKelaminJenazah={jenisKelaminJenazah}
         umurTahunJenazah={umurTahunJenazah}           
         umurBulanJenazah={umurBulanJenazah}           
         umurHariJenazah={umurHariJenazah}          

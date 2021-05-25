@@ -11,6 +11,7 @@ const SkpkDataJenazah = (props) => {
     umurBulanJenazah,           
     umurHariJenazah,          
     tanggalLahirJenazah,          
+    jenisKelaminJenazah,
     pekerjaanJenazah,           
     alamatJalanJenazah,           
     alamatNomorJenazah,           
@@ -48,6 +49,14 @@ const SkpkDataJenazah = (props) => {
         </Col>
         <Col span={16}>
           <p>{`${tempatLahirJenazah}, ${moment(tanggalLahirJenazah).format('LL')}`}</p>
+        </Col>
+      </Row>
+      <Row gutter={16}>
+        <Col span={6}>
+          <p>Jenis Kelamin</p>
+        </Col>
+        <Col span={18}>
+          <p>{jenisKelaminJenazah}</p>
         </Col>
       </Row>
       <Row gutter={16}>
