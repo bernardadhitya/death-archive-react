@@ -3,15 +3,6 @@ import { Route, Redirect, Switch } from 'react-router-dom';
 import PrivateRoute from './PrivateRoute';
 import Login from '../../Containers/Login/Login';
 import HomePage from '../../Containers/HomePage/HomePage';
-import SkmkFormPage from '../../Containers/SkmkFormPage/SkmkFormPage';
-import SkmkFormDisplayPage from '../../Containers/SkmkFormDisplayPage/SkmkFormDisplayPage';
-import SkpkFormPage from '../../Containers/SkpkFormPage/SkpkFormPage';
-import SkpkFormDisplayPage from '../../Containers/SkpkFormDisplayPage/SkpkFormDisplayPage';
-import SkmkLogPage from '../../Containers/SkmkLogPage/SkmkLogPage';
-import SkpkLogPage from '../../Containers/SkpkLogPage/SkpkLogPage';
-import SkmkDetailPage from '../../Containers/SkmkDetailPage/SkmkDetailPage';
-import SkpkDetailPage from '../../Containers/SkpkDetailPage/SkpkDetailPage';
-import RekapBulananPage from '../../Containers/RekapBulananPage/RekapBulananPage';
 
 const DummyPage = () => (
   <div>
@@ -25,10 +16,10 @@ const SkmkNavigatior = ({match}) => {
       <PrivateRoute exact path={match.url}>
         <Redirect to={`/${match.url}/rekap`}/>
       </PrivateRoute>
-      <PrivateRoute path={`${match.url}/rekap`} component={SkmkLogPage}/>
-      <PrivateRoute path={`${match.url}/form/display`} component={SkmkFormDisplayPage}/>
-      <PrivateRoute path={`${match.url}/form`} component={SkmkFormPage}/>
-      <PrivateRoute path={`${match.url}/:id`} component={SkmkDetailPage}/>
+      <PrivateRoute path={`${match.url}/rekap`} component={DummyPage}/>
+      <PrivateRoute path={`${match.url}/form/display`} component={DummyPage}/>
+      <PrivateRoute path={`${match.url}/form`} component={DummyPage}/>
+      <PrivateRoute path={`${match.url}/:id`} component={DummyPage}/>
     </Switch>
   )
 }
@@ -39,10 +30,10 @@ const SkpkNavigation = ({match}) => {
       <PrivateRoute exact path={match.url}>
         <Redirect to={`/${match.url}/rekap`}/>
       </PrivateRoute>
-      <PrivateRoute path={`${match.url}/rekap`} component={SkpkLogPage}/>
-      <PrivateRoute path={`${match.url}/form/display`} component={SkpkFormDisplayPage}/>
-      <PrivateRoute path={`${match.url}/form`} component={SkpkFormPage}/>
-      <PrivateRoute path={`${match.url}/:id`} component={SkpkDetailPage}/>
+      <PrivateRoute path={`${match.url}/rekap`} component={DummyPage}/>
+      <PrivateRoute path={`${match.url}/form/display`} component={DummyPage}/>
+      <PrivateRoute path={`${match.url}/form`} component={DummyPage}/>
+      <PrivateRoute path={`${match.url}/:id`} component={DummyPage}/>
     </Switch>
   )
 }
@@ -56,7 +47,7 @@ const HomeNavigation = () => {
       <Route path='/skpk' component={SkpkNavigation}/>
       <Route path='/skmk' component={SkmkNavigatior}/>
       <PrivateRoute path='/home' component={HomePage}/>
-      <PrivateRoute path='/bulanan' component={RekapBulananPage}/>
+      <PrivateRoute path='/bulanan' component={DummyPage}/>
     </Switch>
   );
 };
