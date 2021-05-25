@@ -11,6 +11,7 @@ import SkmkLogPage from '../../Containers/SkmkLogPage/SkmkLogPage';
 import SkpkLogPage from '../../Containers/SkpkLogPage/SkpkLogPage';
 import SkmkDetailPage from '../../Containers/SkmkDetailPage/SkmkDetailPage';
 import SkpkDetailPage from '../../Containers/SkpkDetailPage/SkpkDetailPage';
+import RekapBulananPage from '../../Containers/RekapBulananPage/RekapBulananPage';
 
 const DummyPage = () => (
   <div>
@@ -55,7 +56,7 @@ const HomeNavigation = () => {
       <Route path='/skpk' component={SkpkNavigation}/>
       <Route path='/skmk' component={SkmkNavigatior}/>
       <PrivateRoute path='/home' component={HomePage}/>
-      <PrivateRoute path='/bulanan' component={DummyPage}/>
+      <PrivateRoute path='/bulanan' component={RekapBulananPage}/>
     </Switch>
   );
 };

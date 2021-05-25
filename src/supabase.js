@@ -1,6 +1,6 @@
 import { createClient } from '@supabase/supabase-js';
 import { supabaseConfig } from './env';
-
+import moment from 'moment';
 
 const { url, apiKey } = supabaseConfig;
 const supabase = createClient(url, apiKey);
@@ -608,4 +608,80 @@ export const getSkpkLogsSortedByDate = async () => {
     .select();
   
   return skpkData;
+}
+
+export const getRekapData = async () => {
+  const { data: rekapData } = await supabase
+    .from('rekap_skmk')
+    .select();
+
+  return rekapData;
+}
+
+export const getPenyebabKematian = async () => {
+  const { data: penyebabKematianData } = await supabase
+    .from('penyebab_kematian')
+    .select()
+  return penyebabKematianData;
+}
+
+export const getRekapDataByMonth = async (month=null) => {
+  const skmkData = await getSkmkLogsSortedByDate();
+  const skpkData = await getSkpkLogsSortedByDate();
+  const combinedData = [...skmkData, ...skpkData];
+
+  const penyebabKematian = await getPenyebabKematian();
+
+  const isSameMonth = (data) => {
+    return month !== null ?
+      moment(data.tanggal_meninggal).isSame(month, 'month')
+      : true;
+  }
+
+  const rekapData = penyebabKematian.map(penyebab => {
+    const { icdx, nama } = penyebab;
+    const penyebabData = combinedData.filter(data => 
+      isSameMonth(data) &&
+      (data.penyebab_langsung_id === icdx ||
+      data.penyebab_antara_1_id === icdx ||
+      data.penyebab_antara_2_id === icdx ||
+      data.penyebab_dasar_id === icdx)
+    );
+    
+    const perempuan = penyebabData.filter(data => data.jenis_kelamin === 'Perempuan').length;
+    const pria = penyebabData.filter(data => data.jenis_kelamin === 'Laki-laki').length;
+    const age_group_1 = penyebabData.filter(data => data.umur_tahun < 1).length;
+    const age_group_2 = penyebabData.filter(data => data.umur_tahun >= 1 && data.umur_tahun <= 14).length;
+    const age_group_3 = penyebabData.filter(data => data.umur_tahun >= 15 && data.umur_tahun <= 24).length;
+    const age_group_4 = penyebabData.filter(data => data.umur_tahun >= 25 && data.umur_tahun <= 44).length;
+    const age_group_5 = penyebabData.filter(data => data.umur_tahun >= 45).length;
+
+    return {
+      icdx,
+      nama,
+      "Perempuan": perempuan,
+      "Laki-laki": pria,
+      "<1 tahun": age_group_1,
+      "1-14 tahun": age_group_2,
+      "15-24 tahun": age_group_3,
+      "25-44 tahun": age_group_4,
+      ">45 tahun": age_group_5,
+      "Total": penyebabData.length
+    }
+  })
+
+  /*
+    turn into:
+    icdx
+    nama
+    Perempuan
+    Laki-laki
+    <1 tahun
+    1-14 tahun
+    15-24 tahun
+    25-44 tahun
+    >45 tahun
+    Total
+  */
+  return rekapData;
 }

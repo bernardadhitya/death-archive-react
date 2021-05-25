@@ -1,0 +1,8 @@
+.action-icon-wrapper{
+  padding: 6px 4px;
+  border-radius: 4px;
+  cursor: pointer;
+  text-align: center;
+  height: 32px;
+  justify-content: center;
+}
