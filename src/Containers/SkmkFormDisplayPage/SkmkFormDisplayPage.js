@@ -235,6 +235,11 @@ const SkmkFormDisplayPage = () => {
 
   const history = useHistory();
 
+  if (!!!sessionStorage.getItem('refresh')){
+    sessionStorage.setItem('refresh', true);
+    window.location.reload(false);
+  }
+
   return (
     <div style={{margin: '120px 160px'}}>
       <h1>Pratinjau Surat Keterangan Melapor Kematian (SKMK)</h1>
@@ -251,6 +256,7 @@ const SkmkFormDisplayPage = () => {
         size='large'
         style={{backgroundColor: '#3990B2', float: 'right', color: '#FFFFFF'}}
         onClick={async () => {
+          sessionStorage.removeItem('refresh');
           history.push('/skmk/form/submit');
         }}
       >
