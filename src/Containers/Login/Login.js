@@ -14,7 +14,9 @@ const Login = () => {
   const history = useHistory();
 
   const handleLogin = async () => {
-    if(username === 'admin' && password === 'admin'){
+    if((username === 'admin' && password === 'admin') ||
+      (username === 'P31740801010000001' && password === '123456')
+    ){
       history.push('/home');
     } else {
       window.alert('Username/password salah! Silahkan mencoba kembali.')
