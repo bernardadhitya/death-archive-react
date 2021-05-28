@@ -279,6 +279,7 @@ export const getSkmkLogs = async () => {
     .from('surat_skmk')
     .select(`
       surat_skmk_id,
+      tanggal_surat,
       jenazah_skmk (
         nama_jenazah,
         jenis_kelamin,
@@ -328,6 +329,7 @@ export const getSkpkLogs = async () => {
     .from('surat_skpk')
     .select(`
       surat_skpk_id,
+      tanggal_surat,
       jenazah_skpk (
         nama_jenazah,
         jenis_kelamin,
@@ -652,7 +654,7 @@ export const getRekapDataByMonth = async (month=null) => {
 
   const isSameMonth = (data) => {
     return month !== null ?
-      moment(data.tanggal_meninggal).isSame(month, 'month')
+      moment(data.tanggal_surat).isSame(month, 'month')
       : true;
   }
 

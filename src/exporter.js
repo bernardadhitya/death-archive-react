@@ -212,9 +212,9 @@ const createRekapBulananWorkbook = (logs, month) => {
 export const exportSkmkLogByDate = async (startDate, endDate) => {
   const skmkLogsSortedByDate = await getSkmkLogsSortedByDate();
   const filteredLogsByDateRange = skmkLogsSortedByDate.filter(log => {
-    const { tanggal_meninggal } = log;
-    return moment(tanggal_meninggal).isAfter(startDate) &&
-      moment(tanggal_meninggal).isBefore(endDate);
+    const { tanggal_surat } = log;
+    return moment(tanggal_surat).isAfter(startDate) &&
+      moment(tanggal_surat).isBefore(endDate);
   })
 
   const workbook = createLogWorkbook(filteredLogsByDateRange, 'SKMK');
@@ -230,9 +230,9 @@ export const exportSkmkLogByDate = async (startDate, endDate) => {
 export const exportSkpkLogByDate = async (startDate, endDate) => {
   const skpkLogsSortedByDate = await getSkpkLogsSortedByDate();
   const filteredLogsByDateRange = skpkLogsSortedByDate.filter(log => {
-    const { tanggal_meninggal } = log;
-    return moment(tanggal_meninggal).isAfter(startDate) &&
-      moment(tanggal_meninggal).isBefore(endDate);
+    const { tanggal_surat } = log;
+    return moment(tanggal_surat).isAfter(startDate) &&
+      moment(tanggal_surat).isBefore(endDate);
   })
 
   const workbook = createLogWorkbook(filteredLogsByDateRange, 'SKPK');

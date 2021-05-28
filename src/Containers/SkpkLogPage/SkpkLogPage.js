@@ -78,12 +78,14 @@ const SkpkLogPage = () => {
       console.log(fetchedSkpkLogs);
       const formattedSkpkLogs = fetchedSkpkLogs.map(log => {
         const {
+          tanggal_surat,
           surat_skpk_id,
           jenazah_skpk,
           nama_penandatangan,
           diagnosa_skpk_list
         } = log;
         return {
+          tanggal_surat,
           ...jenazah_skpk,
           nama_penandatangan,
           ...diagnosa_skpk_list,
@@ -142,10 +144,10 @@ const SkpkLogPage = () => {
         setSkpkData(allSkpkData);
         return;
       }
-      const filteredSkpkByTanggalMeninggal = allSkpkData.filter(logs => {
-        return moment(logs.tanggal_meninggal).isSame(moment(searchDate), 'month')
+      const filteredSkpkByTanggalSurat = allSkpkData.filter(logs => {
+        return moment(logs.tanggal_surat).isSame(moment(searchDate), 'month')
       })
-      setSkpkData(filteredSkpkByTanggalMeninggal);
+      setSkpkData(filteredSkpkByTanggalSurat);
       setSearchText('')
     }
     fetchData();
