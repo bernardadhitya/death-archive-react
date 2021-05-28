@@ -16,7 +16,7 @@ const HomePage = () => {
         <Grid item xs={12}>
           <div className='box-container'>
             <h2>Selamat datang, Admin.</h2>
-            <p>Aplikasi manajemen surat keterangan kematian Puskesmas Kecamatan Kalideres.</p>
+            <p style={{fontSize: '16px'}}>Aplikasi manajemen surat keterangan kematian Puskesmas Kecamatan Kalideres.</p>
           </div>
         </Grid>
         <Grid item xs={3}>
