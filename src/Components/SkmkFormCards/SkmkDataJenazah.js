@@ -124,7 +124,7 @@ const SkmkDataJenazah = (props) => {
       </Row>
       <Row gutter={16}>
         <Col span={6}>
-          <p>Pekerjaan*</p>
+          <p>Pekerjaan Almarhum/ah*</p>
         </Col>
         <Col span={18}>
           <DropdownMenu
