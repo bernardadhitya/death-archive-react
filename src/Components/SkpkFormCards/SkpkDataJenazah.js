@@ -323,10 +323,14 @@ const SkpkDataJenazah = (props) => {
           <p>Bila yang meninggal wanita umur 10-54 tahun, Almarhumah dalam keadaan :</p>
         </Col>
         <Col span={12}>
-          <Input
-            value={statusWanitaJenazah}
-            onChange={(e) => setStatusWanitaJenazah(e.target.value)}
-            placeholder='Isi kondisi'
+          <DropdownMenu
+            list={[
+              'Hamil',
+              'Bersalin',
+              'Nifas',
+              'Lainnya'
+            ]}
+            onSelect={(value) => setStatusWanitaJenazah(value)}
           />
         </Col>
       </Row>
