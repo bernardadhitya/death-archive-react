@@ -22,6 +22,7 @@ import MailIcon from '@material-ui/icons/Mail';
 import HomeIcon from '@material-ui/icons/Home';
 import DateRangeIcon from '@material-ui/icons/DateRange';
 import clsx from 'clsx';
+import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 
 const StyledMenu = withStyles({
   paper: {
@@ -146,10 +147,12 @@ const Navbar = () => {
         </div>
         <div>
           <div
-            className='item'
+            className='item profile-dropdown'
             onClick={handleProfileClick}
+            style={{display: 'flex'}}
           >
-            <h3 style={{color: '#ffffff'}}>Hi, Admin</h3>
+            {'Hi, Admin'}
+            <ArrowDropDownIcon/>
           </div>
           <StyledMenu
             id="customized-menu"

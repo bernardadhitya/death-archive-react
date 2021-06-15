@@ -29,3 +29,11 @@
 .text-no-margin h6{
   margin-top: 1px !important;
 }
+
+.profile-dropdown{
+  font-weight: 500;
+}
+
+.profile-dropdown:hover{
+  font-weight: 700;
+}
