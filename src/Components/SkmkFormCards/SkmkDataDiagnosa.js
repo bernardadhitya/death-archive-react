@@ -92,7 +92,7 @@ const SkmkDataDiagnosa = (props) => {
   const renderDiagnosaIbuAnak = () => {
     const diagnosaIbuAnakList = [
       {
-        judul:      'Penyebab Utama Bayi*',
+        judul:      'Penyebab Utama Bayi',
         nama:       props.namaPenyebabUtamaBayi,    
         hari:       props.hariPenyebabUtamaBayi,  
         bulan:      props.bulanPenyebabUtamaBayi, 
@@ -128,7 +128,7 @@ const SkmkDataDiagnosa = (props) => {
 
       },
       {
-        judul:      'Penyebab Utama Ibu*',
+        judul:      'Penyebab Utama Ibu',
         nama:       props.namaPenyebabUtamaIbu,    
         hari:       props.hariPenyebabUtamaIbu,  
         bulan:      props.bulanPenyebabUtamaIbu, 
