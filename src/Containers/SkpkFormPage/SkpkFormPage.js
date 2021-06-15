@@ -1,9 +1,24 @@
-import { Button } from '@material-ui/core';
+import { Button, withStyles } from '@material-ui/core';
 import React, { useState } from 'react';
 import { useHistory } from 'react-router';
 import SkpkDataDiagnosa from '../../Components/SkpkFormCards/SkpkDataDiagnosa';
 import SkpkDataJenazah from '../../Components/SkpkFormCards/SkpkDataJenazah';
 import SkpkDataSurat from '../../Components/SkpkFormCards/SkpkDataSurat';
+
+const ColorButton = withStyles(() => ({
+  root: {
+    color: '#1B1917',
+    backgroundColor: '#F6B931',
+    float: 'right',
+    '&:hover': {
+      backgroundColor: '#FFCA55',
+    },
+    '&:active': {
+      color: '#FFFFFF',
+      backgroundColor: '#CB8C2E',
+    },
+  },
+}))(Button);
 
 const SkpkFormPage = () => {
   sessionStorage.clear();
@@ -466,13 +481,11 @@ const SkpkFormPage = () => {
       <br/><br/>
       {renderDataDiagnosa()}
       <br/><br/>
-      <Button
-        size='large'
-        style={{backgroundColor: '#F6B931', float: 'right'}}
+      <ColorButton
         onClick={() => handleSubmit()}
       >
         Berikutnya
-      </Button>
+      </ColorButton>
       <br/><br/><br/><br/>
     </div>
   )

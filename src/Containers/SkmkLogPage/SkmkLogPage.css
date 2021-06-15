@@ -6,3 +6,28 @@
   height: 32px;
   justify-content: center;
 }
+
+.view-button{
+  background-color: #3990B2;
+}
+
+.delete-button{
+  background-color: #CD2733;
+}
+
+.view-button:hover{
+  background-color: #5DABCA;
+}
+
+.delete-button:hover{
+  background-color: #EA535E;
+}
+
+.view-button:active{
+  background-color: #062F55;
+}
+
+.delete-button:active{
+  background-color: #690C0C;
+}
+

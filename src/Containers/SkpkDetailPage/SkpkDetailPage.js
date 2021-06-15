@@ -1,4 +1,4 @@
-import { Button } from '@material-ui/core';
+import { Button, withStyles } from '@material-ui/core';
 import { Col, Row } from 'antd';
 import React from 'react';
 import { useHistory, useLocation } from 'react-router';
@@ -7,6 +7,35 @@ import SkpkDataJenazahDisplay from '../../Components/SkpkDetailCards/SkpkDataJen
 import SkpkDataSuratDisplay from '../../Components/SkpkDetailCards/SkpkDataSuratDisplay';
 import { DownloadOutlined } from '@ant-design/icons';
 import { exportSkpkDetail } from '../../exporter';
+
+const ExportButton = withStyles(() => ({
+  root: {
+    color: '#FFFFFF',
+    backgroundColor: '#3990B2',
+    '&:hover': {
+      backgroundColor: '#5DABCA',
+    },
+    '&:active': {
+      color: '#FFFFFF',
+      backgroundColor: '#184C69',
+    },
+  },
+}))(Button);
+
+const ColorButton = withStyles(() => ({
+  root: {
+    color: '#1B1917',
+    backgroundColor: '#F6B931',
+    float: 'left',
+    '&:hover': {
+      backgroundColor: '#FFCA55',
+    },
+    '&:active': {
+      color: '#FFFFFF',
+      backgroundColor: '#CB8C2E',
+    },
+  },
+}))(Button);
 
 const SkpkDetailPage = () => {
 
@@ -110,21 +139,17 @@ const SkpkDetailPage = () => {
     return (
       <Row>
         <Col span={12}>
-          <Button
-            size='large'
-            style={{backgroundColor: '#F6B931', float: 'left', color: '#000000'}}
+          <ColorButton
             onClick={async () => {
               history.push('/skpk/rekap')
             }}
           >
             KEMBALI
-          </Button>
+          </ColorButton>
         </Col>
         <Col span={12}>
           <div style={{float: 'right'}}>
-            <Button
-              size='large'
-              style={{backgroundColor: '#3990B2', float: 'left', color: '#FFFFFF'}}
+            <ExportButton
               onClick={() => handleExportDetail()}
             >
               <Row>
@@ -139,7 +164,7 @@ const SkpkDetailPage = () => {
                   SIMPAN & EKSPOR
                 </Col>
               </Row>
-            </Button>
+            </ExportButton>
           </div>
         </Col>
       </Row>

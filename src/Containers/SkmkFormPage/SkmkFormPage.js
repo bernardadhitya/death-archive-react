@@ -5,6 +5,22 @@ import SkmkDataDiagnosa from '../../Components/SkmkFormCards/SkmkDataDiagnosa';
 import SkmkDataJenazah from '../../Components/SkmkFormCards/SkmkDataJenazah';
 import SkmkDataPelapor from '../../Components/SkmkFormCards/SkmkDataPelapor';
 import SkmkDataSurat from '../../Components/SkmkFormCards/SkmkDataSurat';
+import { withStyles } from '@material-ui/core/styles';
+
+const ColorButton = withStyles(() => ({
+  root: {
+    color: '#1B1917',
+    backgroundColor: '#F6B931',
+    float: 'right',
+    '&:hover': {
+      backgroundColor: '#FFCA55',
+    },
+    '&:active': {
+      color: '#FFFFFF',
+      backgroundColor: '#CB8C2E',
+    },
+  },
+}))(Button);
 
 const SkmkFormPage = () => {
   sessionStorage.clear();
@@ -453,13 +469,11 @@ const SkmkFormPage = () => {
       <br/><br/>
       {renderDataDiagnosa()}
       <br/><br/>
-      <Button
-        size='large'
-        style={{backgroundColor: '#F6B931', float: 'right'}}
+      <ColorButton
         onClick={() => handleSubmit()}
       >
         Berikutnya
-      </Button>
+      </ColorButton>
       <br/><br/><br/><br/>
     </div>
   )

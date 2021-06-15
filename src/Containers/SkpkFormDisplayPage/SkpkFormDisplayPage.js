@@ -1,4 +1,4 @@
-import { Button } from '@material-ui/core';
+import { Button, withStyles } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
 import { useHistory, useLocation } from 'react-router';
 import SkpkDataDiagnosaDisplay from '../../Components/SkpkFormDisplayCards/SkpkDataDiagnosaDisplay';
@@ -6,6 +6,21 @@ import SkpkDataJenazahDisplay from '../../Components/SkpkFormDisplayCards/SkpkDa
 import SkpkDataPelaporDisplay from '../../Components/SkpkFormDisplayCards/SkpkDataPelaporDisplay';
 import SkpkDataSuratDisplay from '../../Components/SkpkFormDisplayCards/SkpkDataSuratDisplay';
 import { handleSubmitData } from './SkpkFormSubmit';
+
+const ColorButton = withStyles(() => ({
+  root: {
+    color: '#FFFFFF',
+    backgroundColor: '#3990B2',
+    float: 'right',
+    '&:hover': {
+      backgroundColor: '#5DABCA',
+    },
+    '&:active': {
+      color: '#FFFFFF',
+      backgroundColor: '#184C69',
+    },
+  },
+}))(Button);
 
 const SkpkFormDisplayPage = () => {
   const namaPembuatSurat =         sessionStorage.getItem('namaPembuatSurat');          
@@ -256,16 +271,14 @@ const SkpkFormDisplayPage = () => {
       <br/><br/>
       {renderDataDiagnosa()}
       <br/><br/>
-      <Button
-        size='large'
-        style={{backgroundColor: '#3990B2', float: 'right', color: '#FFFFFF'}}
+      <ColorButton
         onClick={async () => {
           sessionStorage.removeItem('refresh');
           history.push('/skpk/form/submit')
         }}
       >
         Simpan
-      </Button>
+      </ColorButton>
       <br/><br/><br/><br/>
     </div>
   )

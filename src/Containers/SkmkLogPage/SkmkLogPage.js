@@ -48,8 +48,7 @@ const SkmkLogPage = () => {
       <Row>
         <Col span={10}>
           <div
-            className='action-icon-wrapper'
-            style={{backgroundColor: '#3990B2'}}
+            className='action-icon-wrapper view-button'
             onClick={() => handleRedirect(surat_skmk_id)}
           >
             <EyeFilled style={{color: '#FFFFFF', fontSize: '18px'}}/>
@@ -58,8 +57,7 @@ const SkmkLogPage = () => {
         <Col span={2}/>
         <Col span={10}>
           <div
-            className='action-icon-wrapper'
-            style={{backgroundColor: '#CD2733'}}
+            className='action-icon-wrapper delete-button'
             onClick={() => handleDelete(surat_skmk_id)}
           >
             <DeleteFilled style={{color: '#FFFFFF', fontSize: '18px'}}/>

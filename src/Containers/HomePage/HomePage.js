@@ -21,8 +21,7 @@ const HomePage = () => {
         </Grid>
         <Grid item xs={3}>
           <div
-            className='dashboard-menu-box-container'
-            style={{backgroundColor: '#53B6ED'}}
+            className='dashboard-menu-box-container input-skpk'
             onClick={() => history.push('/skpk/form')}
           >
             <h1 style={{color: '#FFFFFF'}}>
@@ -32,8 +31,7 @@ const HomePage = () => {
         </Grid>
         <Grid item xs={3}>
           <div
-            className='dashboard-menu-box-container'
-            style={{backgroundColor: '#2DAC5F'}}
+            className='dashboard-menu-box-container input-skmk'
             onClick={() => history.push('/skmk/form')}
           >
             <h1 style={{color: '#FFFFFF'}}>
@@ -43,8 +41,7 @@ const HomePage = () => {
         </Grid>
         <Grid item xs={3}>
           <div
-            className='dashboard-menu-box-container'
-            style={{backgroundColor: '#F6B931'}}
+            className='dashboard-menu-box-container log-skpk'
             onClick={() => history.push('/skpk/rekap')}
           >
             <h1 style={{color: '#FFFFFF'}}>
@@ -54,8 +51,7 @@ const HomePage = () => {
         </Grid>
         <Grid item xs={3}>
           <div
-            className='dashboard-menu-box-container'
-            style={{backgroundColor: '#DF5660'}}
+            className='dashboard-menu-box-container log-skmk'
             onClick={() => history.push('/skmk/rekap')}
           >
             <h1 style={{color: '#FFFFFF'}}>

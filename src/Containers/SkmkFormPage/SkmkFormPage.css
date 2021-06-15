@@ -1,0 +1,12 @@
+.next-button{
+  background-color: '#F6B931';
+  float: 'right';
+}
+
+.next-button:hover{
+  background-color: '#FFCA55';
+}
+
+.next-button:active{
+  background-color: '#CB8C2E';
+}

@@ -15,6 +15,14 @@
   margin-top: 30px;
 }
 
+.login-btn:hover{
+  background-color: #145133;
+}
+
+.login-btn:active{
+  background-color: #2CC96A;
+}
+
 .login-card{
   background-color: #ffffff;
   width: 350px;
