@@ -290,50 +290,7 @@ const createSkpkLogDocs = (log) => {
   const doc = new Document({
     sections: [{
       properties: {},
-      headers: {
-        default: new Header({
-          children: [
-            new Paragraph({
-              alignment: AlignmentType.CENTER,
-              children: [
-                new TextRun(
-                  {
-                    text: 'PEMERINTAH PROVINSI DAERAH KHUSUS IBUKOTA JAKARTA',
-                    font: 'Roboto',
-                    bold: true,
-                    size: 24,
-                    underline: {
-                      type: UnderlineType.SINGLE,
-                      color: '000000'
-                    },
-                  }
-                )
-              ]}
-            ),
-            new Paragraph({
-              alignment: AlignmentType.CENTER,
-              children: [
-                new TextRun(
-                  {
-                    text: 'DINAS KESEHATAN',
-                    font: 'Roboto',
-                    bold: true,
-                    size: 24,
-                    underline: {
-                      type: UnderlineType.SINGLE,
-                      color: '000000'
-                    },
-                  }
-                )
-              ]}
-            ),
-          ]
-        })
-      },
       children: [
-        new Paragraph({ text: '' }),
-        new Paragraph({ text: '' }),
-        new Paragraph({ text: '' }),
         new Paragraph({
           alignment: AlignmentType.CENTER,
           children: [
@@ -787,81 +744,7 @@ const createSkmkLogDocs = (log) => {
   return new Document({
     sections: [{
       properties: {},
-      headers: {
-        default: new Header({
-          children: [
-            new Paragraph({
-              alignment: AlignmentType.CENTER,
-              children: [
-                new TextRun(
-                  {
-                    text: 'PEMERINTAH DAERAH KHUSUS IBUKOTA JAKARTA',
-                    font: 'Times New Roman',
-                    bold: true,
-                    size: 18,
-                  }
-                )
-              ]}
-            ),
-            new Paragraph({
-              alignment: AlignmentType.CENTER,
-              children: [
-                new TextRun(
-                  {
-                    text: 'SUKU DINAS KESEHATAN KOTA ADMINISTRASI JAKARTA BARAT',
-                    font: 'Times New Roman',
-                    bold: true,
-                    size: 18,
-                  }
-                )
-              ]}
-            ),
-            new Paragraph({
-              alignment: AlignmentType.CENTER,
-              children: [
-                new TextRun(
-                  {
-                    text: 'PUSKESMAS KECAMATAN KALIDERES',
-                    font: 'Times New Roman',
-                    bold: true,
-                    size: 32,
-                  }
-                )
-              ]}
-            ),
-            new Paragraph({
-              alignment: AlignmentType.CENTER,
-              children: [
-                new TextRun(
-                  {
-                    text: 'JL. TANJUNG PURA RAYA RT. 006 / 05 KELURAHAN PEGADUNGAN KECAMATAN KALIDERES',
-                    font: 'Times New Roman',
-                    bold: true,
-                    size: 16,
-                  }
-                )
-              ]}
-            ),
-            new Paragraph({
-              alignment: AlignmentType.CENTER,
-              children: [
-                new TextRun(
-                  {
-                    text: 'TELP. (021)-54313154 JAKARTA',
-                    font: 'Times New Roman',
-                    bold: true,
-                    size: 16,
-                  }
-                )
-              ]}
-            ),
-          ]
-        })
-      },
       children: [
-        new Paragraph({ text: '' }),
-        new Paragraph({ text: '' }),
-        new Paragraph({ text: '' }),
         new Paragraph({
           alignment: AlignmentType.CENTER,
           children: [
