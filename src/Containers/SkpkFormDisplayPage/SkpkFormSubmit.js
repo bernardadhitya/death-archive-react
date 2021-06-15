@@ -4,21 +4,8 @@ import { createSkpkEntry } from '../../supabase';
 const namaPembuatSurat =         sessionStorage.getItem('namaPembuatSurat');          
 const nomorSurat =               sessionStorage.getItem('nomorSurat');                
 const tanggalSurat =             sessionStorage.getItem('tanggalSurat');              
-const namaPenandatangan =        sessionStorage.getItem('namaPenandatangan');         
-const namaPelapor =              sessionStorage.getItem('namaPelapor');               
-const tempatLahirPelapor =       sessionStorage.getItem('tempatLahirPelapor');        
-const tanggalLahirPelapor =      sessionStorage.getItem('tanggalLahirPelapor');       
-const pekerjaanPelapor =         sessionStorage.getItem('pekerjaanPelapor');          
-const alamatJalanPelapor =       sessionStorage.getItem('alamatJalanPelapor');        
-const alamatNomorPelapor =       sessionStorage.getItem('alamatNomorPelapor');        
-const alamatRtRwPelapor =        sessionStorage.getItem('alamatRtRwPelapor');         
-const alamatKelurahanPelapor =   sessionStorage.getItem('alamatKelurahanPelapor');    
-const alamatKecamatanPelapor =   sessionStorage.getItem('alamatKecamatanPelapor');    
-const alamatKotaPelapor =        sessionStorage.getItem('alamatKotaPelapor');         
-const alamatKodePosPelapor =     sessionStorage.getItem('alamatKodePosPelapor');      
-const nomorTeleponPelapor =      sessionStorage.getItem('nomorTeleponPelapor');       
-const nomorKtpPelapor =          sessionStorage.getItem('nomorKtpPelapor');           
-const hubunganPelapor =          sessionStorage.getItem('hubunganPelapor');           
+const namaPenandatangan =        sessionStorage.getItem('namaPenandatangan');                  
+const nomorIzinPegawai =         sessionStorage.getItem('nomorIzinPegawai');
 const namaJenazah =              sessionStorage.getItem('namaJenazah');               
 const tempatLahirJenazah =       sessionStorage.getItem('tempatLahirJenazah');        
 const umurTahunJenazah =         sessionStorage.getItem('umurTahunJenazah');          
@@ -231,6 +218,7 @@ export const handleSubmitData = async () => {
     no_rekam_medis: nomorRekamMedis, 
     nama_penerima: namaPenerima,   
     hubungan: hubunganPenerima,
+    nomor_izin_pegawai: nomorIzinPegawai
   }
 
   const result = await createSkpkEntry(

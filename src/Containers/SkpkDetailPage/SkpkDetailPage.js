@@ -23,6 +23,7 @@ const SkpkDetailPage = () => {
     nama_penerima: namaPenerima,
     hubungan: hubunganPenerima,
     nama_penandatangan: namaPenandatangan,
+    nomor_izin_pegawai: nomorIzinPegawai,
     jenazah_skpk : {
         nama_jenazah: namaJenazah,
         jenis_kelamin: jenisKelaminJenazah,
@@ -61,6 +62,7 @@ const SkpkDetailPage = () => {
         nomorRekamMedis  = {nomorRekamMedis }
         namaPenerima     = {namaPenerima    }
         hubunganPenerima = {hubunganPenerima}
+        nomorIzinPegawai = {nomorIzinPegawai}
      /> 
     )
   }

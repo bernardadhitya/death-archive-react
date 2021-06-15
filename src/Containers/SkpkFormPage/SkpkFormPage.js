@@ -18,6 +18,7 @@ const SkpkFormPage = () => {
   const [nomorRekamMedis,         setNomorRekamMedis         ] = useState('');
   const [namaPenerima,            setNamaPenerima            ] = useState('');
   const [hubunganPenerima,        setHubunganPenerima        ] = useState('');
+  const [nomorIzinPegawai,        setNomorIzinPegawai        ] = useState('');
 
   const [namaJenazah,               setNamaJenazah              ] = useState('');
   const [tempatLahirJenazah,        setTempatLahirJenazah       ] = useState('');
@@ -128,6 +129,7 @@ const SkpkFormPage = () => {
         nomorRekamMedis     ={nomorRekamMedis     }     
         namaPenerima        ={namaPenerima        }     
         hubunganPenerima    ={hubunganPenerima    }
+        nomorIzinPegawai    ={nomorIzinPegawai    }
         setNamaPembuatSurat ={setNamaPembuatSurat }
         setNomorSurat       ={setNomorSurat       }
         setTanggalSurat     ={setTanggalSurat     }
@@ -138,6 +140,7 @@ const SkpkFormPage = () => {
         setNomorRekamMedis  ={setNomorRekamMedis  }
         setNamaPenerima     ={setNamaPenerima     }
         setHubunganPenerima ={setHubunganPenerima }
+        setNomorIzinPegawai ={setNomorIzinPegawai }
      /> 
     )
   }
@@ -349,6 +352,7 @@ const SkpkFormPage = () => {
     sessionStorage.setItem('nomorSurat',                nomorSurat);                
     sessionStorage.setItem('tanggalSurat',              tanggalSurat);              
     sessionStorage.setItem('namaPenandatangan',         namaPenandatangan);                   
+    sessionStorage.setItem('nomorIzinPegawai',          nomorIzinPegawai);                   
     sessionStorage.setItem('namaJenazah',               namaJenazah);               
     sessionStorage.setItem('tempatLahirJenazah',        tempatLahirJenazah);        
     sessionStorage.setItem('umurTahunJenazah',          umurTahunJenazah);          

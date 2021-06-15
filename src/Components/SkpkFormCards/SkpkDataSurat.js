@@ -23,7 +23,9 @@ const SkpkDataSurat = (props) => {
     setNomorUrutSurat,  
     setNomorRekamMedis, 
     setNamaPenerima,    
-    setHubunganPenerima
+    setHubunganPenerima,
+    nomorIzinPegawai,
+    setNomorIzinPegawai
   } = props;
 
   const [nomorUrut, setNomorUrut] = useState(null);
@@ -172,6 +174,18 @@ const SkpkDataSurat = (props) => {
             placeholder='Nama'
             value={namaPenandatangan}
             onChange={(e) => setNamaPenandatangan(e.target.value)}
+          />
+        </Col>
+      </Row>
+      <Row gutter={16}>
+        <Col span={6}>
+          <p>Nomor Izin Pegawai*</p>
+        </Col>
+        <Col span={18}>
+          <Input
+            placeholder='NIP'
+            value={nomorIzinPegawai}
+            onChange={(e) => setNomorIzinPegawai(e.target.value)}
           />
         </Col>
       </Row>

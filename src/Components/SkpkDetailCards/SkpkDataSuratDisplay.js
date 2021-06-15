@@ -13,7 +13,8 @@ const SkpkDataSuratDisplay = (props) => {
     nomorUrutSurat,   
     nomorRekamMedis,  
     namaPenerima,     
-    hubunganPenerima 
+    hubunganPenerima,
+    nomorIzinPegawai
   } = props;
   
   return (
@@ -91,6 +92,14 @@ const SkpkDataSuratDisplay = (props) => {
         </Col>
         <Col span={18}>
           <p>{hubunganPenerima}</p>
+        </Col>
+      </Row>
+      <Row gutter={16}>
+        <Col span={6}>
+          <p>Nomor Izin Pegawai</p>
+        </Col>
+        <Col span={18}>
+          <p>{nomorIzinPegawai}</p>
         </Col>
       </Row>
     </Card>

@@ -10,7 +10,8 @@ import { handleSubmitData } from './SkpkFormSubmit';
 const SkpkFormDisplayPage = () => {
   const namaPembuatSurat =         sessionStorage.getItem('namaPembuatSurat');          
   const nomorSurat =               sessionStorage.getItem('nomorSurat');                
-  const tanggalSurat =             sessionStorage.getItem('tanggalSurat');              
+  const tanggalSurat =             sessionStorage.getItem('tanggalSurat');          
+  const nomorIzinPegawai =         sessionStorage.getItem('nomorIzinPegawai');    
   const namaPenandatangan =        sessionStorage.getItem('namaPenandatangan');         
   const namaJenazah =              sessionStorage.getItem('namaJenazah');               
   const tempatLahirJenazah =       sessionStorage.getItem('tempatLahirJenazah');        
@@ -126,6 +127,7 @@ const SkpkFormDisplayPage = () => {
         nomorRekamMedis  = {nomorRekamMedis }
         namaPenerima     = {namaPenerima    }
         hubunganPenerima = {hubunganPenerima}
+        nomorIzinPegawai = {nomorIzinPegawai}
      /> 
     )
   }

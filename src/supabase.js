@@ -255,12 +255,6 @@ export const createSkpkEntry = async (
   diagnosaIbuAnakData,
   lamaKematian
 ) => {
-  
-  console.log(suratSkpkData);
-  console.log(jenazahData);
-  console.log(diagnosaUmumData);
-  console.log(diagnosaIbuAnakData);
-  console.log(lamaKematian);
 
   const diagnosaEntry = await postDiagnosaSkpk(diagnosaUmumData, diagnosaIbuAnakData, lamaKematian);
   const jenazahEntry = await postJenazahSkpk(jenazahData);
@@ -494,6 +488,7 @@ export const getSkpkDetail = async (surat_skpk_id) => {
       nama_penerima,
       hubungan,
       nama_penandatangan,
+      nomor_izin_pegawai,
       jenazah_skpk (
         nama_jenazah,
         jenis_kelamin,
