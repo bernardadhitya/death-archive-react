@@ -18,7 +18,8 @@ const SkmkLogPage = () => {
   const [refresh, setRefresh] = useState(0);
   const [showModal, setShowModal] = useState(false);
   const [startDate, setStartDate] = useState(null);
-  const [endDate, setEndDate] = useState(null)
+  const [endDate, setEndDate] = useState(null);
+  const [showDeleteModal, setShowDeleteModal] = useState(null);
 
   const [allSkmkData, setAllSkmkData] = useState([]);
   const [skmkData, setSkmkData] = useState([]);
@@ -40,7 +41,37 @@ const SkmkLogPage = () => {
   const handleDelete = async(surat_skmk_id) => {
     const deletedSkmkDetail = await deleteSkmkData(surat_skmk_id);
     window.alert('Data berhasil dihapus!');
+    setShowDeleteModal(null);
     setRefresh(refresh + 1)
+  }
+
+  const renderDeleteModal = () => {
+    return (
+      <Modal
+        title='Export Excel'
+        visible={!!showDeleteModal}
+        onCancel={() => setShowDeleteModal(null)}
+        footer={[
+          <Button
+            variant="contained"
+            size="large"
+            onClick={() => setShowDeleteModal(null)}
+          >
+            Batal
+          </Button>,
+          <Button
+          variant="contained"
+          size="large"
+          style={{ backgroundColor: '#CD2733', color: '#FFFFFF', marginLeft: '10px'}}
+          onClick={() => handleDelete(showDeleteModal)}
+        >
+          Ya
+        </Button>
+        ]}
+      >
+        <p>Apakah anda yakin ingin menghapus rekap ini?</p>
+      </Modal>
+    )
   }
 
   const renderActionCell = (surat_skmk_id) => {
@@ -58,7 +89,7 @@ const SkmkLogPage = () => {
         <Col span={10}>
           <div
             className='action-icon-wrapper delete-button'
-            onClick={() => handleDelete(surat_skmk_id)}
+            onClick={() => setShowDeleteModal(surat_skmk_id)}
           >
             <DeleteFilled style={{color: '#FFFFFF', fontSize: '18px'}}/>
           </div>
@@ -367,6 +398,7 @@ const SkmkLogPage = () => {
       <br/>
       {renderTableContent()}
       {renderExportModal()}
+      {renderDeleteModal()}
     </div>
   )
 }

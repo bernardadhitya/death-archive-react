@@ -18,7 +18,8 @@ const SkpkLogPage = () => {
   const [refresh, setRefresh] = useState(0);
   const [showModal, setShowModal] = useState(false);
   const [startDate, setStartDate] = useState(null);
-  const [endDate, setEndDate] = useState(null)
+  const [endDate, setEndDate] = useState(null);
+  const [showDeleteModal, setShowDeleteModal] = useState(null);
 
   const stringDiff = (a, b) => a.localeCompare(b, 'en', { numeric: true });
 
@@ -39,11 +40,40 @@ const SkpkLogPage = () => {
     history.push(`/skpk/${surat_skpk_id}`, fetchedSkpkDetail);
   }
 
-  const handleDelete = async(surat_skpk_id) => {
+  const handleDelete = async (surat_skpk_id) => {
     const deletedSkpkDetail = await deleteSkpkData(surat_skpk_id);
-    console.log(deletedSkpkDetail);
     window.alert('Data berhasil dihapus!');
+    setShowDeleteModal(null);
     setRefresh(refresh + 1);
+  }
+
+  const renderDeleteModal = () => {
+    return (
+      <Modal
+        title='Export Excel'
+        visible={!!showDeleteModal}
+        onCancel={() => setShowDeleteModal(null)}
+        footer={[
+          <Button
+            variant="contained"
+            size="large"
+            onClick={() => setShowDeleteModal(null)}
+          >
+            Batal
+          </Button>,
+          <Button
+          variant="contained"
+          size="large"
+          style={{ backgroundColor: '#CD2733', color: '#FFFFFF', marginLeft: '10px'}}
+          onClick={() => handleDelete(showDeleteModal)}
+        >
+          Ya
+        </Button>
+        ]}
+      >
+        <p>Apakah anda yakin ingin menghapus rekap ini?</p>
+      </Modal>
+    )
   }
 
   const renderActionCell = (surat_skpk_id) => {
@@ -61,7 +91,7 @@ const SkpkLogPage = () => {
         <Col span={10}>
           <div
             className='action-icon-wrapper delete-button'
-            onClick={() => handleDelete(surat_skpk_id)}
+            onClick={() => setShowDeleteModal(surat_skpk_id)}
           >
             <DeleteFilled style={{color: '#FFFFFF', fontSize: '18px'}}/>
           </div>
@@ -370,6 +400,7 @@ const SkpkLogPage = () => {
       <br/>
       {renderTableContent()}
       {renderExportModal()}
+      {renderDeleteModal()}
     </div>
   )
 }

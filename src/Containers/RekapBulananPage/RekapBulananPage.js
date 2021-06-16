@@ -22,10 +22,6 @@ const RekapBulananPage = () => {
   const [allRekapData, setAllRekapData] = useState([]);
   const [rekapData, setRekapData] = useState([]);
 
-  const stringDiff = (a, b) => a.localeCompare(b, 'en', { numeric: true });
-
-  const history = useHistory();
-
   const handleExportData = async () => {
     const sortedRekapData = await exportRekamBulanan(exportMonth);
     setShowModal(false)
