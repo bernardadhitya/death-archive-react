@@ -6,6 +6,7 @@ import hospital from '../../Assets/images/hospital.png';
 import logo from '../../Assets/images/logo.png';
 import PersonIcon from '@material-ui/icons/Person';
 import LockIcon from '@material-ui/icons/Lock';
+import { Modal } from 'antd';
 
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -19,7 +20,15 @@ const Login = () => {
     ){
       history.push('/home');
     } else {
-      window.alert('Username/password salah! Silahkan mencoba kembali.')
+      Modal.error({
+        content: 
+        <>
+          <h3>Username/password salah!</h3>
+          <p>
+            Silahkan mencoba kembali.
+          </p>
+        </>
+      });
     }
   }
 
