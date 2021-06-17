@@ -6,6 +6,7 @@ import SkpkDataJenazahDisplay from '../../Components/SkpkFormDisplayCards/SkpkDa
 import SkpkDataPelaporDisplay from '../../Components/SkpkFormDisplayCards/SkpkDataPelaporDisplay';
 import SkpkDataSuratDisplay from '../../Components/SkpkFormDisplayCards/SkpkDataSuratDisplay';
 import { handleSubmitData } from './SkpkFormSubmit';
+import Modal from 'antd/lib/modal/Modal';
 
 const ColorButton = withStyles(() => ({
   root: {
@@ -256,9 +257,45 @@ const SkpkFormDisplayPage = () => {
 
   const history = useHistory();
 
+  const [showModal, setShowModal] = useState(false);
+
   if (!!!sessionStorage.getItem('refresh')){
     sessionStorage.setItem('refresh', true);
     window.location.reload(false);
+  }
+
+  const handleRedirectAndSubmit = () => {
+    sessionStorage.removeItem('refresh');
+    setShowModal(false);
+    history.push('/skpk/form/submit');
+  }
+
+  const renderConfirmationModal = () => {
+    return (
+      <Modal
+        title='Simpan Rekap'
+        visible={showModal}
+        onCancel={() => setShowModal(false)}
+        footer={[
+          <Button
+            variant="contained"
+            size="large"
+            onClick={() => setShowModal(false)}
+          >
+            Batal
+          </Button>,
+          <ColorButton
+            size="large"
+            style={{marginLeft: '10px'}}
+            onClick={() => handleRedirectAndSubmit()}
+          >
+            Ya
+          </ColorButton>
+        ]}
+      >
+        <p>Apakah anda yakin untuk menyimpan data ini?</p>
+      </Modal>
+    )
   }
 
   return (
@@ -272,13 +309,11 @@ const SkpkFormDisplayPage = () => {
       {renderDataDiagnosa()}
       <br/><br/>
       <ColorButton
-        onClick={async () => {
-          sessionStorage.removeItem('refresh');
-          history.push('/skpk/form/submit')
-        }}
+        onClick={() => setShowModal(true)}
       >
         Simpan
       </ColorButton>
+      {renderConfirmationModal()}
       <br/><br/><br/><br/>
     </div>
   )
