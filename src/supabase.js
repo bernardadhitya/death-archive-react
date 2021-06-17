@@ -141,26 +141,23 @@ export const createSkmkEntry = async (
   diagnosaIbuAnakData,
   lamaKematian
 ) => {
-  
-  console.log(suratSkmkData);
-  console.log(pelaporData);
-  console.log(jenazahData);
-  console.log(diagnosaUmumData);
-  console.log(diagnosaIbuAnakData);
-  console.log(lamaKematian);
 
-  const diagnosaEntry = await postDiagnosaSkmk(diagnosaUmumData, diagnosaIbuAnakData, lamaKematian);
-  const pelaporEntry = await postPelaporSkmk(pelaporData);
-  const jenazahEntry = await postJenazahSkmk(jenazahData);
+  try {
+    const diagnosaEntry = await postDiagnosaSkmk(diagnosaUmumData, diagnosaIbuAnakData, lamaKematian);
+    const pelaporEntry = await postPelaporSkmk(pelaporData);
+    const jenazahEntry = await postJenazahSkmk(jenazahData);
 
-  const suratSkmkEntry = await postSuratSkmk(
-    suratSkmkData,
-    diagnosaEntry,
-    pelaporEntry,
-    jenazahEntry
-  )
+    const suratSkmkEntry = await postSuratSkmk(
+      suratSkmkData,
+      diagnosaEntry,
+      pelaporEntry,
+      jenazahEntry
+    )
 
-  return suratSkmkEntry;
+    return suratSkmkEntry;
+  } catch (error) {
+    return null
+  }
 }
 
 const postDiagnosaSkpk = async (diagnosaUmumData, diagnosaIbuAnakData, lamaKematian) => {
@@ -255,17 +252,20 @@ export const createSkpkEntry = async (
   diagnosaIbuAnakData,
   lamaKematian
 ) => {
+  try {
+    const diagnosaEntry = await postDiagnosaSkpk(diagnosaUmumData, diagnosaIbuAnakData, lamaKematian);
+    const jenazahEntry = await postJenazahSkpk(jenazahData);
 
-  const diagnosaEntry = await postDiagnosaSkpk(diagnosaUmumData, diagnosaIbuAnakData, lamaKematian);
-  const jenazahEntry = await postJenazahSkpk(jenazahData);
+    const suratSkpkEntry = await postSuratSkpk(
+      suratSkpkData,
+      diagnosaEntry,
+      jenazahEntry
+    )
 
-  const suratSkpkEntry = await postSuratSkpk(
-    suratSkpkData,
-    diagnosaEntry,
-    jenazahEntry
-  )
-
-  return suratSkpkEntry;
+    return suratSkpkEntry;
+  } catch (error) {
+    return null
+  }
 }
 
 export const getSkmkLogs = async () => {

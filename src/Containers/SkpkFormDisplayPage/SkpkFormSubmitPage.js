@@ -11,7 +11,7 @@ const SkpkFormSubmitPage = () => {
       const result = await handleSubmitData();
       if(result === null){
         window.alert('Data gagal dimasukkan. Mohon memastikan data terisi dengan lengkap dan memastikan tidak memasukkan NIK jenazah yang sudah pernah dimasukkan');
-        history.push('/skpk/form/display');
+        history.push('/skpk/form/');
       } else {
         window.alert('Data berhasil disimpan!');
         history.push('/skpk/rekap');
