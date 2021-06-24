@@ -78,7 +78,7 @@ const createLogWorkbook = (logs, type) => {
   worksheet.addRow(columnHeaders);
 
   logs.forEach((log, idx) => {
-    worksheet.addRow({idx, ...log});
+    worksheet.addRow({idx: idx+1, ...log});
   });
 
   worksheet.mergeCells('A1:N1'); worksheet.getCell('A1').value = `Register ${type}`;
@@ -178,7 +178,7 @@ const createRekapBulananWorkbook = (logs, month) => {
   worksheet.addRow(columnHeaders);
 
   logs.forEach((log, idx) => {
-    worksheet.addRow({idx, ...log});
+    worksheet.addRow({idx: idx+1, ...log});
   });
 
   const getMonth = month !== null ? moment(month).format('MMMM') : 'Semua'
